@@ -1909,14 +1909,51 @@
     updateProgress(0);
   }
 
+  // Cache voices after they load
+  var _cachedVoices = null;
+  function _getEnglishVoice() {
+    var voices = _cachedVoices || speechSynthesis.getVoices();
+    if (!voices.length) return null;
+    // Prefer Google/Chrome voices first (usually best quality), then any English
+    var preferred = [
+      'Google US English', 'Google UK English', 'Google.com',
+      'Microsoft David', 'Microsoft Zira', 'Microsoft Ava',
+      'Samantha', 'Daniel', 'Karen', 'Moira',
+      'en-US', 'en-GB', 'en-AU', 'en-GB'
+    ];
+    for (var i = 0; i < preferred.length; i++) {
+      for (var j = 0; j < voices.length; j++) {
+        if (voices[j].name.indexOf(preferred[i]) !== -1 ||
+            voices[j].lang === preferred[i] ||
+            voices[j].lang.indexOf('en') === 0) {
+          return voices[j];
+        }
+      }
+    }
+    // Fallback: any English voice
+    for (var k = 0; k < voices.length; k++) {
+      if (voices[k].lang && voices[k].lang.indexOf('en') === 0) return voices[k];
+    }
+    return null;
+  }
+  // Load voices (some browsers load async)
+  if (speechSynthesis.onvoiceschanged !== undefined) {
+    speechSynthesis.onvoiceschanged = function() {
+      _cachedVoices = speechSynthesis.getVoices();
+    };
+  }
+  _cachedVoices = speechSynthesis.getVoices();
+
   function speakWord(word) {
     if (!window.speechSynthesis) return;
-    window.speechSynthesis.cancel();
-    const utt = new SpeechSynthesisUtterance(word);
+    speechSynthesis.cancel();
+    var utt = new SpeechSynthesisUtterance(word);
     utt.lang = 'en-US';
     utt.rate = 0.85;
     utt.pitch = 1;
-    window.speechSynthesis.speak(utt);
+    var voice = _getEnglishVoice();
+    if (voice) utt.voice = voice;
+    speechSynthesis.speak(utt);
   }
 
   function showLesson(n) {
