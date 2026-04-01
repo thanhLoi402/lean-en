@@ -429,9 +429,369 @@
     margin-top: 40px;
   }
   .footer a { color: var(--primary); text-decoration: none; }
+  /* ── FLASHCARD OVERLAY ── */
+  .flashcard-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: var(--bg);
+    z-index: 1000;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .flashcard-overlay.active { display: flex; }
+
+  .fc-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    background: linear-gradient(135deg, #1a73e8 0%, #0d47a1 100%);
+    color: #fff;
+    flex-shrink: 0;
+  }
+  .fc-lesson-title {
+    font-size: .9rem;
+    font-weight: 600;
+    opacity: .9;
+  }
+  .fc-counter {
+    font-size: .85rem;
+    background: rgba(255,255,255,.2);
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+  .fc-close {
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255,255,255,.2);
+    color: #fff;
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background .2s;
+    padding: 0;
+  }
+  .fc-close:hover { background: rgba(255,255,255,.35); }
+
+  .fc-body {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    overflow: hidden;
+    touch-action: pan-y;
+    user-select: none;
+  }
+
+  .fc-card-wrapper {
+    width: 100%;
+    max-width: 420px;
+    position: relative;
+  }
+
+  .fc-card {
+    background: var(--card);
+    border-radius: 20px;
+    box-shadow: var(--shadow-lg);
+    padding: 36px 28px;
+    text-align: center;
+    cursor: pointer;
+    transition: box-shadow .3s;
+    min-height: 220px;
+    display: block;
+    position: relative;
+    overflow: hidden;
+  }
+  .fc-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+  }
+  .fc-card:active { transform: scale(0.98); }
+  .fc-card.flipped .fc-front { opacity: 0; pointer-events: none; }
+  .fc-card.flipped .fc-back  { opacity: 1; pointer-events: auto; }
+  .fc-front { opacity: 1; pointer-events: auto; }
+  .fc-back  { opacity: 0; pointer-events: none; }
+
+  .fc-front, .fc-back {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 36px 28px;
+    transition: opacity .3s;
+  }
+  .fc-front { pointer-events: auto; }
+  .fc-back  { pointer-events: none; }
+
+  .fc-word {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #1a237e;
+    margin-bottom: 8px;
+    line-height: 1.2;
+  }
+  .fc-type {
+    display: inline-block;
+    padding: 3px 14px;
+    border-radius: 20px;
+    font-size: .8rem;
+    font-weight: 600;
+    background: #e3f2fd;
+    color: #1565c0;
+    margin-bottom: 10px;
+  }
+  .fc-phonetic {
+    font-size: 1rem;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-bottom: 16px;
+  }
+  .fc-speak-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 20px;
+    border-radius: 25px;
+    border: 1.5px solid var(--primary);
+    background: transparent;
+    color: var(--primary);
+    font-size: .9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .2s;
+    margin-bottom: 16px;
+  }
+  .fc-speak-btn:hover {
+    background: var(--primary);
+    color: #fff;
+  }
+  .fc-tap-hint {
+    font-size: .78rem;
+    color: var(--text-muted);
+    opacity: .7;
+  }
+
+  .fc-viet {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .fc-viet-extra {
+    font-size: .88rem;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  .fc-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px 20px;
+    flex-shrink: 0;
+    gap: 12px;
+  }
+  .fc-nav-btn {
+    flex: 1;
+    padding: 14px;
+    border-radius: 14px;
+    border: none;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: all .2s;
+  }
+  .fc-nav-btn.prev {
+    background: var(--card);
+    color: var(--primary);
+    box-shadow: var(--shadow);
+  }
+  .fc-nav-btn.prev:hover { background: var(--secondary); }
+  .fc-nav-btn.next {
+    background: var(--primary);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(26,115,232,.35);
+  }
+  .fc-nav-btn.next:hover { background: var(--primary-dark); transform: translateY(-1px); }
+  .fc-nav-btn:disabled {
+    opacity: .35;
+    cursor: default;
+    transform: none;
+  }
+
+  .fc-dot-nav {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    padding: 4px 16px 0;
+    flex-shrink: 0;
+    overflow: hidden;
+    max-height: 40px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .fc-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--border);
+    cursor: pointer;
+    transition: all .2s;
+    flex-shrink: 0;
+  }
+  .fc-dot.active {
+    background: var(--primary);
+    width: 24px;
+    border-radius: 4px;
+  }
+  .fc-dot:hover:not(.active) { background: var(--text-muted); }
+
+  /* swipe feedback */
+  .fc-card.swiping-left  { transform: translateX(-30px) rotate(-2deg); opacity: .7; }
+  .fc-card.swiping-right { transform: translateX(30px) rotate(2deg);  opacity: .7; }
+
+  /* lesson topic pills in header */
+  .fc-topic-bar {
+    background: rgba(255,255,255,.12);
+    padding: 6px 16px;
+    font-size: .78rem;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex-shrink: 0;
+  }
+
+  /* ══ View switching ══ */
+  #webView { display: block; }
+  #flashcardView { display: none; }
+
+  #webView.hide     { display: none; }
+  #flashcardView.show { display: block; }
+
+  /* floating flashcard trigger button */
+  .fc-float-btn {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 54px; height: 54px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ff6d00, #e65100);
+    border: none;
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(255,109,0,.4);
+    z-index: 100;
+    display: flex; align-items: center; justify-content: center;
+    transition: all .25s;
+  }
+  .fc-float-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(255,109,0,.5);
+  }
+  .fc-float-btn:active { transform: scale(0.95); }
+
+  /* lesson picker in flashcard */
+  .fc-lesson-picker {
+    background: rgba(0,0,0,.5);
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 1100;
+    display: none;
+    align-items: flex-end;
+    justify-content: center;
+  }
+  .fc-lesson-picker.active { display: flex; }
+  .fc-lesson-sheet {
+    background: var(--card);
+    border-radius: 20px 20px 0 0;
+    padding: 24px;
+    width: 100%;
+    max-width: 500px;
+    max-height: 70vh;
+    overflow-y: auto;
+  }
+  .fc-lesson-sheet h3 {
+    font-size: 1.1rem;
+    margin-bottom: 16px;
+    color: var(--primary-dark);
+  }
+  .fc-lesson-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  @media (max-width: 400px) {
+    .fc-lesson-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  .fc-lesson-chip {
+    padding: 10px 4px;
+    border-radius: 10px;
+    border: 1.5px solid var(--border);
+    background: var(--bg);
+    font-size: .82rem;
+    font-weight: 600;
+    text-align: center;
+    cursor: pointer;
+    transition: all .15s;
+  }
+  .fc-lesson-chip:hover { border-color: var(--primary); color: var(--primary); }
+  .fc-lesson-chip.current {
+    background: var(--primary);
+    color: #fff;
+    border-color: var(--primary);
+  }
+  .fc-lesson-chip .chip-num { display: block; font-size: 1.1rem; }
+  .fc-lesson-chip .chip-sub { display: block; font-size: .65rem; opacity: .75; margin-top: 2px; }
+
+  .fc-mode-toggle {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .fc-mode-btn {
+    flex: 1;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1.5px solid var(--border);
+    background: var(--bg);
+    font-size: .82rem;
+    font-weight: 600;
+    text-align: center;
+    cursor: pointer;
+    transition: all .15s;
+    color: var(--text-muted);
+  }
+  .fc-mode-btn.active {
+    background: var(--secondary);
+    border-color: var(--primary);
+    color: var(--primary);
+  }
+
+  @media (max-width: 380px) {
+    .fc-card { padding: 28px 20px; min-height: 180px; }
+    .fc-word { font-size: 1.6rem; }
+    .fc-viet { font-size: 1.1rem; }
+  }
 </style>
 </head>
 <body>
+
+<!-- ══ WEB VIEW ══ -->
+<div id="webView">
 
 <!-- ══ HEADER ══ -->
 <header class="site-header">
@@ -1889,118 +2249,402 @@
   </div>
 </div>
 
-<!-- ══ JAVASCRIPT ══ -->
+<!-- VOCAB DATA (auto-generated) -->
 <script>
-  // const navBtns = document.querySelectorAll('.lesson-nav .nav-btn');
-  const lessonSections = document.querySelectorAll('.lesson-section');
-  const convSections = document.querySelectorAll('.conv-section');
-  let currentLesson = 0;
+var _lessonTitles = {
+  1:"Bài 1 — Khởi tạo & Lập kế hoạch dự án",
+  2:"Bài 2 — Nhóm & Bên liên quan",
+  3:"Bài 3 — Yêu cầu & Phạm vi dự án",
+  4:"Bài 4 — Thiết kế & Kiến trúc",
+  5:"Bài 5 — Phát triển & Mã nguồn",
+  6:"Bài 6 — Kiểm thử & Chất lượng",
+  7:"Bài 7 — Triển khai & Ra mắt",
+  8:"Bài 8 — Giám sát & Quản lý rủi ro",
+  9:"Bài 9 — Giao tiếp & Báo cáo",
+  10:"Bài 10 — Agile & Scrum",
+  11:"Bài 11 — Bảo mật & Tuân thủ",
+  12:"Bài 12 — Quản lý Thay đổi & Cấu hình",
+  13:"Bài 13 — Tài chính & Hợp đồng",
+  14:"Bài 14 — Đo lường & Báo cáo Nâng cao",
+  15:"Bài 15 — Công nghệ & Hạ tầng",
+  16:"Bài 16 — Đàm phán & Giải quyết Xung đột",
+  17:"Bài 17 — Giao tiếp Quốc tế & Văn hóa",
+  18:"Bài 18 — Tư duy & Kỹ năng PM",
+  19:"Bài 19 — Tài liệu & Chứng chỉ",
+  20:"Bài 20 — Đánh giá & Đóng Dự án",
+};
+var _lessonVocab = {
+  1: [["project","n","/ˈprɒdʒekt/","dự án"],["initiate","v","/ɪˈnɪʃieɪt/","khởi tạo, khởi động"],["stakeholder","n","/ˈsteɪkˌhoʊldər/","bên liên quan / người có lợi ích"],["charter","n","/ˈtʃɑːrtər/","bản điều lệ dự án"],["objective","n","/əbˈdʒektɪv/","mục tiêu"],["deliverable","n","/dɪˈlɪvərəbəl/","sản phẩm bàn giao"],["milestone","n","/ˈmaɪlstoʊn/","cột mốc (quan trọng)"],["scope","n","/skoʊp/","phạm vi (dự án)"],["schedule","n / v","/ˈʃedjuːl/","lịch trình; lập lịch"],["timeline","n","/ˈtaɪmlaɪn/","kế hoạch thời gian / dòng thời gian"],["feasibility","n","/ˌfiːzəˈbɪləti/","tính khả thi"],["budget","n","/ˈbʌdʒɪt/","ngân sách"],["resource","n","/ˈriːsɔːrs/","nguồn lực"],["allocate","v","/ˈæləkeɪt/","phân bổ (nguồn lực)"],["kick-off","n / v","/ˈkɪk ɒf/","khởi động dự án"]],
+  2: [["team","n","/tiːm/","nhóm / đội"],["lead","n / v","/liːd/","trưởng nhóm; dẫn dắt"],["member","n","/ˈmembər/","thành viên"],["role","n","/roʊl/","vai trò"],["responsibility","n","/rɪˌspɒnsəˈbɪləti/","trách nhiệm"],["accountable","adj","/əˈkaʊntəbəl/","chịu trách nhiệm cuối cùng"],["empower","v","/ɪmˈpaʊər/","trao quyền (cho đội)"],["outsource","v","/ˌaʊtˈsɔːrs/","thuê ngoài"],["vendor","n","/ˈvendər/","nhà cung cấp"],["client","n","/ˈklaɪənt/","khách hàng"],["sponsor","n","/ˈspɒnsər/","nhà tài trợ / người bảo trợ"],["mentor","n / v","/ˈmentɔːr/","người cố vấn; hướng dẫn"],["onboard","v","/ˈɒnbɔːrd/","đưa thành viên vào dự án"],["offboard","v","/ˈɒfbɔːrd/","kết thúc tham gia dự án"],["collaborate","v","/kəˈlæbəreɪt/","cộng tác, hợp tác"]],
+  3: [["requirement","n","/rɪˈkwaɪərmənt/","yêu cầu"],["specification","n","/ˌspesɪfɪˈkeɪʃən/","đặc tả chi tiết"],["gather","v","/ˈɡæðər/","thu thập (yêu cầu)"],["analyze","v","/ˈænəlaɪz/","phân tích"],["prioritize","v","/praɪˈɒrɪtaɪz/","ưu tiên hóa"],["scope creep","n","/skoʊp kriːp/","lan scope (phạm vi bò)"],["feature","n","/ˈfiːtʃər/","tính năng"],["functional","adj","/ˈfʌŋkʃənəl/","thuộc về chức năng"],["non-functional","adj","/nɒn ˈfʌŋkʃənəl/","phi chức năng (hiệu năng...)"],["use case","n","/juːz keɪs/","trường hợp sử dụng"],["acceptance criteria","n","/əkˈseptəns kraɪˈtɪəriə/","tiêu chí nghiệm thu"],["interview","n / v","/ˈɪntərvjuː/","phỏng vấn / phỏng vấn"],["workshop","n","/ˈwɜːrkʃɒp/","hội thảo (thu thập yêu cầu)"],["stakeholder alignment","n","/ˈsteɪkˌhoʊldər əˈlaɪnmənt/","đồng thuận bên liên quan"],["traceability","n","/ˌteɪsəˈbɪləti/","khả năng truy vết"]],
+  4: [["architecture","n","/ˈɑːrkɪtektʃər/","kiến trúc (hệ thống)"],["design","n / v","/dɪˈzaɪn/","thiết kế"],["prototype","n / v","/ˈproʊtətaɪp/","bản mẫu / tạo bản mẫu"],["wireframe","n","/ˈwaɪərfreɪm/","khung dây (thiết kế UI)"],["component","n","/kəmˈpoʊnənt/","thành phần / module"],["interface","n","/ˈɪntərfeɪs/","giao diện"],["integrate","v","/ˈɪntɪɡreɪt/","tích hợp"],["scalable","adj","/ˈskeɪləbəl/","có thể mở rộng"],["scalability","n","/ˌskeɪləˈbɪləti/","khả năng mở rộng"],["modular","adj","/ˈmɒdjʊlər/","theo module / khối"],["diagram","n","/ˈdaɪəɡræm/","sơ đồ"],["workflow","n","/ˈwɜːrkfloʊ/","quy trình làm việc"],["redesign","v","/ˌriːdɪˈzaɪn/","thiết kế lại"],["technical debt","n","/ˈteknɪkəl det/","nợ kỹ thuật"],["refactor","v","/riːˈfæktər/","tái cấu trúc mã nguồn"]],
+  5: [["development","n","/dɪˈveləpmənt/","phát triển"],["implement","v","/ˈɪmplɪment/","triển khai / thực hiện"],["iteration","n","/ˌɪtəˈreɪʃən/","vòng lặp / lần lặp"],["sprint","n","/sprɪnt/","sprint (vòng phát triển ngắn)"],["backlog","n","/ˈbæklɒɡ/","danh sách việc cần làm"],["repository","n","/rɪˈpɒzɪtɔːri/","kho mã nguồn"],["commit","v","/kəˈmɪt/","commit (lưu thay đổi mã)"],["merge","v","/mɜːrdʒ/","gộp (nhánh mã)"],["branch","n / v","/bræntʃ/","nhánh (mã); rẽ nhánh"],["build","n / v","/bɪld/","bản build; biên dịch"],["deploy","v","/dɪˈpleɪ/","triển khai (lên server)"],["pipeline","n","/ˈpaɪplaɪn/","quy trình tự động hóa"],["code review","n","/koʊd rɪˈvjuː/","kiểm tra mã nguồn"],["debug","v","/diːˈbʌɡ/","gỡ lỗi"],["hotfix","n","/ˈhɒtfɪks/","sửa lỗi khẩn cấp"]],
+  6: [["testing","n","/ˈtestɪŋ/","kiểm thử"],["quality assurance","n","/ˈkwɒləti əˈʃʊərəns/","đảm bảo chất lượng (QA)"],["test case","n","/test keɪs/","trường hợp kiểm thử"],["test plan","n","/test plæn/","kế hoạch kiểm thử"],["bug","n","/bʌɡ/","lỗi phần mềm"],["defect","n","/ˈdiːfekt/","khuyết tật / lỗi"],["regression","n","/rɪˈɡreʃən/","hồi quy (lỗi cũ tái xuất)"],["UAT","abbr","/juː eɪ tiː/","kiểm thử người dùng cuối"],["staging environment","n","/ˈsteɪdʒɪŋ ɪnˈvaɪrənmənt/","môi trường staging"],["production","n","/prəˈdʌkʃən/","môi trường thực (sản xuất)"],["pass / fail","v / n","/pæs / feɪl/","đạt / không đạt"],["coverage","n","/ˈkʌvərɪdʒ/","độ phủ (kiểm thử)"],["automate","v","/ˈɔːtəmeɪt/","tự động hóa"],["sanity check","n","/ˈsænəti tʃek/","kiểm tra sơ bộ"],["severity","n","/sɪˈverəti/","mức độ nghiêm trọng (của lỗi)"]],
+  7: [["release","n / v","/rɪˈliːs/","phát hành"],["launch","n / v","/lɔːntʃ/","ra mắt"],["rollout","n","/ˈroʊlaʊt/","triển khai rộng rãi"],["rollback","n / v","/ˈroʊlbæk/","quay lui (phiên bản)"],["migration","n","/maɪˈɡreɪʃən/","di chuyển / chuyển đổi"],["cutover","n","/ˈkʌtˌoʊvər/","chuyển đổi hệ thống chính"],["configuration","n","/kənˌfɪɡjʊˈreɪʃən/","cấu hình"],["infrastructure","n","/ˈɪnfrəstrʌktʃər/","hạ tầng"],["data center","n","/ˈdeɪtə ˈsentər/","trung tâm dữ liệu"],["hosting","n","/ˈhoʊstɪŋ/","lưu trữ (web hosting)"],["go-live","n","/ɡoʊ laɪv/","thời điểm chính thức vận hành"],["post-launch","adj","/poʊst lɔːntʃ/","sau khi ra mắt"],["support","n / v","/səˈpɔːrt/","hỗ trợ"],["maintenance","n","/ˈmeɪntənəns/","bảo trì"],["version","n","/ˈvɜːrʒən/","phiên bản"]],
+  8: [["monitor","v","/ˈmɒnɪtər/","giám sát, theo dõi"],["track","v","/træk/","theo dõi (tiến độ)"],["KPI","abbr","/keɪ piː aɪ/","chỉ số hiệu quả chính"],["metric","n","/ˈmetrɪk/","chỉ số đo lường"],["benchmark","n / v","/ˈbentʃmɑːrk/","mốc chuẩn / đánh giá chuẩn"],["risk","n","/rɪsk/","rủi ro"],["mitigate","v","/ˈmɪtɪɡeɪt/","giảm thiểu (rủi ro)"],["contingency","n","/kənˈtɪndʒənsi/","phương án dự phòng"],["issue","n","/ˈɪʃuː/","vấn đề / sự cố"],["blocker","n","/ˈblɒkər/","vấn đề chặn tiến độ"],["velocity","n","/vəˈlɒsəti/","tốc độ hoàn thành của đội"],["burndown chart","n","/ˈbɜːrndaʊn tʃɑːrt/","biểu đồ đốt cháy công việc"],["variance","n","/ˈveəriəns/","chênh lệch (so với kế hoạch)"],["overdue","adj","/ˌoʊvərˈdjuː/","quá hạn"],["escalate","v","/ˈeskəleɪt/","báo lên cấp cao hơn"]],
+  9: [["status","n","/ˈsteɪtəs/","trạng thái"],["update","n / v","/ˈʌpdeɪt/","cập nhật; báo cáo cập nhật"],["report","n / v","/rɪˈpɔːrt/","báo cáo"],["agenda","n","/əˈdʒendə/","chương trình nghị sự"],["minutes","n","/ˈmɪnɪts/","biên bản cuộc họp"],["presentation","n","/ˌprezənˈteɪʃən/","bài thuyết trình"],["stakeholder management","n","/ˈsteɪkˌhoʊldər ˈmænɪdʒmənt/","quản lý bên liên quan"],["escalation","n","/ˌeskəˈleɪʃən/","báo cáo leo thang"],["transparent","adj","/trænsˈpærənt/","minh bạch"],["clarify","v","/ˈklærɪfaɪ/","làm rõ"],["follow up","v","/ˈfɒloʊ ʌp/","theo dõi, nhắc nhở"],["briefing","n","/ˈbriːfɪŋ/","buổi giao ban / hướng dẫn nhanh"],["documentation","n","/ˌdɒkjʊmenˈteɪʃən/","tài liệu"],["notify","v","/ˈnoʊtɪfaɪ/","thông báo"],["feedback","n","/ˈfiːdbæk/","phản hồi"]],
+  10: [["agile","adj","/ˈædʒaɪl/","linh hoạt / Agile"],["scrum","n","/skrʌm/","Scrum (khung phát triển)"],["product owner","n","/ˈprɒdʌkt ˈoʊnər/","chủ sản phẩm"],["scrum master","n","/skrʌm ˈmæstər/","người hướng dẫn Scrum"],["backlog grooming","n","/ˈbæklɒɡ ˈɡruːmɪŋ/","sửa đổi / tinh chỉnh backlog"],["planning poker","n","/ˈplænɪŋ ˈpoʊkər/","bình chọn ước lượng công việc"],["story point","n","/ˈstɔːri pɔɪnt/","điểm câu chuyện (đo công sức)"],["daily stand-up","n","/ˈdeɪli stænd ʌp/","họp đứng hàng ngày"],["retrospective","n","/ˌretrəˈspektɪv/","họp nhìn lại sprint"],["sprint review","n","/sprɪnt rɪˈvjuː/","trình duyệt sprint"],["increment","n","/ˈɪnkrɪmənt/","phần tăng trưởng (sản phẩm)"],["definition of done","n","/ˌdefɪˈnɪʃən əv dʌn/","định nghĩa hoàn thành"],["kanban","n","/kɑːnˈbɑːn/","Kanban (bảng thẻ công việc)"],["WIP limit","n","/wɪp ˈlɪmɪt/","giới hạn công việc đang làm"],["continuous improvement","n","/kənˈtɪnjuəs ɪmˈpruːvmənt/","cải tiến liên tục"]],
+  11: [["security","n","/sɪˈkjʊərəti/","bảo mật / an ninh"],["authentication","n","/ɔːˌθentɪˈkeɪʃən/","xác thực"],["authorization","n","/ˌɔːθəraɪˈzeɪʃən/","phân quyền"],["encryption","n","/ɪnˈkrɪpʃən/","mã hóa"],["compliance","n","/kəmˈplaɪəns/","sự tuân thủ"],["vulnerability","n","/ˌvʌlnərəˈbɪləti/","lỗ hổng bảo mật"],["threat","n","/θret/","mối đe dọa"],["data breach","n","/ˈdeɪtə briːtʃ/","rò rỉ dữ liệu"],["privacy","n","/ˈprɪvəsi/","quyền riêng tư"],["access control","n","/ˈækses kənˈtroʊl/","kiểm soát truy cập"],["audit","n / v","/ˈɔːdɪt/","kiểm toán"],["penetration testing","n","/ˌpenɪˈtreɪʃən ˈtestɪŋ/","kiểm thử xâm nhập"],["incident","n","/ˈɪnsɪdənt/","sự cố bảo mật"],["disaster recovery","n","/dɪˈzɑːstər rɪˈkʌvəri/","phục hồi sau thảm họa"],["backup","n / v","/ˈbækʌp/","sao lưu"]],
+  12: [["change","n / v","/tʃeɪndʒ/","thay đổi"],["change request","n","/tʃeɪndʒ rɪˈkwest/","yêu cầu thay đổi (CR)"],["change control","n","/tʃeɪndʒ kənˈtroʊl/","kiểm soát thay đổi"],["change board","n","/tʃeɪndʒ bɔːrd/","hội đồng thay đổi (CAB)"],["impact analysis","n","/ˈɪmpækt əˈnæləsɪs/","phân tích tác động"],["baseline","n","/ˈbeɪslaɪn/","đường cơ sở"],["configuration item","n","/kənˌfɪɡjʊˈreɪʃən ˈaɪtəm/","mục cấu hình (CI)"],["release management","n","/rɪˈliːs ˈmænɪdʒmənt/","quản lý phát hành"],["approval","n","/əˈpruːvəl/","phê duyệt"],["reject","v","/rɪˈdʒekt/","từ chối"],["implement","v","/ˈɪmplɪment/","thực hiện / triển khai"],["revert","v","/rɪˈvɜːrt/","hoàn nguyên"],["version control","n","/ˈvɜːrʒən kənˈtroʊl/","kiểm soát phiên bản"],["change log","n","/tʃeɪndʒ lɒɡ/","nhật ký thay đổi"],["regression test","n","/rɪˈɡreʃən test/","kiểm thử hồi quy"]],
+  13: [["cost","n","/kɒst/","chi phí"],["estimate","v / n","/ˈestɪmət/","ước lượng"],["quote","n","/kwoʊt/","báo giá"],["invoice","n","/ˈɪnvɔɪs/","hóa đơn"],["payment","n","/ˈpeɪmənt/","thanh toán"],["procurement","n","/prəˈkjʊərmənt/","mua sắm / thu mua"],["contract","n","/ˈkɒntrækt/","hợp đồng"],["SOW","abbr","/es oʊ ˈdʌbəljuː/","phạm vi công việc"],["NDA","abbr","/en diː eɪ/","thỏa thuận bảo mật"],["penalty","n","/ˈpenəlti/","phạt vi phạm hợp đồng"],["ROI","abbr","/ɑːr oʊ aɪ/","lợi tức đầu tư"],["cash flow","n","/kæʃ floʊ/","dòng tiền"],["tender","n","/ˈtendər/","đấu thầu"],["terms and conditions","n","/tɜːrmz ənd kənˈdɪʃənz/","điều khoản và điều kiện"],["renewal","n","/rɪˈnjuːəl/","gia hạn hợp đồng"]],
+  14: [["Earned Value","n","/ˈɜːrnd ˈvæljuː/","giá trị đã đạt (EV)"],["planned value","n","/plænd ˈvæljuː/","giá trị kế hoạch (PV)"],["actual cost","n","/ˈæktʃuəl kɒst/","chi phí thực tế (AC)"],["CPI","abbr","/siː piː aɪ/","chỉ số tiết kiệm chi phí"],["SPI","abbr","/es piː aɪ/","chỉ số tiến độ"],["forecast","n / v","/ˈfɔːrkæst/","dự báo"],["trend","n","/trend/","xu hướng"],["dashboard","n","/ˈdæʃbɔːrd/","bảng điều khiển"],["data-driven","adj","/ˈdeɪtə ˈdrɪvən/","dựa trên dữ liệu"],["indicator","n","/ˈɪndɪkeɪtər/","chỉ báo"],["baseline","n","/ˈbeɪslaɪn/","đường cơ sở (đo lường)"],["target","n","/ˈtɑːrɡɪt/","mục tiêu / chỉ tiêu"],["root cause","n","/ruːt kɔːz/","nguyên nhân gốc rễ"],["insight","n","/ˈɪnsaɪt/","nhận định sâu / insight"],["benchmarking","n","/ˈbentʃmɑːrkɪŋ/","so sánh chuẩn"]],
+  15: [["cloud computing","n","/klaʊd kəmˈpjuːtɪŋ/","điện toán đám mây"],["virtualization","n","/ˌvɜːrtʃuəlaɪˈzeɪʃən/","ảo hóa"],["container","n","/kənˈteɪnər/","container (Docker)"],["microservice","n","/ˈmaɪkroʊˌsɜːrvɪs/","kiến trúc vi dịch vụ"],["API","abbr","/eɪ piː aɪ/","giao diện lập trình ứng dụng"],["database","n","/ˈdeɪtəbeɪs/","cơ sở dữ liệu"],["server","n","/ˈsɜːrvər/","máy chủ"],["bandwidth","n","/ˈbændwɪdθ/","băng thông"],["latency","n","/ˈleɪtənsi/","độ trễ"],["redundancy","n","/rɪˈdʌndənsi/","dự phòng (hệ thống)"],["load balancing","n","/loʊd ˈbælənsɪŋ/","cân bằng tải"],["CDN","abbr","/siː diː en/","mạng phân phối nội dung"],["on-premise","adj","/ɒn ˈpremɪs/","tại chỗ (không cloud)"],["hybrid","adj","/ˈhaɪbrɪd/","lai (hybrid cloud)"],["disaster recovery site","n","/dɪˈzɑːstər rɪˈkʌvəri saɪt/","trang web phục hồi DR"]],
+  16: [["negotiate","v","/nɪˈɡoʊʃieɪt/","đàm phán"],["compromise","n / v","/ˈkɒmprəmaɪz/","thỏa hiệp"],["consensus","n","/kənˈsensəs/","đồng thuận chung"],["conflict","n","/ˈkɒnflɪkt/","xung đột"],["mediate","v","/ˈmiːdieɪt/","hòa giải"],["assertive","adj","/əˈsɜːrtɪv/","quả quyết / kiên định"],["persuade","v","/pərˈsweɪd/","thuyết phục"],["influence","n / v","/ˈɪnfluəns/","ảnh hưởng"],["diplomacy","n","/dɪˈploʊməsi/","ngoại giao / khéo léo"],["stakeholder mapping","n","/ˈsteɪkˌhoʊldər ˈmæpɪŋ/","lập bản đồ bên liên quan"],["win-win","adj","/wɪn wɪn/","cùng có lợi"],["leverage","v","/ˈlevərɪdʒ/","tận dụng / dựa vào"],["proposal","n","/prəˈpoʊzəl/","đề xuất"],["objection","n","/əbˈdʒekʃən/","phản đối / ý kiến phản bác"],["facilitate","v","/fəˈsɪlɪteɪt/","tạo điều kiện / dẫn dắt"]],
+  17: [["cross-cultural","adj","/krɒs ˈkʌltʃərəl/","xuyên văn hóa"],["localization","n","/ˌloʊkəlaɪˈzeɪʃən/","bản địa hóa"],["timezone","n","/ˈtaɪmzoʊn/","múi giờ"],["offshore","adj","/ˌɒfˈʃɔːr/","ngoài khơi / thuê ngoài"],["nearshore","adj","/ˈnɪərʃɔːr/","thuê gần (đơn vị gần)"],["distributed team","n","/dɪˈstrɪbjuːtɪd tiːm/","đội phân tán"],["remote work","n","/rɪˈmoʊt wɜːrk/","làm việc từ xa"],["virtual meeting","n","/ˈvɜːrtʃuəl ˈmiːtɪŋ/","cuộc họp trực tuyến"],["asynchronous","adj","/eɪˈsɪŋkrənəs/","không đồng bộ"],["synchronous","adj","/ˈsɪŋkrənəs/","đồng bộ"],["cultural awareness","n","/ˈkʌltʃərəl əˈweərnəs/","nhận thức văn hóa"],["native speaker","n","/ˈneɪtɪv ˈspiːkər/","người bản ngữ"],["lingua franca","n","/ˈlɪŋɡwə ˈfræŋkə/","ngôn ngữ chung (thường là Anh)"],["diversity","n","/daɪˈvɜːrsəti/","sự đa dạng"],["inclusion","n","/ɪnˈkluːʒən/","sự bao trùm / hòa nhập"]],
+  18: [["leadership","n","/ˈliːdərʃɪp/","lãnh đạo"],["strategy","n","/ˈstrætədʒi/","chiến lược"],["strategic","adj","/strəˈtiːdʒɪk/","chiến lược (adj)"],["tactical","adj","/ˈtæktɪkəl/","chiến thuật"],["vision","n","/ˈvɪʒən/","tầm nhìn"],["mission","n","/ˈmɪʃən/","sứ mệnh"],["decision-making","n","/dɪˈsɪʒən ˈmeɪkɪŋ/","ra quyết định"],["delegation","n","/ˌdelɪˈɡeɪʃən/","ủy quyền"],["accountability","n","/əˌkaʊntəˈbɪləti/","trách nhiệm giải trình"],["mentality","n","/menˈtæləti/","tư duy"],["proactive","adj","/proʊˈæktɪv/","chủ động"],["adaptable","adj","/əˈdæptəbəl/","có khả năng thích nghi"],["resilient","adj","/rɪˈzɪliənt/","kiên cường / có khả năng phục hồi"],["synergy","n","/ˈsɪnərdʒi/","hiệp lực"],["stakeholder buy-in","n","/ˈsteɪkˌhoʊldər ˈbaɪ ɪn/","sự ủng hộ của bên liên quan"]],
+  19: [["charter","n","/ˈtʃɑːrtər/","điều lệ dự án"],["feasibility study","n","/ˌfiːzəˈbɪləti ˈstʌdi/","nghiên cứu tính khả thi"],["business case","n","/ˈbɪznəs keɪs/","phân tích lợi ích-kinh phí"],["project plan","n","/ˈprɒdʒekt plæn/","kế hoạch dự án"],["WBS","abbr","/dʌbəljuː biː es/","cấu trúc phân rã công việc"],["RACI matrix","n","/ˈræsi ˈmeɪtrɪks/","ma trận phân công trách nhiệm"],["lessons learned","n","/ˈlesənz ˈlɜːrnd/","bài học kinh nghiệm"],["PMP","abbr","/piː em piː/","chứng chỉ quản lý dự án"],["PMI","abbr","/piː em aɪ/","viện quản lý dự án"],["PRINCE2","abbr","/prɪns tuː/","phương pháp quản lý dự án PRINCE2"],["ISO 9001","abbr","/aɪ es oʊ naɪn wʌn wʌn/","tiêu chuẩn quản lý chất lượng"],["CMMI","abbr","/siː em em aɪ/","mô hình năng lực trưởng thành"],["best practice","n","/best ˈpræktɪs/","thực hành tốt nhất"],["templates","n","/ˈtempləts/","mẫu tài liệu"],["sign-off","n","/ˈsaɪn ɒf/","xác nhận phê duyệt cuối cùng"]],
+  20: [["close out","v","/kloʊz aʊt/","đóng dự án"],["closure","n","/ˈkloʊʒər/","sự kết thúc"],["handover","n","/ˈhændoʊvər/","bàn giao"],["post-implementation","adj","/poʊst ˌɪmplɪmenˈteɪʃən/","hậu triển khai"],["benefit realization","n","/ˈbenɪfɪt ˌriːəlaɪˈzeɪʃən/","hiện thực hóa lợi ích"],["success criteria","n","/səkˈses kraɪˈtɪəriə/","tiêu chí thành công"],["performance review","n","/pərˈfɔːrməns rɪˈvjuː/","đánh giá hiệu suất"],["project retrospective","n","/ˈprɒdʒekt ˌretrəˈspektɪv/","nhìn lại toàn dự án"],["archive","v","/ˈɑːrkaɪv/","lưu trữ"],["decommission","v","/ˌdiːkəˈmɪʃən/","ngừng sử dụng hệ thống cũ"],["sunset","n","/ˈsʌnset/","ngừng hỗ trợ sản phẩm"],["reference","n","/ˈrefrəns/","tài liệu tham chiếu"],["recognition","n","/ˌrekəɡˈnɪʃən/","công nhận / ghi nhận"],["warranty","n","/ˈwɒrənti/","bảo hành"],["sustainability","n","/səˌsteɪnəˈbɪləti/","tính bền vững"]],
+};
 
-  function clearActive() {
-    // navBtns.forEach(b => b.classList.remove('active'));
-    lessonSections.forEach(s => s.classList.remove('active'));
-    convSections.forEach(c => c.classList.remove('active'));
+</script>
+
+</div><!-- end webView -->
+
+<div id="flashcardView">
+  <div class="fc-header">
+    <button class="fc-close" id="fcCloseBtn" onclick="closeFlashcard()" title="Đóng (F)">&#10005;</button>
+    <span class="fc-lesson-title" id="fcLessonTitle">Bài 1</span>
+    <span class="fc-counter" id="fcCounter">1 / 15</span>
+  </div>
+  <div class="fc-topic-bar" id="fcTopicBar" style="cursor:pointer" onclick="openLessonPicker()" title="Đổi bài học">Khởi tạo & Lập kế hoạch dự án</div>
+
+  <div class="fc-body" id="fcBody">
+    <div class="fc-card-wrapper">
+      <div class="fc-card" id="fcCard" onclick="fcFlip()">
+        <div class="fc-front">
+          <div class="fc-word" id="fcWord">project</div>
+          <div class="fc-type" id="fcType">n</div>
+          <div class="fc-phonetic" id="fcPhonetic">/ˈprɒdʒekt/</div>
+          <button class="fc-speak-btn" id="fcSpeakBtn" onclick="event.stopPropagation();fcSpeak()">&#128266; Nghe phát âm</button>
+          <div class="fc-tap-hint">Tap để xem nghĩa</div>
+        </div>
+        <div class="fc-back">
+          <div class="fc-viet" id="fcViet">dự án</div>
+          <div class="fc-viet-extra" id="fcVietExtra"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- dot indicators -->
+  <div class="fc-dot-nav" id="fcDotNav"></div>
+
+  <div class="fc-nav">
+    <button class="fc-nav-btn prev" id="fcPrev" onclick="fcPrev()">&#8592; Trước</button>
+    <button class="fc-nav-btn next" id="fcNext" onclick="fcNext()">Tiếp &#8594;</button>
+  </div>
+</div>
+
+<!-- Lesson picker sheet -->
+<div class="fc-lesson-picker" id="fcLessonPicker" onclick="if(event.target===this)closeLessonPicker()">
+  <div class="fc-lesson-sheet">
+    <h3>Chọn bài học</h3>
+    <div class="fc-mode-toggle">
+      <div class="fc-mode-btn active" id="fcModeAll" onclick="fcSetMode('all')">Tất cả 300 từ</div>
+      <div class="fc-mode-btn" id="fcModeLesson" onclick="fcSetMode('lesson')">Theo bài</div>
+    </div>
+    <div class="fc-lesson-grid" id="fcLessonGrid"></div>
+    <button class="fc-nav-btn next" style="margin-top:8px" onclick="closeLessonPicker()">Bắt đầu học</button>
+  </div>
+</div>
+
+<!-- Toggle button: Web ↔ Flashcard -->
+<button class="fc-float-btn" id="fcToggleBtn" onclick="toggleView()" title="Chuyển chế độ học (F)">&#128203;</button>
+
+<script>
+// ── Core navigation ──────────────────────────────────────────────
+var lessonSections = document.querySelectorAll('.lesson-section');
+var convSections = document.querySelectorAll('.conv-section');
+var currentLesson = 0;
+
+function clearActive() {
+  lessonSections.forEach(function(s){ s.classList.remove('active'); });
+  convSections.forEach(function(c){ c.classList.remove('active'); });
+}
+
+function showCover() {
+  clearActive();
+  document.getElementById('cover').classList.add('active');
+  updateProgress(0);
+}
+
+function showLesson(n) {
+  clearActive();
+  document.getElementById('lesson-' + n).classList.add('active');
+  updateProgress(n);
+}
+
+function showConversations() {
+  clearActive();
+  document.getElementById('conversations-panel').classList.add('active');
+  document.getElementById('conv-1').classList.add('active');
+  updateProgress(0);
+}
+
+function showConv(n) {
+  clearActive();
+  convSections.forEach(function(c){ c.classList.remove('active'); });
+  document.getElementById('conv-' + n).classList.add('active');
+}
+
+function updateProgress(n) {
+  currentLesson = n;
+  var pct = n === 0 ? 0 : Math.round((n / 20) * 100);
+  document.getElementById('progress-bar').style.width = pct + '%';
+  var label = n === 0 ? 'Giới thiệu' : 'Bài ' + n + ' / 20';
+  document.getElementById('progress-label').textContent = label;
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'ArrowRight') {
+    var next = Math.min(currentLesson + 1, 20);
+    if (next === 0) showCover(); else showLesson(next);
   }
-
-  function showCover() {
-    clearActive();
-    //nt.querySelector('.lesson-nav .nav-btn').classList.add('active');
-    document.getElementById('cover').classList.add('active');
-    updateProgress(0);
+  if (e.key === 'ArrowLeft') {
+    var prev = Math.max(currentLesson - 1, 0);
+    if (prev === 0) showCover(); else showLesson(prev);
   }
+});
 
-  // Cache voices after they load
-  var _cachedVoices = null;
-  function _getEnglishVoice() {
-    var voices = _cachedVoices || speechSynthesis.getVoices();
-    if (!voices.length) return null;
-    // Prefer Google/Chrome voices first (usually best quality), then any English
-    var preferred = [
-      'Google US English', 'Google UK English', 'Google.com',
-      'Microsoft David', 'Microsoft Zira', 'Microsoft Ava',
-      'Samantha', 'Daniel', 'Karen', 'Moira',
-      'en-US', 'en-GB', 'en-AU', 'en-GB'
-    ];
-    for (var i = 0; i < preferred.length; i++) {
-      for (var j = 0; j < voices.length; j++) {
-        if (voices[j].name.indexOf(preferred[i]) !== -1 ||
-            voices[j].lang === preferred[i] ||
-            voices[j].lang.indexOf('en') === 0) {
-          return voices[j];
-        }
+// ── Speech synthesis ───────────────────────────────────────────────
+var _cachedVoices = null;
+function _getEnglishVoice() {
+  var voices = _cachedVoices || speechSynthesis.getVoices();
+  if (!voices.length) return null;
+  var preferred = [
+    'Google US English','Google UK English','Google.com',
+    'Microsoft David','Microsoft Zira','Microsoft Ava',
+    'Samantha','Daniel','Karen','Moira',
+    'en-US','en-GB','en-AU','en-GB'
+  ];
+  for (var i = 0; i < preferred.length; i++) {
+    for (var j = 0; j < voices.length; j++) {
+      if (voices[j].name.indexOf(preferred[i]) !== -1 ||
+          voices[j].lang === preferred[i] ||
+          voices[j].lang.indexOf('en') === 0) {
+        return voices[j];
       }
     }
-    // Fallback: any English voice
-    for (var k = 0; k < voices.length; k++) {
-      if (voices[k].lang && voices[k].lang.indexOf('en') === 0) return voices[k];
+  }
+  for (var k = 0; k < voices.length; k++) {
+    if (voices[k].lang && voices[k].lang.indexOf('en') === 0) return voices[k];
+  }
+  return null;
+}
+if (speechSynthesis.onvoiceschanged !== undefined) {
+  speechSynthesis.onvoiceschanged = function() {
+    _cachedVoices = speechSynthesis.getVoices();
+  };
+}
+_cachedVoices = speechSynthesis.getVoices();
+
+function speakWord(word) {
+  if (!window.speechSynthesis) return;
+  speechSynthesis.cancel();
+  var utt = new SpeechSynthesisUtterance(word);
+  utt.lang = 'en-US';
+  utt.rate = 0.85;
+  utt.pitch = 1;
+  var voice = _getEnglishVoice();
+  if (voice) utt.voice = voice;
+  speechSynthesis.speak(utt);
+}
+
+// ── Flashcard module ───────────────────────────────────────────────
+(function(){
+  var _fcCurrent = 0;
+  var _fcWords   = [];
+  var _fcMode    = 'all';
+  var _fcLesson  = 0;
+  var _fcAllWords = [];
+
+  for (var ln in _lessonVocab) {
+    for (var i = 0; i < _lessonVocab[ln].length; i++) {
+      _fcAllWords.push(_lessonVocab[ln][i]);
     }
-    return null;
-  }
-  // Load voices (some browsers load async)
-  if (speechSynthesis.onvoiceschanged !== undefined) {
-    speechSynthesis.onvoiceschanged = function() {
-      _cachedVoices = speechSynthesis.getVoices();
-    };
-  }
-  _cachedVoices = speechSynthesis.getVoices();
-
-  function speakWord(word) {
-    if (!window.speechSynthesis) return;
-    speechSynthesis.cancel();
-    var utt = new SpeechSynthesisUtterance(word);
-    utt.lang = 'en-US';
-    utt.rate = 0.85;
-    utt.pitch = 1;
-    var voice = _getEnglishVoice();
-    if (voice) utt.voice = voice;
-    speechSynthesis.speak(utt);
   }
 
-  function showLesson(n) {
-    clearActive();
-    //const btns = document.querySelectorAll('.lesson-nav .nav-btn');
-    //btns[n].classList.add('active');
-    document.getElementById('lesson-' + n).classList.add('active');
-    updateProgress(n);
-  }
-
-  function showConversations() {
-    clearActive();
-    // document.querySelectorAll('.lesson-nav .nav-btn').forEach(b => {
-    //   if (b.textContent.includes('Hội thoại')) b.classList.add('active');
-    // });
-    document.getElementById('conversations-panel').classList.add('active');
-    document.getElementById('conv-1').classList.add('active');
-    updateProgress(0);
-  }
-
-  function showConv(n) {
-    clearActive();
-    // document.querySelectorAll('.lesson-nav .nav-btn').forEach(b => {
-    //   if (b.textContent.includes('Hội thoại')) b.classList.add('active');
-    // });
-    convSections.forEach(c => c.classList.remove('active'));
-    document.getElementById('conv-' + n).classList.add('active');
-  }
-
-  function updateProgress(n) {
-    currentLesson = n;
-    const pct = n === 0 ? 0 : Math.round((n / 20) * 100);
-    document.getElementById('progress-bar').style.width = pct + '%';
-    const label = n === 0 ? 'Giới thiệu' : 'Bài ' + n + ' / 20';
-    document.getElementById('progress-label').textContent = label;
-  }
-
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'ArrowRight') {
-      const next = Math.min(currentLesson + 1, 20);
-      if (next === 0) showCover(); else showLesson(next);
+  function fcUpdateCard() {
+    var words = _fcMode === 'all' ? _fcAllWords : (_lessonVocab[_fcLesson] || []);
+    _fcWords = words;
+    if (_fcCurrent >= words.length) _fcCurrent = Math.max(0, words.length - 1);
+    var w = words[_fcCurrent] || [];
+    document.getElementById('fcWord').textContent       = w[0] || '';
+    document.getElementById('fcType').textContent        = w[1] || '';
+    document.getElementById('fcPhonetic').textContent    = w[2] || '';
+    var vietParts = w[3] ? w[3].split(' / ') : [];
+    document.getElementById('fcViet').textContent        = vietParts[0] || w[3] || '';
+    document.getElementById('fcVietExtra').textContent   = vietParts.slice(1).join(' / ') || '';
+    document.getElementById('fcCounter').textContent     = (_fcCurrent + 1) + ' / ' + words.length;
+    document.getElementById('fcPrev').disabled            = _fcCurrent <= 0;
+    document.getElementById('fcNext').disabled            = _fcCurrent >= words.length - 1;
+    document.getElementById('fcCard').classList.remove('flipped');
+    if (_fcMode === 'lesson') {
+      document.getElementById('fcLessonTitle').textContent = _lessonTitles[_fcLesson] || '';
+      document.getElementById('fcTopicBar').textContent    = '';
+    } else {
+      document.getElementById('fcLessonTitle').textContent = 'Tất cả từ vựng';
+      document.getElementById('fcTopicBar').textContent    = _fcAllWords.length + ' từ — 20 bài học';
     }
-    if (e.key === 'ArrowLeft') {
-      const prev = Math.max(currentLesson - 1, 0);
-      if (prev === 0) showCover(); else showLesson(prev);
+    fcUpdateDots();
+  }
+
+  function fcUpdateDots() {
+    var nav   = document.getElementById('fcDotNav');
+    var words = _fcMode === 'all' ? _fcAllWords : (_lessonVocab[_fcLesson] || []);
+    var maxDots = Math.min(words.length, 40);
+    var start   = Math.max(0, _fcCurrent - 5);
+    var end     = Math.min(words.length, start + maxDots);
+    if (end === words.length && start > 0 && end - start < maxDots) start = Math.max(0, end - maxDots);
+    var html = '';
+    for (var i = start; i < end; i++) {
+      html += '<span class="fc-dot' + (i === _fcCurrent ? ' active' : '') + '" onclick="fcGoTo(' + i + ')"></span>';
     }
-  });
+    nav.innerHTML = html;
+  }
+
+  window.openFlashcard = function(lessonNum) {
+    if (lessonNum) {
+      _fcLesson = lessonNum;
+      _fcMode    = 'lesson';
+      document.getElementById('fcModeLesson').classList.add('active');
+      document.getElementById('fcModeAll').classList.remove('active');
+    } else {
+      _fcMode    = 'all';
+      document.getElementById('fcModeAll').classList.add('active');
+      document.getElementById('fcModeLesson').classList.remove('active');
+    }
+    _fcCurrent = 0;
+    fcUpdateCard();
+    document.getElementById('webView').classList.add('hide');
+    document.getElementById('flashcardView').classList.add('show');
+    fcBuildLessonGrid();
+  };
+
+  window.closeFlashcard = function() {
+    document.getElementById('flashcardView').classList.remove('show');
+    document.getElementById('webView').classList.remove('hide');
+    if (window.speechSynthesis) window.speechSynthesis.cancel();
+  };
+
+  window.toggleView = function() {
+    if (document.getElementById('flashcardView').classList.contains('show')) {
+      closeFlashcard();
+    } else {
+      openFlashcard();
+    }
+  };
+
+  window.fcFlip = function() {
+    var card = document.getElementById('fcCard');
+    card.classList.toggle('flipped');
+  };
+
+  window.fcSpeak = function() {
+    var w = _fcWords[_fcCurrent];
+    if (w) speakWord(w[0]);
+  };
+
+  window.fcPrev = function() {
+    if (_fcCurrent > 0) { _fcCurrent--; fcUpdateCard(); }
+  };
+
+  window.fcNext = function() {
+    if (_fcCurrent < _fcWords.length - 1) { _fcCurrent++; fcUpdateCard(); }
+  };
+
+  window.fcGoTo = function(idx) {
+    _fcCurrent = idx;
+    fcUpdateCard();
+  };
+
+  window.fcSetMode = function(mode) {
+    _fcMode = mode;
+    if (mode === 'lesson') {
+      if (!_fcLesson) _fcLesson = 1;
+      document.getElementById('fcModeLesson').classList.add('active');
+      document.getElementById('fcModeAll').classList.remove('active');
+    } else {
+      document.getElementById('fcModeAll').classList.add('active');
+      document.getElementById('fcModeLesson').classList.remove('active');
+    }
+    _fcCurrent = 0;
+    fcUpdateCard();
+  };
+
+  window.fcBuildLessonGrid = function() {
+    var grid = document.getElementById('fcLessonGrid');
+    var html = '';
+    for (var i = 1; i <= 20; i++) {
+      var wcount = _lessonVocab[i] ? _lessonVocab[i].length : 0;
+      html += '<div class="fc-lesson-chip' + (i === _fcLesson ? ' current' : '') + '" onclick="fcSelectLesson(' + i + ')">';
+      html += '<span class="chip-num">' + i + '</span>';
+      html += '<span class="chip-sub">' + wcount + ' từ</span></div>';
+    }
+    grid.innerHTML = html;
+  };
+
+  window.fcSelectLesson = function(n) {
+    _fcLesson = n;
+    _fcMode    = 'lesson';
+    document.getElementById('fcModeLesson').classList.add('active');
+    document.getElementById('fcModeAll').classList.remove('active');
+    _fcCurrent = 0;
+    fcUpdateCard();
+    closeLessonPicker();
+  };
+
+  window.closeLessonPicker = function() {
+    document.getElementById('fcLessonPicker').classList.remove('active');
+  };
+
+  window.openLessonPicker = function() {
+    fcBuildLessonGrid();
+    document.getElementById('fcLessonPicker').classList.add('active');
+  };
+
+  // Swipe handling — runs after DOM is ready (script is at end of body)
+  var el   = document.getElementById('fcBody');
+  var card = document.getElementById('fcCard');
+  if (el && card) {
+    var startX = 0, startY = 0, dx = 0;
+    var isDragging = false;
+    el.addEventListener('touchstart', function(e) {
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+      isDragging = true;
+      card.style.transition = 'none';
+    }, { passive: true });
+    el.addEventListener('touchmove', function(e) {
+      if (!isDragging) return;
+      dx = e.touches[0].clientX - startX;
+      var dy = Math.abs(e.touches[0].clientY - startY);
+      if (Math.abs(dx) > dy) {
+        e.preventDefault();
+        card.style.transform = 'translateX(' + dx + 'px) rotate(' + (dx * 0.03) + 'deg)';
+      }
+    }, { passive: false });
+    el.addEventListener('touchend', function() {
+      if (!isDragging) return;
+      isDragging = false;
+      card.style.transition = '';
+      card.style.transform = '';
+      if (dx > 60)      { fcPrev(); }
+      else if (dx < -60){ fcNext(); }
+      dx = 0;
+    });
+  }
+})();
 </script>
+
+<script>
+// Phím tắt: F để chuyển đổi giữa chế độ web ↔ flashcard
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'f' || e.key === 'F') {
+    toggleView();
+  }
+});
+</script>
+
 </body>
 </html>
