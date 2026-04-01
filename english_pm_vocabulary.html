@@ -1,0 +1,1867 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Học Tiếng Anh PM CNTT — 10 Bài</title>
+<style>
+  :root {
+    --primary: #1a73e8;
+    --primary-dark: #1557b0;
+    --secondary: #e8f0fe;
+    --accent: #ff6d00;
+    --bg: #f0f4f8;
+    --card: #ffffff;
+    --text: #202124;
+    --text-muted: #5f6368;
+    --border: #dadce0;
+    --success: #34a853;
+    --danger: #ea4335;
+    --shadow: 0 2px 8px rgba(0,0,0,.08);
+    --shadow-lg: 0 8px 24px rgba(0,0,0,.12);
+    --radius: 12px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    font-size: 15px;
+  }
+
+  /* ── HEADER ── */
+  .site-header {
+    background: linear-gradient(135deg, #1a73e8 0%, #0d47a1 100%);
+    color: #fff;
+    padding: 48px 24px 56px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .site-header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -20%;
+    width: 60%;
+    height: 200%;
+    background: rgba(255,255,255,.06);
+    transform: rotate(-12deg);
+    border-radius: 50%;
+  }
+  .site-header::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    right: -10%;
+    width: 50%;
+    height: 180%;
+    background: rgba(255,255,255,.04);
+    transform: rotate(8deg);
+    border-radius: 50%;
+  }
+  .site-header h1 {
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-weight: 800;
+    letter-spacing: -.5px;
+    margin-bottom: 8px;
+    position: relative;
+    z-index: 1;
+  }
+  .site-header p {
+    font-size: 1rem;
+    opacity: .88;
+    max-width: 560px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+  .header-stats {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin-top: 20px;
+    position: relative;
+    z-index: 1;
+    flex-wrap: wrap;
+  }
+  .stat-item {
+    text-align: center;
+  }
+  .stat-number {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #ffd54f;
+  }
+  .stat-label {
+    font-size: .78rem;
+    opacity: .8;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+  }
+
+  /* ── LAYOUT ── */
+  .container {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+
+  /* ── NAV TABS ── */
+  .lesson-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    padding: 0 16px;
+    margin-top: -20px;
+    margin-bottom: 32px;
+  }
+  .lesson-nav-inner {
+    max-width: 820px;
+    margin: 0 auto;
+  }
+  .nav-row {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding: 8px 0;
+  }
+  .nav-row::-webkit-scrollbar { display: none; }
+  .nav-row .nav-label {
+    flex-shrink: 0;
+    font-size: .75rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    padding: 6px 8px;
+    white-space: nowrap;
+  }
+  .nav-btn {
+    flex-shrink: 0;
+    padding: 6px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 20px;
+    background: transparent;
+    color: var(--text-muted);
+    font-size: .8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .2s;
+    white-space: nowrap;
+  }
+  .nav-btn:hover { border-color: var(--primary); color: var(--primary); }
+  .nav-btn.active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #fff;
+  }
+  .nav-btn.conversation-btn { border-color: var(--accent); color: var(--accent); }
+  .nav-btn.conversation-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+  /* ── LESSON ── */
+  .lesson-section { display: none; }
+  .lesson-section.active { display: block; }
+
+  .lesson-intro {
+    background: var(--secondary);
+    border-left: 4px solid var(--primary);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 16px 20px;
+    margin-bottom: 24px;
+  }
+  .lesson-intro h2 {
+    font-size: 1.3rem;
+    color: var(--primary-dark);
+    margin-bottom: 4px;
+  }
+  .lesson-intro p { color: var(--text-muted); font-size: .9rem; }
+
+  /* ── VOCABULARY TABLE ── */
+  .vocab-table {
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    margin-bottom: 32px;
+  }
+  .vocab-header {
+    display: grid;
+    grid-template-columns: 44px 1fr 120px 1fr;
+    gap: 8px;
+    padding: 12px 20px;
+    background: var(--primary);
+    color: #fff;
+    font-size: .8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+  }
+  @media (max-width: 600px) {
+    .vocab-header { grid-template-columns: 36px 1fr 1fr; }
+    .vocab-header span:nth-child(3) { display: none; }
+  }
+  .vocab-row {
+    display: grid;
+    grid-template-columns: 44px 1fr 120px 1fr;
+    gap: 8px;
+    padding: 11px 20px;
+    border-bottom: 1px solid #f1f3f4;
+    align-items: start;
+    transition: background .15s;
+  }
+  .vocab-row:last-child { border-bottom: none; }
+  .vocab-row:hover { background: var(--secondary); }
+  @media (max-width: 600px) {
+    .vocab-row { grid-template-columns: 36px 1fr 1fr; }
+    .vocab-row span:nth-child(3) { display: none; }
+  }
+  .vocab-num {
+    font-weight: 700;
+    color: var(--primary);
+    font-size: .85rem;
+    text-align: center;
+    padding-top: 2px;
+  }
+  .vocab-word { font-weight: 700; color: #1a237e; font-size: 1rem; }
+  .vocab-phonetic {
+    color: var(--text-muted);
+    font-size: .85rem;
+    font-style: italic;
+  }
+  .vocab-type {
+    display: inline-block;
+    padding: 1px 8px;
+    border-radius: 10px;
+    font-size: .72rem;
+    font-weight: 600;
+    background: #e3f2fd;
+    color: #1565c0;
+    margin-bottom: 3px;
+  }
+  .vocab-meaning { color: var(--text); font-size: .95rem; }
+
+  /* ── COVER / CONVERSATION ── */
+  .cover-section { display: none; }
+  .cover-section.active { display: block; }
+
+  .conv-section {
+    display: none;
+    animation: fadeIn .3s ease;
+  }
+  .conv-section.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+  .conv-card {
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 28px 32px;
+    margin-bottom: 24px;
+  }
+  .conv-card h3 {
+    font-size: 1.05rem;
+    color: var(--primary-dark);
+    margin-bottom: 4px;
+  }
+  .conv-card .conv-subtitle {
+    font-size: .82rem;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+  }
+  .conv-line {
+    padding: 12px 16px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    font-size: .97rem;
+  }
+  .conv-speaker {
+    background: #e3f2fd;
+    border-left: 3px solid #1976d2;
+  }
+  .conv-response {
+    background: #f1f8e9;
+    border-left: 3px solid #388e3c;
+  }
+  .conv-label {
+    font-weight: 700;
+    font-size: .78rem;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    margin-bottom: 4px;
+    display: block;
+  }
+  .conv-speaker .conv-label { color: #1565c0; }
+  .conv-response .conv-label { color: #2e7d32; }
+  .conv-translation {
+    font-size: .83rem;
+    color: var(--text-muted);
+    margin-top: 4px;
+    padding-top: 6px;
+    border-top: 1px dashed #e0e0e0;
+    display: none;
+  }
+  .conv-line:hover .conv-translation { display: block; }
+
+  .toggle-trans {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+    font-size: .85rem;
+    color: var(--text-muted);
+    cursor: pointer;
+    user-select: none;
+  }
+  .toggle-trans input { display: none; }
+  .toggle-track {
+    width: 36px;
+    height: 20px;
+    background: var(--border);
+    border-radius: 10px;
+    position: relative;
+    transition: background .2s;
+  }
+  .toggle-trans input:checked + .toggle-track { background: var(--primary); }
+  .toggle-thumb {
+    width: 16px;
+    height: 16px;
+    background: #fff;
+    border-radius: 50%;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    transition: left .2s;
+    box-shadow: 0 1px 3px rgba(0,0,0,.2);
+  }
+  .toggle-trans input:checked ~ .toggle-track .toggle-thumb { left: 18px; }
+
+  .review-note {
+    background: #fff8e1;
+    border-left: 4px solid #ffa000;
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 14px 18px;
+    font-size: .9rem;
+    color: #5d4037;
+    margin-top: 24px;
+  }
+
+  /* ── PROGRESS ── */
+  .progress-wrap {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+  }
+  .progress-label {
+    background: var(--primary);
+    color: #fff;
+    font-size: .75rem;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+  }
+  .progress-bar-outer {
+    width: 120px;
+    height: 6px;
+    background: rgba(0,0,0,.12);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .progress-bar-inner {
+    height: 100%;
+    background: #ffd54f;
+    border-radius: 3px;
+    transition: width .4s ease;
+    width: 0%;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    text-align: center;
+    padding: 32px 16px;
+    color: var(--text-muted);
+    font-size: .82rem;
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+  }
+  .footer a { color: var(--primary); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<!-- ══ HEADER ══ -->
+<header class="site-header">
+  <h1>English for IT Project Manager</h1>
+  <p>300 từ vựng tiếng Anh chuyên ngành Quản trị Dự án CNTT<br>20 bài học &mdash; Mỗi bài có hội thoại ôn luyện</p>
+  <div class="header-stats">
+    <div class="stat-item"><div class="stat-number">20</div><div class="stat-label">Bài học</div></div>
+    <div class="stat-item"><div class="stat-number">300</div><div class="stat-label">Từ vựng</div></div>
+    <div class="stat-item"><div class="stat-number">20</div><div class="stat-label">Hội thoại</div></div>
+  </div>
+</header>
+
+<!-- ══ NAV TABS ══ -->
+<nav class="lesson-nav">
+  <div class="lesson-nav-inner">
+    <div class="nav-row">
+      <span class="nav-label">Bài học</span>
+      <button class="nav-btn active" onclick="showCover()">Giới thiệu</button>
+      <button class="nav-btn" onclick="showLesson(1)">Bài 1</button>
+      <button class="nav-btn" onclick="showLesson(2)">Bài 2</button>
+      <button class="nav-btn" onclick="showLesson(3)">Bài 3</button>
+      <button class="nav-btn" onclick="showLesson(4)">Bài 4</button>
+      <button class="nav-btn" onclick="showLesson(5)">Bài 5</button>
+      <button class="nav-btn" onclick="showLesson(6)">Bài 6</button>
+      <button class="nav-btn" onclick="showLesson(7)">Bài 7</button>
+      <button class="nav-btn" onclick="showLesson(8)">Bài 8</button>
+      <button class="nav-btn" onclick="showLesson(9)">Bài 9</button>
+      <button class="nav-btn" onclick="showLesson(10)">Bài 10</button>
+    </div>
+    <div class="nav-row">
+      <span class="nav-label">Bài 11-20</span>
+      <button class="nav-btn" onclick="showLesson(11)">Bài 11</button>
+      <button class="nav-btn" onclick="showLesson(12)">Bài 12</button>
+      <button class="nav-btn" onclick="showLesson(13)">Bài 13</button>
+      <button class="nav-btn" onclick="showLesson(14)">Bài 14</button>
+      <button class="nav-btn" onclick="showLesson(15)">Bài 15</button>
+      <button class="nav-btn" onclick="showLesson(16)">Bài 16</button>
+      <button class="nav-btn" onclick="showLesson(17)">Bài 17</button>
+      <button class="nav-btn" onclick="showLesson(18)">Bài 18</button>
+      <button class="nav-btn" onclick="showLesson(19)">Bài 19</button>
+      <button class="nav-btn" onclick="showLesson(20)">Bài 20</button>
+      <button class="nav-btn conversation-btn" onclick="showConversations()">Hội thoại</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ══ COVER / INTRO ══ -->
+<section class="cover-section active" id="cover">
+  <div class="container">
+    <div class="lesson-intro" style="margin-bottom: 0;">
+      <h2>Chào mừng bạn!</h2>
+      <p>Tài liệu gồm <strong>20 bài học</strong>, mỗi bài 15 từ vựng phổ biến trong quản trị dự án CNTT. Cuối mỗi bài có một <strong>đoạn hội thoại</strong> ôn luyện từ vựng của bài đó và các bài trước.</p>
+      <p style="margin-top: 8px;">Cách sử dụng: Nhấn <strong>tab Bài 1 → Bài 10</strong> để học từ mới. Nhấn tab <strong>Hội thoại</strong> để mở danh sách 10 đoạn hội thoại ôn luyện. Di chuột qua dòng hội thoại để xem bản dịch tiếng Việt.</p>
+    </div>
+    <div style="margin-top: 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px;">
+      <div style="background: var(--card); border-radius: var(--radius); padding: 16px 20px; box-shadow: var(--shadow);">
+        <div style="font-size: 1.4rem; margin-bottom: 4px;">📖</div>
+        <strong>10 Bài học</strong>
+        <p style="font-size: .83rem; color: var(--text-muted); margin-top: 4px;">150 từ vựng chuyên ngành CNTT, chia theo chủ đề</p>
+      </div>
+      <div style="background: var(--card); border-radius: var(--radius); padding: 16px 20px; box-shadow: var(--shadow);">
+        <div style="font-size: 1.4rem; margin-bottom: 4px;">🔊</div>
+        <strong>Phát âm IPA</strong>
+        <p style="font-size: .83rem; color: var(--text-muted); margin-top: 4px;">Ký hiệu phiên âm quốc tế giúp phát âm chuẩn</p>
+      </div>
+      <div style="background: var(--card); border-radius: var(--radius); padding: 16px 20px; box-shadow: var(--shadow);">
+        <div style="font-size: 1.4rem; margin-bottom: 4px;">💬</div>
+        <strong>10 Hội thoại</strong>
+        <p style="font-size: .83rem; color: var(--text-muted); margin-top: 4px;">Ôn từ vựng qua tình huống giao tiếp thực tế</p>
+      </div>
+    </div>
+    <div style="margin-top: 28px; background: var(--card); border-radius: var(--radius); padding: 20px 24px; box-shadow: var(--shadow);">
+      <h3 style="color: var(--primary-dark); margin-bottom: 12px;">Các chủ đề trong 10 bài học</h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 8px; font-size: .88rem;">
+        <div>📁 Bài 1 — Khởi tạo & Lập kế hoạch dự án</div>
+        <div>👥 Bài 2 — Nhóm & Bên liên quan</div>
+        <div>📋 Bài 3 — Yêu cầu & Phạm vi dự án</div>
+        <div>🏗️ Bài 4 — Thiết kế & Kiến trúc</div>
+        <div>💻 Bài 5 — Phát triển & Mã nguồn</div>
+        <div>🧪 Bài 6 — Kiểm thử & Chất lượng</div>
+        <div>🚀 Bài 7 — Triển khai & Ra mắt</div>
+        <div>📊 Bài 8 — Giám sát & Quản lý rủi ro</div>
+        <div>📧 Bài 9 — Giao tiếp & Báo cáo</div>
+        <div>🔄 Bài 10 — Agile & Scrum</div>
+        <div>🔒 Bài 11 — Bảo mật & Tuân thủ</div>
+        <div>📐 Bài 12 — Quản lý thay đổi & Cấu hình</div>
+        <div>💰 Bài 13 — Tài chính & Hợp đồng</div>
+        <div>📈 Bài 14 — Đo lường & Báo cáo nâng cao</div>
+        <div>🛠️ Bài 15 — Công nghệ & Hạ tầng</div>
+        <div>🤝 Bài 16 — Đàm phán & Giải quyết xung đột</div>
+        <div>🌐 Bài 17 — Giao tiếp quốc tế & Văn hóa</div>
+        <div>🧠 Bài 18 — Tư duy & Kỹ năng PM</div>
+        <div>📚 Bài 19 — Tài liệu & Chứng chỉ</div>
+        <div>🎯 Bài 20 — Đánh giá & Đóng dự án</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ LESSON SECTIONS ══ -->
+<div class="container">
+
+<!-- LESSON 1 -->
+<section class="lesson-section" id="lesson-1">
+  <div class="lesson-intro">
+    <h2>Bài 1 — Khởi tạo & Lập kế hoạch dự án</h2>
+    <p>15 từ vựng nền tảng về việc bắt đầu và lập kế hoạch một dự án CNTT.</p>
+  </div>
+  <div class="vocab-table">
+    <div class="vocab-header"><span>#</span><span>Từ vựng</span><span>Phiên âm</span><span>Nghĩa tiếng Việt</span></div>
+    <div class="vocab-row"><span class="vocab-num">1</span><span><span class="vocab-word">project</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈprɒdʒekt/</span><span class="vocab-meaning">dự án</span></div>
+    <div class="vocab-row"><span class="vocab-num">2</span><span><span class="vocab-word">initiate</span><br><span class="vocab-type">v</span></span><span class="vocab-phonetic">/ɪˈnɪʃieɪt/</span><span class="vocab-meaning">khởi tạo, khởi động</span></div>
+    <div class="vocab-row"><span class="vocab-num">3</span><span><span class="vocab-word">stakeholder</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈsteɪkˌhoʊldər/</span><span class="vocab-meaning">bên liên quan / người có lợi ích</span></div>
+    <div class="vocab-row"><span class="vocab-num">4</span><span><span class="vocab-word">charter</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈtʃɑːrtər/</span><span class="vocab-meaning">bản điều lệ dự án</span></div>
+    <div class="vocab-row"><span class="vocab-num">5</span><span><span class="vocab-word">objective</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/əbˈdʒektɪv/</span><span class="vocab-meaning">mục tiêu</span></div>
+    <div class="vocab-row"><span class="vocab-num">6</span><span><span class="vocab-word">deliverable</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/dɪˈlɪvərəbəl/</span><span class="vocab-meaning">sản phẩm bàn giao</span></div>
+    <div class="vocab-row"><span class="vocab-num">7</span><span><span class="vocab-word">milestone</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈmaɪlstoʊn/</span><span class="vocab-meaning">cột mốc (quan trọng)</span></div>
+    <div class="vocab-row"><span class="vocab-num">8</span><span><span class="vocab-word">scope</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/skoʊp/</span><span class="vocab-meaning">phạm vi (dự án)</span></div>
+    <div class="vocab-row"><span class="vocab-num">9</span><span><span class="vocab-word">schedule</span><br><span class="vocab-type">n / v</span></span><span class="vocab-phonetic">/ˈʃedjuːl/</span><span class="vocab-meaning">lịch trình; lập lịch</span></div>
+    <div class="vocab-row"><span class="vocab-num">10</span><span><span class="vocab-word">timeline</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈtaɪmlaɪn/</span><span class="vocab-meaning">kế hoạch thời gian / dòng thời gian</span></div>
+    <div class="vocab-row"><span class="vocab-num">11</span><span><span class="vocab-word">feasibility</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˌfiːzəˈbɪləti/</span><span class="vocab-meaning">tính khả thi</span></div>
+    <div class="vocab-row"><span class="vocab-num">12</span><span><span class="vocab-word">budget</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈbʌdʒɪt/</span><span class="vocab-meaning">ngân sách</span></div>
+    <div class="vocab-row"><span class="vocab-num">13</span><span><span class="vocab-word">resource</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈriːsɔːrs/</span><span class="vocab-meaning">nguồn lực</span></div>
+    <div class="vocab-row"><span class="vocab-num">14</span><span><span class="vocab-word">allocate</span><br><span class="vocab-type">v</span></span><span class="vocab-phonetic">/ˈæləkeɪt/</span><span class="vocab-meaning">phân bổ (nguồn lực)</span></div>
+    <div class="vocab-row"><span class="vocab-num">15</span><span><span class="vocab-word">kick-off</span><br><span class="vocab-type">n / v</span></span><span class="vocab-phonetic">/ˈkɪk ɒf/</span><span class="vocab-meaning">khởi động dự án</span></div>
+  </div>
+</section>
+
+<!-- LESSON 2 -->
+<section class="lesson-section" id="lesson-2">
+  <div class="lesson-intro">
+    <h2>Bài 2 — Nhóm & Bên liên quan</h2>
+    <p>Từ vựng về cấu trúc đội nhóm, vai trò và quản lý các bên liên quan.</p>
+  </div>
+  <div class="vocab-table">
+    <div class="vocab-header"><span>#</span><span>Từ vựng</span><span>Phiên âm</span><span>Nghĩa tiếng Việt</span></div>
+    <div class="vocab-row"><span class="vocab-num">1</span><span><span class="vocab-word">team</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/tiːm/</span><span class="vocab-meaning">nhóm / đội</span></div>
+    <div class="vocab-row"><span class="vocab-num">2</span><span><span class="vocab-word">lead</span><br><span class="vocab-type">n / v</span></span><span class="vocab-phonetic">/liːd/</span><span class="vocab-meaning">trưởng nhóm; dẫn dắt</span></div>
+    <div class="vocab-row"><span class="vocab-num">3</span><span><span class="vocab-word">member</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈmembər/</span><span class="vocab-meaning">thành viên</span></div>
+    <div class="vocab-row"><span class="vocab-num">4</span><span><span class="vocab-word">role</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/roʊl/</span><span class="vocab-meaning">vai trò</span></div>
+    <div class="vocab-row"><span class="vocab-num">5</span><span><span class="vocab-word">responsibility</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/rɪˌspɒnsəˈbɪləti/</span><span class="vocab-meaning">trách nhiệm</span></div>
+    <div class="vocab-row"><span class="vocab-num">6</span><span><span class="vocab-word">accountable</span><br><span class="vocab-type">adj</span></span><span class="vocab-phonetic">/əˈkaʊntəbəl/</span><span class="vocab-meaning">chịu trách nhiệm cuối cùng</span></div>
+    <div class="vocab-row"><span class="vocab-num">7</span><span><span class="vocab-word">empower</span><br><span class="vocab-type">v</span></span><span class="vocab-phonetic">/ɪmˈpaʊər/</span><span class="vocab-meaning">trao quyền (cho đội)</span></div>
+    <div class="vocab-row"><span class="vocab-num">8</span><span><span class="vocab-word">outsource</span><br><span class="vocab-type">v</span></span><span class="vocab-phonetic">/ˌaʊtˈsɔːrs/</span><span class="vocab-meaning">thuê ngoài</span></div>
+    <div class="vocab-row"><span class="vocab-num">9</span><span><span class="vocab-word">vendor</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈvendər/</span><span class="vocab-meaning">nhà cung cấp</span></div>
+    <div class="vocab-row"><span class="vocab-num">10</span><span><span class="vocab-word">client</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈklaɪənt/</span><span class="vocab-meaning">khách hàng</span></div>
+    <div class="vocab-row"><span class="vocab-num">11</span><span><span class="vocab-word">sponsor</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈspɒnsər/</span><span class="vocab-meaning">nhà tài trợ / người bảo trợ</span></div>
+    <div class="vocab-row"><span class="vocab-num">12</span><span><span class="vocab-word">mentor</span><br><span class="vocab-type">n / v</span></span><span class="vocab-phonetic">/ˈmentɔːr/</span><span class="vocab-meaning">người cố vấn; hướng dẫn</span></div>
+    <div class="vocab-row"><span class="vocab-num">13</span><span><span class="vocab-word">onboard</span><br><span class="vocab-type">v</span></span><span class="vocab-phonetic">/ˈɒnbɔːrd/</span><span class="vocab-meaning">đưa thành viên vào dự án</span></div>
+    <div class="vocab-row"><span class="vocab-num">14</span><span><span class="vocab-word">offboard</span><br><span class="vocab-type">v</span></span><span class="vocab-phonetic">/ˈɒfbɔːrd/</span><span class="vocab-meaning">kết thúc tham gia dự án</span></div>
+    <div class="vocab-row"><span class="vocab-num">15</span><span><span class="vocab-word">collaborate</span><br><span class="vocab-type">v</span></span><span class="vocab-phonetic">/kəˈlæbəreɪt/</span><span class="vocab-meaning">cộng tác, hợp tác</span></div>
+  </div>
+</section>
+
+<!-- LESSON 3 -->
+<section class="lesson-section" id="lesson-3">
+  <div class="lesson-intro">
+    <h2>Bài 3 — Yêu cầu & Phạm vi dự án</h2>
+    <p>Từ vựng liên quan đến thu thập, phân tích và quản lý yêu cầu.</p>
+  </div>
+  <div class="vocab-table">
+    <div class="vocab-header"><span>#</span><span>Từ vựng</span><span>Phiên âm</span><span>Nghĩa tiếng Việt</span></div>
+    <div class="vocab-row"><span class="vocab-num">1</span><span><span class="vocab-word">requirement</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/rɪˈkwaɪərmənt/</span><span class="vocab-meaning">yêu cầu</span></div>
+    <div class="vocab-row"><span class="vocab-num">2</span><span><span class="vocab-word">specification</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˌspesɪfɪˈkeɪʃən/</span><span class="vocab-meaning">đặc tả chi tiết</span></div>
+    <div class="vocab-row"><span class="vocab-num">3</span><span><span class="vocab-word">gather</span><br><span class="vocab-type">v</span></span><span class="vocab-phonetic">/ˈɡæðər/</span><span class="vocab-meaning">thu thập (yêu cầu)</span></div>
+    <div class="vocab-row"><span class="vocab-num">4</span><span><span class="vocab-word">analyze</span><br><span class="vocab-type">v</span></span><span class="vocab-phonetic">/ˈænəlaɪz/</span><span class="vocab-meaning">phân tích</span></div>
+    <div class="vocab-row"><span class="vocab-num">5</span><span><span class="vocab-word">prioritize</span><br><span class="vocab-type">v</span></span><span class="vocab-phonetic">/praɪˈɒrɪtaɪz/</span><span class="vocab-meaning">ưu tiên hóa</span></div>
+    <div class="vocab-row"><span class="vocab-num">6</span><span><span class="vocab-word">scope creep</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/skoʊp kriːp/</span><span class="vocab-meaning">lan scope (phạm vi bò)</span></div>
+    <div class="vocab-row"><span class="vocab-num">7</span><span><span class="vocab-word">feature</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈfiːtʃər/</span><span class="vocab-meaning">tính năng</span></div>
+    <div class="vocab-row"><span class="vocab-num">8</span><span><span class="vocab-word">functional</span><br><span class="vocab-type">adj</span></span><span class="vocab-phonetic">/ˈfʌŋkʃənəl/</span><span class="vocab-meaning">thuộc về chức năng</span></div>
+    <div class="vocab-row"><span class="vocab-num">9</span><span><span class="vocab-word">non-functional</span><br><span class="vocab-type">adj</span></span><span class="vocab-phonetic">/nɒn ˈfʌŋkʃənəl/</span><span class="vocab-meaning">phi chức năng (hiệu năng...)</span></div>
+    <div class="vocab-row"><span class="vocab-num">10</span><span><span class="vocab-word">use case</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/juːz keɪs/</span><span class="vocab-meaning">trường hợp sử dụng</span></div>
+    <div class="vocab-row"><span class="vocab-num">11</span><span><span class="vocab-word">acceptance criteria</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/əkˈseptəns kraɪˈtɪəriə/</span><span class="vocab-meaning">tiêu chí nghiệm thu</span></div>
+    <div class="vocab-row"><span class="vocab-num">12</span><span><span class="vocab-word">interview</span><br><span class="vocab-type">n / v</span></span><span class="vocab-phonetic">/ˈɪntərvjuː/</span><span class="vocab-meaning">phỏng vấn / phỏng vấn</span></div>
+    <div class="vocab-row"><span class="vocab-num">13</span><span><span class="vocab-word">workshop</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈwɜːrkʃɒp/</span><span class="vocab-meaning">hội thảo (thu thập yêu cầu)</span></div>
+    <div class="vocab-row"><span class="vocab-num">14</span><span><span class="vocab-word">stakeholder alignment</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈsteɪkˌhoʊldər əˈlaɪnmənt/</span><span class="vocab-meaning">đồng thuận bên liên quan</span></div>
+    <div class="vocab-row"><span class="vocab-num">15</span><span><span class="vocab-word">traceability</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˌteɪsəˈbɪləti/</span><span class="vocab-meaning">khả năng truy vết</span></div>
+  </div>
+</section>
+
+<!-- LESSON 4 -->
+<section class="lesson-section" id="lesson-4">
+  <div class="lesson-intro">
+    <h2>Bài 4 — Thiết kế & Kiến trúc</h2>
+    <p>Từ vựng về thiết kế hệ thống, kiến trúc phần mềm và mô hình hóa.</p>
+  </div>
+  <div class="vocab-table">
+    <div class="vocab-header"><span>#</span><span>Từ vựng</span><span>Phiên âm</span><span>Nghĩa tiếng Việt</span></div>
+    <div class="vocab-row"><span class="vocab-num">1</span><span><span class="vocab-word">architecture</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈɑːrkɪtektʃər/</span><span class="vocab-meaning">kiến trúc (hệ thống)</span></div>
+    <div class="vocab-row"><span class="vocab-num">2</span><span><span class="vocab-word">design</span><br><span class="vocab-type">n / v</span></span><span class="vocab-phonetic">/dɪˈzaɪn/</span><span class="vocab-meaning">thiết kế</span></div>
+    <div class="vocab-row"><span class="vocab-num">3</span><span><span class="vocab-word">prototype</span><br><span class="vocab-type">n / v</span></span><span class="vocab-phonetic">/ˈproʊtətaɪp/</span><span class="vocab-meaning">bản mẫu / tạo bản mẫu</span></div>
+    <div class="vocab-row"><span class="vocab-num">4</span><span><span class="vocab-word">wireframe</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈwaɪərfreɪm/</span><span class="vocab-meaning">khung dây (thiết kế UI)</span></div>
+    <div class="vocab-row"><span class="vocab-num">5</span><span><span class="vocab-word">component</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/kəmˈpoʊnənt/</span><span class="vocab-meaning">thành phần / module</span></div>
+    <div class="vocab-row"><span class="vocab-num">6</span><span><span class="vocab-word">interface</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈɪntərfeɪs/</span><span class="vocab-meaning">giao diện</span></div>
+    <div class="vocab-row"><span class="vocab-num">7</span><span><span class="vocab-word">integrate</span><br><span class="vocab-type">v</span></span><span class="vocab-phonetic">/ˈɪntɪɡreɪt/</span><span class="vocab-meaning">tích hợp</span></div>
+    <div class="vocab-row"><span class="vocab-num">8</span><span><span class="vocab-word">scalable</span><br><span class="vocab-type">adj</span></span><span class="vocab-phonetic">/ˈskeɪləbəl/</span><span class="vocab-meaning">có thể mở rộng</span></div>
+    <div class="vocab-row"><span class="vocab-num">9</span><span><span class="vocab-word">scalability</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˌskeɪləˈbɪləti/</span><span class="vocab-meaning">khả năng mở rộng</span></div>
+    <div class="vocab-row"><span class="vocab-num">10</span><span><span class="vocab-word">modular</span><br><span class="vocab-type">adj</span></span><span class="vocab-phonetic">/ˈmɒdjʊlər/</span><span class="vocab-meaning">theo module / khối</span></div>
+    <div class="vocab-row"><span class="vocab-num">11</span><span><span class="vocab-word">diagram</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈdaɪəɡræm/</span><span class="vocab-meaning">sơ đồ</span></div>
+    <div class="vocab-row"><span class="vocab-num">12</span><span><span class="vocab-word">workflow</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈwɜːrkfloʊ/</span><span class="vocab-meaning">quy trình làm việc</span></div>
+    <div class="vocab-row"><span class="vocab-num">13</span><span><span class="vocab-word">redesign</span><br><span class="vocab-type">v</span></span><span class="vocab-phonetic">/ˌriːdɪˈzaɪn/</span><span class="vocab-meaning">thiết kế lại</span></div>
+    <div class="vocab-row"><span class="vocab-num">14</span><span><span class="vocab-word">technical debt</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈteknɪkəl det/</span><span class="vocab-meaning">nợ kỹ thuật</span></div>
+    <div class="vocab-row"><span class="vocab-num">15</span><span><span class="vocab-word">refactor</span><br><span class="vocab-type">v</span></span><span class="vocab-phonetic">/riːˈfæktər/</span><span class="vocab-meaning">tái cấu trúc mã nguồn</span></div>
+  </div>
+</section>
+
+<!-- LESSON 5 -->
+<section class="lesson-section" id="lesson-5">
+  <div class="lesson-intro">
+    <h2>Bài 5 — Phát triển & Mã nguồn</h2>
+    <p>Từ vựng về quy trình phát triển phần mềm và quản lý mã nguồn.</p>
+  </div>
+  <div class="vocab-table">
+    <div class="vocab-header"><span>#</span><span>Từ vựng</span><span>Phiên âm</span><span>Nghĩa tiếng Việt</span></div>
+    <div class="vocab-row"><span class="vocab-num">1</span><span><span class="vocab-word">development</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/dɪˈveləpmənt/</span><span class="vocab-meaning">phát triển</span></div>
+    <div class="vocab-row"><span class="vocab-num">2</span><span><span class="vocab-word">implement</span><br><span class="vocab-type">v</span></span><span class="vocab-phonetic">/ˈɪmplɪment/</span><span class="vocab-meaning">triển khai / thực hiện</span></div>
+    <div class="vocab-row"><span class="vocab-num">3</span><span><span class="vocab-word">iteration</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˌɪtəˈreɪʃən/</span><span class="vocab-meaning">vòng lặp / lần lặp</span></div>
+    <div class="vocab-row"><span class="vocab-num">4</span><span><span class="vocab-word">sprint</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/sprɪnt/</span><span class="vocab-meaning">sprint (vòng phát triển ngắn)</span></div>
+    <div class="vocab-row"><span class="vocab-num">5</span><span><span class="vocab-word">backlog</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈbæklɒɡ/</span><span class="vocab-meaning">danh sách việc cần làm</span></div>
+    <div class="vocab-row"><span class="vocab-num">6</span><span><span class="vocab-word">repository</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/rɪˈpɒzɪtɔːri/</span><span class="vocab-meaning">kho mã nguồn</span></div>
+    <div class="vocab-row"><span class="vocab-num">7</span><span><span class="vocab-word">commit</span><br><span class="vocab-type">v</span></span><span class="vocab-phonetic">/kəˈmɪt/</span><span class="vocab-meaning">commit (lưu thay đổi mã)</span></div>
+    <div class="vocab-row"><span class="vocab-num">8</span><span><span class="vocab-word">merge</span><br><span class="vocab-type">v</span></span><span class="vocab-phonetic">/mɜːrdʒ/</span><span class="vocab-meaning">gộp (nhánh mã)</span></div>
+    <div class="vocab-row"><span class="vocab-num">9</span><span><span class="vocab-word">branch</span><br><span class="vocab-type">n / v</span></span><span class="vocab-phonetic">/bræntʃ/</span><span class="vocab-meaning">nhánh (mã); rẽ nhánh</span></div>
+    <div class="vocab-row"><span class="vocab-num">10</span><span><span class="vocab-word">build</span><br><span class="vocab-type">n / v</span></span><span class="vocab-phonetic">/bɪld/</span><span class="vocab-meaning">bản build; biên dịch</span></div>
+    <div class="vocab-row"><span class="vocab-num">11</span><span><span class="vocab-word">deploy</span><br><span class="vocab-type">v</span></span><span class="vocab-phonetic">/dɪˈpleɪ/</span><span class="vocab-meaning">triển khai (lên server)</span></div>
+    <div class="vocab-row"><span class="vocab-num">12</span><span><span class="vocab-word">pipeline</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈpaɪplaɪn/</span><span class="vocab-meaning">quy trình tự động hóa</span></div>
+    <div class="vocab-row"><span class="vocab-num">13</span><span><span class="vocab-word">code review</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/koʊd rɪˈvjuː/</span><span class="vocab-meaning">kiểm tra mã nguồn</span></div>
+    <div class="vocab-row"><span class="vocab-num">14</span><span><span class="vocab-word">debug</span><br><span class="vocab-type">v</span></span><span class="vocab-phonetic">/diːˈbʌɡ/</span><span class="vocab-meaning">gỡ lỗi</span></div>
+    <div class="vocab-row"><span class="vocab-num">15</span><span><span class="vocab-word">hotfix</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈhɒtfɪks/</span><span class="vocab-meaning">sửa lỗi khẩn cấp</span></div>
+  </div>
+</section>
+
+<!-- LESSON 6 -->
+<section class="lesson-section" id="lesson-6">
+  <div class="lesson-intro">
+    <h2>Bài 6 — Kiểm thử & Chất lượng</h2>
+    <p>Từ vựng về các loại kiểm thử, quản lý lỗi và đảm bảo chất lượng phần mềm.</p>
+  </div>
+  <div class="vocab-table">
+    <div class="vocab-header"><span>#</span><span>Từ vựng</span><span>Phiên âm</span><span>Nghĩa tiếng Việt</span></div>
+    <div class="vocab-row"><span class="vocab-num">1</span><span><span class="vocab-word">testing</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈtestɪŋ/</span><span class="vocab-meaning">kiểm thử</span></div>
+    <div class="vocab-row"><span class="vocab-num">2</span><span><span class="vocab-word">quality assurance</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈkwɒləti əˈʃʊərəns/</span><span class="vocab-meaning">đảm bảo chất lượng (QA)</span></div>
+    <div class="vocab-row"><span class="vocab-num">3</span><span><span class="vocab-word">test case</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/test keɪs/</span><span class="vocab-meaning">trường hợp kiểm thử</span></div>
+    <div class="vocab-row"><span class="vocab-num">4</span><span><span class="vocab-word">test plan</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/test plæn/</span><span class="vocab-meaning">kế hoạch kiểm thử</span></div>
+    <div class="vocab-row"><span class="vocab-num">5</span><span><span class="vocab-word">bug</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/bʌɡ/</span><span class="vocab-meaning">lỗi phần mềm</span></div>
+    <div class="vocab-row"><span class="vocab-num">6</span><span><span class="vocab-word">defect</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈdiːfekt/</span><span class="vocab-meaning">khuyết tật / lỗi</span></div>
+    <div class="vocab-row"><span class="vocab-num">7</span><span><span class="vocab-word">regression</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/rɪˈɡreʃən/</span><span class="vocab-meaning">hồi quy (lỗi cũ tái xuất)</span></div>
+    <div class="vocab-row"><span class="vocab-num">8</span><span><span class="vocab-word">UAT</span><br><span class="vocab-type">abbr</span></span><span class="vocab-phonetic">/juː eɪ tiː/</span><span class="vocab-meaning">kiểm thử người dùng cuối</span></div>
+    <div class="vocab-row"><span class="vocab-num">9</span><span><span class="vocab-word">staging environment</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈsteɪdʒɪŋ ɪnˈvaɪrənmənt/</span><span class="vocab-meaning">môi trường staging</span></div>
+    <div class="vocab-row"><span class="vocab-num">10</span><span><span class="vocab-word">production</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/prəˈdʌkʃən/</span><span class="vocab-meaning">môi trường thực (sản xuất)</span></div>
+    <div class="vocab-row"><span class="vocab-num">11</span><span><span class="vocab-word">pass / fail</span><br><span class="vocab-type">v / n</span></span><span class="vocab-phonetic">/pæs / feɪl/</span><span class="vocab-meaning">đạt / không đạt</span></div>
+    <div class="vocab-row"><span class="vocab-num">12</span><span><span class="vocab-word">coverage</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈkʌvərɪdʒ/</span><span class="vocab-meaning">độ phủ (kiểm thử)</span></div>
+    <div class="vocab-row"><span class="vocab-num">13</span><span><span class="vocab-word">automate</span><br><span class="vocab-type">v</span></span><span class="vocab-phonetic">/ˈɔːtəmeɪt/</span><span class="vocab-meaning">tự động hóa</span></div>
+    <div class="vocab-row"><span class="vocab-num">14</span><span><span class="vocab-word">sanity check</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈsænəti tʃek/</span><span class="vocab-meaning">kiểm tra sơ bộ</span></div>
+    <div class="vocab-row"><span class="vocab-num">15</span><span><span class="vocab-word">severity</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/sɪˈverəti/</span><span class="vocab-meaning">mức độ nghiêm trọng (của lỗi)</span></div>
+  </div>
+</section>
+
+<!-- LESSON 7 -->
+<section class="lesson-section" id="lesson-7">
+  <div class="lesson-intro">
+    <h2>Bài 7 — Triển khai & Ra mắt</h2>
+    <p>Từ vựng về phát hành sản phẩm, quản lý môi trường và quá trình ra mắt.</p>
+  </div>
+  <div class="vocab-table">
+    <div class="vocab-header"><span>#</span><span>Từ vựng</span><span>Phiên âm</span><span>Nghĩa tiếng Việt</span></div>
+    <div class="vocab-row"><span class="vocab-num">1</span><span><span class="vocab-word">release</span><br><span class="vocab-type">n / v</span></span><span class="vocab-phonetic">/rɪˈliːs/</span><span class="vocab-meaning">phát hành</span></div>
+    <div class="vocab-row"><span class="vocab-num">2</span><span><span class="vocab-word">launch</span><br><span class="vocab-type">n / v</span></span><span class="vocab-phonetic">/lɔːntʃ/</span><span class="vocab-meaning">ra mắt</span></div>
+    <div class="vocab-row"><span class="vocab-num">3</span><span><span class="vocab-word">rollout</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈroʊlaʊt/</span><span class="vocab-meaning">triển khai rộng rãi</span></div>
+    <div class="vocab-row"><span class="vocab-num">4</span><span><span class="vocab-word">rollback</span><br><span class="vocab-type">n / v</span></span><span class="vocab-phonetic">/ˈroʊlbæk/</span><span class="vocab-meaning">quay lui (phiên bản)</span></div>
+    <div class="vocab-row"><span class="vocab-num">5</span><span><span class="vocab-word">migration</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/maɪˈɡreɪʃən/</span><span class="vocab-meaning">di chuyển / chuyển đổi</span></div>
+    <div class="vocab-row"><span class="vocab-num">6</span><span><span class="vocab-word">cutover</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈkʌtˌoʊvər/</span><span class="vocab-meaning">chuyển đổi hệ thống chính</span></div>
+    <div class="vocab-row"><span class="vocab-num">7</span><span><span class="vocab-word">configuration</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/kənˌfɪɡjʊˈreɪʃən/</span><span class="vocab-meaning">cấu hình</span></div>
+    <div class="vocab-row"><span class="vocab-num">8</span><span><span class="vocab-word">infrastructure</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈɪnfrəstrʌktʃər/</span><span class="vocab-meaning">hạ tầng</span></div>
+    <div class="vocab-row"><span class="vocab-num">9</span><span><span class="vocab-word">data center</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈdeɪtə ˈsentər/</span><span class="vocab-meaning">trung tâm dữ liệu</span></div>
+    <div class="vocab-row"><span class="vocab-num">10</span><span><span class="vocab-word">hosting</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈhoʊstɪŋ/</span><span class="vocab-meaning">lưu trữ (web hosting)</span></div>
+    <div class="vocab-row"><span class="vocab-num">11</span><span><span class="vocab-word">go-live</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ɡoʊ laɪv/</span><span class="vocab-meaning">thời điểm chính thức vận hành</span></div>
+    <div class="vocab-row"><span class="vocab-num">12</span><span><span class="vocab-word">post-launch</span><br><span class="vocab-type">adj</span></span><span class="vocab-phonetic">/poʊst lɔːntʃ/</span><span class="vocab-meaning">sau khi ra mắt</span></div>
+    <div class="vocab-row"><span class="vocab-num">13</span><span><span class="vocab-word">support</span><br><span class="vocab-type">n / v</span></span><span class="vocab-phonetic">/səˈpɔːrt/</span><span class="vocab-meaning">hỗ trợ</span></div>
+    <div class="vocab-row"><span class="vocab-num">14</span><span><span class="vocab-word">maintenance</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈmeɪntənəns/</span><span class="vocab-meaning">bảo trì</span></div>
+    <div class="vocab-row"><span class="vocab-num">15</span><span><span class="vocab-word">version</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈvɜːrʒən/</span><span class="vocab-meaning">phiên bản</span></div>
+  </div>
+</section>
+
+<!-- LESSON 8 -->
+<section class="lesson-section" id="lesson-8">
+  <div class="lesson-intro">
+    <h2>Bài 8 — Giám sát & Quản lý rủi ro</h2>
+    <p>Từ vựng về theo dõi tiến độ, đo lường hiệu suất và quản lý rủi ro dự án.</p>
+  </div>
+  <div class="vocab-table">
+    <div class="vocab-header"><span>#</span><span>Từ vựng</span><span>Phiên âm</span><span>Nghĩa tiếng Việt</span></div>
+    <div class="vocab-row"><span class="vocab-num">1</span><span><span class="vocab-word">monitor</span><br><span class="vocab-type">v</span></span><span class="vocab-phonetic">/ˈmɒnɪtər/</span><span class="vocab-meaning">giám sát, theo dõi</span></div>
+    <div class="vocab-row"><span class="vocab-num">2</span><span><span class="vocab-word">track</span><br><span class="vocab-type">v</span></span><span class="vocab-phonetic">/træk/</span><span class="vocab-meaning">theo dõi (tiến độ)</span></div>
+    <div class="vocab-row"><span class="vocab-num">3</span><span><span class="vocab-word">KPI</span><br><span class="vocab-type">abbr</span></span><span class="vocab-phonetic">/keɪ piː aɪ/</span><span class="vocab-meaning">chỉ số hiệu quả chính</span></div>
+    <div class="vocab-row"><span class="vocab-num">4</span><span><span class="vocab-word">metric</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈmetrɪk/</span><span class="vocab-meaning">chỉ số đo lường</span></div>
+    <div class="vocab-row"><span class="vocab-num">5</span><span><span class="vocab-word">benchmark</span><br><span class="vocab-type">n / v</span></span><span class="vocab-phonetic">/ˈbentʃmɑːrk/</span><span class="vocab-meaning">mốc chuẩn / đánh giá chuẩn</span></div>
+    <div class="vocab-row"><span class="vocab-num">6</span><span><span class="vocab-word">risk</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/rɪsk/</span><span class="vocab-meaning">rủi ro</span></div>
+    <div class="vocab-row"><span class="vocab-num">7</span><span><span class="vocab-word">mitigate</span><br><span class="vocab-type">v</span></span><span class="vocab-phonetic">/ˈmɪtɪɡeɪt/</span><span class="vocab-meaning">giảm thiểu (rủi ro)</span></div>
+    <div class="vocab-row"><span class="vocab-num">8</span><span><span class="vocab-word">contingency</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/kənˈtɪndʒənsi/</span><span class="vocab-meaning">phương án dự phòng</span></div>
+    <div class="vocab-row"><span class="vocab-num">9</span><span><span class="vocab-word">issue</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈɪʃuː/</span><span class="vocab-meaning">vấn đề / sự cố</span></div>
+    <div class="vocab-row"><span class="vocab-num">10</span><span><span class="vocab-word">blocker</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈblɒkər/</span><span class="vocab-meaning">vấn đề chặn tiến độ</span></div>
+    <div class="vocab-row"><span class="vocab-num">11</span><span><span class="vocab-word">velocity</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/vəˈlɒsəti/</span><span class="vocab-meaning">tốc độ hoàn thành của đội</span></div>
+    <div class="vocab-row"><span class="vocab-num">12</span><span><span class="vocab-word">burndown chart</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈbɜːrndaʊn tʃɑːrt/</span><span class="vocab-meaning">biểu đồ đốt cháy công việc</span></div>
+    <div class="vocab-row"><span class="vocab-num">13</span><span><span class="vocab-word">variance</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈveəriəns/</span><span class="vocab-meaning">chênh lệch (so với kế hoạch)</span></div>
+    <div class="vocab-row"><span class="vocab-num">14</span><span><span class="vocab-word">overdue</span><br><span class="vocab-type">adj</span></span><span class="vocab-phonetic">/ˌoʊvərˈdjuː/</span><span class="vocab-meaning">quá hạn</span></div>
+    <div class="vocab-row"><span class="vocab-num">15</span><span><span class="vocab-word">escalate</span><br><span class="vocab-type">v</span></span><span class="vocab-phonetic">/ˈeskəleɪt/</span><span class="vocab-meaning">báo lên cấp cao hơn</span></div>
+  </div>
+</section>
+
+<!-- LESSON 9 -->
+<section class="lesson-section" id="lesson-9">
+  <div class="lesson-intro">
+    <h2>Bài 9 — Giao tiếp & Báo cáo</h2>
+    <p>Từ vựng về giao tiếp dự án, báo cáo tiến độ và tài liệu.</p>
+  </div>
+  <div class="vocab-table">
+    <div class="vocab-header"><span>#</span><span>Từ vựng</span><span>Phiên âm</span><span>Nghĩa tiếng Việt</span></div>
+    <div class="vocab-row"><span class="vocab-num">1</span><span><span class="vocab-word">status</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈsteɪtəs/</span><span class="vocab-meaning">trạng thái</span></div>
+    <div class="vocab-row"><span class="vocab-num">2</span><span><span class="vocab-word">update</span><br><span class="vocab-type">n / v</span></span><span class="vocab-phonetic">/ˈʌpdeɪt/</span><span class="vocab-meaning">cập nhật; báo cáo cập nhật</span></div>
+    <div class="vocab-row"><span class="vocab-num">3</span><span><span class="vocab-word">report</span><br><span class="vocab-type">n / v</span></span><span class="vocab-phonetic">/rɪˈpɔːrt/</span><span class="vocab-meaning">báo cáo</span></div>
+    <div class="vocab-row"><span class="vocab-num">4</span><span><span class="vocab-word">agenda</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/əˈdʒendə/</span><span class="vocab-meaning">chương trình nghị sự</span></div>
+    <div class="vocab-row"><span class="vocab-num">5</span><span><span class="vocab-word">minutes</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈmɪnɪts/</span><span class="vocab-meaning">biên bản cuộc họp</span></div>
+    <div class="vocab-row"><span class="vocab-num">6</span><span><span class="vocab-word">presentation</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˌprezənˈteɪʃən/</span><span class="vocab-meaning">bài thuyết trình</span></div>
+    <div class="vocab-row"><span class="vocab-num">7</span><span><span class="vocab-word">stakeholder management</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈsteɪkˌhoʊldər ˈmænɪdʒmənt/</span><span class="vocab-meaning">quản lý bên liên quan</span></div>
+    <div class="vocab-row"><span class="vocab-num">8</span><span><span class="vocab-word">escalation</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˌeskəˈleɪʃən/</span><span class="vocab-meaning">báo cáo leo thang</span></div>
+    <div class="vocab-row"><span class="vocab-num">9</span><span><span class="vocab-word">transparent</span><br><span class="vocab-type">adj</span></span><span class="vocab-phonetic">/trænsˈpærənt/</span><span class="vocab-meaning">minh bạch</span></div>
+    <div class="vocab-row"><span class="vocab-num">10</span><span><span class="vocab-word">clarify</span><br><span class="vocab-type">v</span></span><span class="vocab-phonetic">/ˈklærɪfaɪ/</span><span class="vocab-meaning">làm rõ</span></div>
+    <div class="vocab-row"><span class="vocab-num">11</span><span><span class="vocab-word">follow up</span><br><span class="vocab-type">v</span></span><span class="vocab-phonetic">/ˈfɒloʊ ʌp/</span><span class="vocab-meaning">theo dõi, nhắc nhở</span></div>
+    <div class="vocab-row"><span class="vocab-num">12</span><span><span class="vocab-word">briefing</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈbriːfɪŋ/</span><span class="vocab-meaning">buổi giao ban / hướng dẫn nhanh</span></div>
+    <div class="vocab-row"><span class="vocab-num">13</span><span><span class="vocab-word">documentation</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˌdɒkjʊmenˈteɪʃən/</span><span class="vocab-meaning">tài liệu</span></div>
+    <div class="vocab-row"><span class="vocab-num">14</span><span><span class="vocab-word">notify</span><br><span class="vocab-type">v</span></span><span class="vocab-phonetic">/ˈnoʊtɪfaɪ/</span><span class="vocab-meaning">thông báo</span></div>
+    <div class="vocab-row"><span class="vocab-num">15</span><span><span class="vocab-word">feedback</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈfiːdbæk/</span><span class="vocab-meaning">phản hồi</span></div>
+  </div>
+</section>
+
+<!-- LESSON 10 -->
+<section class="lesson-section" id="lesson-10">
+  <div class="lesson-intro">
+    <h2>Bài 10 — Agile & Scrum</h2>
+    <p>Từ vựng chuyên ngành về phương pháp Agile, Scrum và Kanban.</p>
+  </div>
+  <div class="vocab-table">
+    <div class="vocab-header"><span>#</span><span>Từ vựng</span><span>Phiên âm</span><span>Nghĩa tiếng Việt</span></div>
+    <div class="vocab-row"><span class="vocab-num">1</span><span><span class="vocab-word">agile</span><br><span class="vocab-type">adj</span></span><span class="vocab-phonetic">/ˈædʒaɪl/</span><span class="vocab-meaning">linh hoạt / Agile</span></div>
+    <div class="vocab-row"><span class="vocab-num">2</span><span><span class="vocab-word">scrum</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/skrʌm/</span><span class="vocab-meaning">Scrum (khung phát triển)</span></div>
+    <div class="vocab-row"><span class="vocab-num">3</span><span><span class="vocab-word">product owner</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈprɒdʌkt ˈoʊnər/</span><span class="vocab-meaning">chủ sản phẩm</span></div>
+    <div class="vocab-row"><span class="vocab-num">4</span><span><span class="vocab-word">scrum master</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/skrʌm ˈmæstər/</span><span class="vocab-meaning">người hướng dẫn Scrum</span></div>
+    <div class="vocab-row"><span class="vocab-num">5</span><span><span class="vocab-word">backlog grooming</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈbæklɒɡ ˈɡruːmɪŋ/</span><span class="vocab-meaning">sửa đổi / tinh chỉnh backlog</span></div>
+    <div class="vocab-row"><span class="vocab-num">6</span><span><span class="vocab-word">planning poker</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈplænɪŋ ˈpoʊkər/</span><span class="vocab-meaning">bình chọn ước lượng công việc</span></div>
+    <div class="vocab-row"><span class="vocab-num">7</span><span><span class="vocab-word">story point</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈstɔːri pɔɪnt/</span><span class="vocab-meaning">điểm câu chuyện (đo công sức)</span></div>
+    <div class="vocab-row"><span class="vocab-num">8</span><span><span class="vocab-word">daily stand-up</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈdeɪli stænd ʌp/</span><span class="vocab-meaning">họp đứng hàng ngày</span></div>
+    <div class="vocab-row"><span class="vocab-num">9</span><span><span class="vocab-word">retrospective</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˌretrəˈspektɪv/</span><span class="vocab-meaning">họp nhìn lại sprint</span></div>
+    <div class="vocab-row"><span class="vocab-num">10</span><span><span class="vocab-word">sprint review</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/sprɪnt rɪˈvjuː/</span><span class="vocab-meaning">trình duyệt sprint</span></div>
+    <div class="vocab-row"><span class="vocab-num">11</span><span><span class="vocab-word">increment</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈɪnkrɪmənt/</span><span class="vocab-meaning">phần tăng trưởng (sản phẩm)</span></div>
+    <div class="vocab-row"><span class="vocab-num">12</span><span><span class="vocab-word">definition of done</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˌdefɪˈnɪʃən əv dʌn/</span><span class="vocab-meaning">định nghĩa hoàn thành</span></div>
+    <div class="vocab-row"><span class="vocab-num">13</span><span><span class="vocab-word">kanban</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/kɑːnˈbɑːn/</span><span class="vocab-meaning">Kanban (bảng thẻ công việc)</span></div>
+    <div class="vocab-row"><span class="vocab-num">14</span><span><span class="vocab-word">WIP limit</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/wɪp ˈlɪmɪt/</span><span class="vocab-meaning">giới hạn công việc đang làm</span></div>
+    <div class="vocab-row"><span class="vocab-num">15</span><span><span class="vocab-word">continuous improvement</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/kənˈtɪnjuəs ɪmˈpruːvmənt/</span><span class="vocab-meaning">cải tiến liên tục</span></div>
+  </div>
+</section>
+
+<!-- LESSON 11 -->
+<section class="lesson-section" id="lesson-11">
+  <div class="lesson-intro">
+    <h2>Bài 11 — Bảo mật & Tuân thủ</h2>
+    <p>Từ vựng về an ninh mạng, bảo mật thông tin và tuân thủ quy định.</p>
+  </div>
+  <div class="vocab-table">
+    <div class="vocab-header"><span>#</span><span>Từ vựng</span><span>Phiên âm</span><span>Nghĩa tiếng Việt</span></div>
+    <div class="vocab-row"><span class="vocab-num">1</span><span><span class="vocab-word">security</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/sɪˈkjʊərəti/</span><span class="vocab-meaning">bảo mật / an ninh</span></div>
+    <div class="vocab-row"><span class="vocab-num">2</span><span><span class="vocab-word">authentication</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ɔːˌθentɪˈkeɪʃən/</span><span class="vocab-meaning">xác thực</span></div>
+    <div class="vocab-row"><span class="vocab-num">3</span><span><span class="vocab-word">authorization</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˌɔːθəraɪˈzeɪʃən/</span><span class="vocab-meaning">phân quyền</span></div>
+    <div class="vocab-row"><span class="vocab-num">4</span><span><span class="vocab-word">encryption</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ɪnˈkrɪpʃən/</span><span class="vocab-meaning">mã hóa</span></div>
+    <div class="vocab-row"><span class="vocab-num">5</span><span><span class="vocab-word">compliance</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/kəmˈplaɪəns/</span><span class="vocab-meaning">sự tuân thủ</span></div>
+    <div class="vocab-row"><span class="vocab-num">6</span><span><span class="vocab-word">vulnerability</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˌvʌlnərəˈbɪləti/</span><span class="vocab-meaning">lỗ hổng bảo mật</span></div>
+    <div class="vocab-row"><span class="vocab-num">7</span><span><span class="vocab-word">threat</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/θret/</span><span class="vocab-meaning">mối đe dọa</span></div>
+    <div class="vocab-row"><span class="vocab-num">8</span><span><span class="vocab-word">data breach</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈdeɪtə briːtʃ/</span><span class="vocab-meaning">rò rỉ dữ liệu</span></div>
+    <div class="vocab-row"><span class="vocab-num">9</span><span><span class="vocab-word">privacy</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈprɪvəsi/</span><span class="vocab-meaning">quyền riêng tư</span></div>
+    <div class="vocab-row"><span class="vocab-num">10</span><span><span class="vocab-word">access control</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈækses kənˈtroʊl/</span><span class="vocab-meaning">kiểm soát truy cập</span></div>
+    <div class="vocab-row"><span class="vocab-num">11</span><span><span class="vocab-word">audit</span><br><span class="vocab-type">n / v</span></span><span class="vocab-phonetic">/ˈɔːdɪt/</span><span class="vocab-meaning">kiểm toán</span></div>
+    <div class="vocab-row"><span class="vocab-num">12</span><span><span class="vocab-word">penetration testing</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˌpenɪˈtreɪʃən ˈtestɪŋ/</span><span class="vocab-meaning">kiểm thử xâm nhập</span></div>
+    <div class="vocab-row"><span class="vocab-num">13</span><span><span class="vocab-word">incident</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈɪnsɪdənt/</span><span class="vocab-meaning">sự cố bảo mật</span></div>
+    <div class="vocab-row"><span class="vocab-num">14</span><span><span class="vocab-word">disaster recovery</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/dɪˈzɑːstər rɪˈkʌvəri/</span><span class="vocab-meaning">phục hồi sau thảm họa</span></div>
+    <div class="vocab-row"><span class="vocab-num">15</span><span><span class="vocab-word">backup</span><br><span class="vocab-type">n / v</span></span><span class="vocab-phonetic">/ˈbækʌp/</span><span class="vocab-meaning">sao lưu</span></div>
+  </div>
+</section>
+
+<!-- LESSON 12 -->
+<section class="lesson-section" id="lesson-12">
+  <div class="lesson-intro">
+    <h2>Bài 12 — Quản lý Thay đổi & Cấu hình</h2>
+    <p>Từ vựng về kiểm soát thay đổi, quản lý cấu hình và quản lý phát hành.</p>
+  </div>
+  <div class="vocab-table">
+    <div class="vocab-header"><span>#</span><span>Từ vựng</span><span>Phiên âm</span><span>Nghĩa tiếng Việt</span></div>
+    <div class="vocab-row"><span class="vocab-num">1</span><span><span class="vocab-word">change</span><br><span class="vocab-type">n / v</span></span><span class="vocab-phonetic">/tʃeɪndʒ/</span><span class="vocab-meaning">thay đổi</span></div>
+    <div class="vocab-row"><span class="vocab-num">2</span><span><span class="vocab-word">change request</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/tʃeɪndʒ rɪˈkwest/</span><span class="vocab-meaning">yêu cầu thay đổi (CR)</span></div>
+    <div class="vocab-row"><span class="vocab-num">3</span><span><span class="vocab-word">change control</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/tʃeɪndʒ kənˈtroʊl/</span><span class="vocab-meaning">kiểm soát thay đổi</span></div>
+    <div class="vocab-row"><span class="vocab-num">4</span><span><span class="vocab-word">change board</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/tʃeɪndʒ bɔːrd/</span><span class="vocab-meaning">hội đồng thay đổi (CAB)</span></div>
+    <div class="vocab-row"><span class="vocab-num">5</span><span><span class="vocab-word">impact analysis</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈɪmpækt əˈnæləsɪs/</span><span class="vocab-meaning">phân tích tác động</span></div>
+    <div class="vocab-row"><span class="vocab-num">6</span><span><span class="vocab-word">baseline</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈbeɪslaɪn/</span><span class="vocab-meaning">đường cơ sở</span></div>
+    <div class="vocab-row"><span class="vocab-num">7</span><span><span class="vocab-word">configuration item</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/kənˌfɪɡjʊˈreɪʃən ˈaɪtəm/</span><span class="vocab-meaning">mục cấu hình (CI)</span></div>
+    <div class="vocab-row"><span class="vocab-num">8</span><span><span class="vocab-word">release management</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/rɪˈliːs ˈmænɪdʒmənt/</span><span class="vocab-meaning">quản lý phát hành</span></div>
+    <div class="vocab-row"><span class="vocab-num">9</span><span><span class="vocab-word">approval</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/əˈpruːvəl/</span><span class="vocab-meaning">phê duyệt</span></div>
+    <div class="vocab-row"><span class="vocab-num">10</span><span><span class="vocab-word">reject</span><br><span class="vocab-type">v</span></span><span class="vocab-phonetic">/rɪˈdʒekt/</span><span class="vocab-meaning">từ chối</span></div>
+    <div class="vocab-row"><span class="vocab-num">11</span><span><span class="vocab-word">implement</span><br><span class="vocab-type">v</span></span><span class="vocab-phonetic">/ˈɪmplɪment/</span><span class="vocab-meaning">thực hiện / triển khai</span></div>
+    <div class="vocab-row"><span class="vocab-num">12</span><span><span class="vocab-word">revert</span><br><span class="vocab-type">v</span></span><span class="vocab-phonetic">/rɪˈvɜːrt/</span><span class="vocab-meaning">hoàn nguyên</span></div>
+    <div class="vocab-row"><span class="vocab-num">13</span><span><span class="vocab-word">version control</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈvɜːrʒən kənˈtroʊl/</span><span class="vocab-meaning">kiểm soát phiên bản</span></div>
+    <div class="vocab-row"><span class="vocab-num">14</span><span><span class="vocab-word">change log</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/tʃeɪndʒ lɒɡ/</span><span class="vocab-meaning">nhật ký thay đổi</span></div>
+    <div class="vocab-row"><span class="vocab-num">15</span><span><span class="vocab-word">regression test</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/rɪˈɡreʃən test/</span><span class="vocab-meaning">kiểm thử hồi quy</span></div>
+  </div>
+</section>
+
+<!-- LESSON 13 -->
+<section class="lesson-section" id="lesson-13">
+  <div class="lesson-intro">
+    <h2>Bài 13 — Tài chính & Hợp đồng</h2>
+    <p>Từ vựng về ngân sách dự án, chi phí, hợp đồng và đàm phán.</p>
+  </div>
+  <div class="vocab-table">
+    <div class="vocab-header"><span>#</span><span>Từ vựng</span><span>Phiên âm</span><span>Nghĩa tiếng Việt</span></div>
+    <div class="vocab-row"><span class="vocab-num">1</span><span><span class="vocab-word">cost</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/kɒst/</span><span class="vocab-meaning">chi phí</span></div>
+    <div class="vocab-row"><span class="vocab-num">2</span><span><span class="vocab-word">estimate</span><br><span class="vocab-type">v / n</span></span><span class="vocab-phonetic">/ˈestɪmət/</span><span class="vocab-meaning">ước lượng</span></div>
+    <div class="vocab-row"><span class="vocab-num">3</span><span><span class="vocab-word">quote</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/kwoʊt/</span><span class="vocab-meaning">báo giá</span></div>
+    <div class="vocab-row"><span class="vocab-num">4</span><span><span class="vocab-word">invoice</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈɪnvɔɪs/</span><span class="vocab-meaning">hóa đơn</span></div>
+    <div class="vocab-row"><span class="vocab-num">5</span><span><span class="vocab-word">payment</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈpeɪmənt/</span><span class="vocab-meaning">thanh toán</span></div>
+    <div class="vocab-row"><span class="vocab-num">6</span><span><span class="vocab-word">procurement</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/prəˈkjʊərmənt/</span><span class="vocab-meaning">mua sắm / thu mua</span></div>
+    <div class="vocab-row"><span class="vocab-num">7</span><span><span class="vocab-word">contract</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈkɒntrækt/</span><span class="vocab-meaning">hợp đồng</span></div>
+    <div class="vocab-row"><span class="vocab-num">8</span><span><span class="vocab-word">SOW</span><br><span class="vocab-type">abbr</span></span><span class="vocab-phonetic">/es oʊ ˈdʌbəljuː/</span><span class="vocab-meaning">phạm vi công việc</span></div>
+    <div class="vocab-row"><span class="vocab-num">9</span><span><span class="vocab-word">NDA</span><br><span class="vocab-type">abbr</span></span><span class="vocab-phonetic">/en diː eɪ/</span><span class="vocab-meaning">thỏa thuận bảo mật</span></div>
+    <div class="vocab-row"><span class="vocab-num">10</span><span><span class="vocab-word">penalty</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈpenəlti/</span><span class="vocab-meaning">phạt vi phạm hợp đồng</span></div>
+    <div class="vocab-row"><span class="vocab-num">11</span><span><span class="vocab-word">ROI</span><br><span class="vocab-type">abbr</span></span><span class="vocab-phonetic">/ɑːr oʊ aɪ/</span><span class="vocab-meaning">lợi tức đầu tư</span></div>
+    <div class="vocab-row"><span class="vocab-num">12</span><span><span class="vocab-word">cash flow</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/kæʃ floʊ/</span><span class="vocab-meaning">dòng tiền</span></div>
+    <div class="vocab-row"><span class="vocab-num">13</span><span><span class="vocab-word">tender</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈtendər/</span><span class="vocab-meaning">đấu thầu</span></div>
+    <div class="vocab-row"><span class="vocab-num">14</span><span><span class="vocab-word">terms and conditions</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/tɜːrmz ənd kənˈdɪʃənz/</span><span class="vocab-meaning">điều khoản và điều kiện</span></div>
+    <div class="vocab-row"><span class="vocab-num">15</span><span><span class="vocab-word">renewal</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/rɪˈnjuːəl/</span><span class="vocab-meaning">gia hạn hợp đồng</span></div>
+  </div>
+</section>
+
+<!-- LESSON 14 -->
+<section class="lesson-section" id="lesson-14">
+  <div class="lesson-intro">
+    <h2>Bài 14 — Đo lường & Báo cáo Nâng cao</h2>
+    <p>Từ vựng về EVM, chỉ số dự án, phân tích dữ liệu và dashboard.</p>
+  </div>
+  <div class="vocab-table">
+    <div class="vocab-header"><span>#</span><span>Từ vựng</span><span>Phiên âm</span><span>Nghĩa tiếng Việt</span></div>
+    <div class="vocab-row"><span class="vocab-num">1</span><span><span class="vocab-word">Earned Value</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈɜːrnd ˈvæljuː/</span><span class="vocab-meaning">giá trị đã đạt (EV)</span></div>
+    <div class="vocab-row"><span class="vocab-num">2</span><span><span class="vocab-word">planned value</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/plænd ˈvæljuː/</span><span class="vocab-meaning">giá trị kế hoạch (PV)</span></div>
+    <div class="vocab-row"><span class="vocab-num">3</span><span><span class="vocab-word">actual cost</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈæktʃuəl kɒst/</span><span class="vocab-meaning">chi phí thực tế (AC)</span></div>
+    <div class="vocab-row"><span class="vocab-num">4</span><span><span class="vocab-word">CPI</span><br><span class="vocab-type">abbr</span></span><span class="vocab-phonetic">/siː piː aɪ/</span><span class="vocab-meaning">chỉ số tiết kiệm chi phí</span></div>
+    <div class="vocab-row"><span class="vocab-num">5</span><span><span class="vocab-word">SPI</span><br><span class="vocab-type">abbr</span></span><span class="vocab-phonetic">/es piː aɪ/</span><span class="vocab-meaning">chỉ số tiến độ</span></div>
+    <div class="vocab-row"><span class="vocab-num">6</span><span><span class="vocab-word">forecast</span><br><span class="vocab-type">n / v</span></span><span class="vocab-phonetic">/ˈfɔːrkæst/</span><span class="vocab-meaning">dự báo</span></div>
+    <div class="vocab-row"><span class="vocab-num">7</span><span><span class="vocab-word">trend</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/trend/</span><span class="vocab-meaning">xu hướng</span></div>
+    <div class="vocab-row"><span class="vocab-num">8</span><span><span class="vocab-word">dashboard</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈdæʃbɔːrd/</span><span class="vocab-meaning">bảng điều khiển</span></div>
+    <div class="vocab-row"><span class="vocab-num">9</span><span><span class="vocab-word">data-driven</span><br><span class="vocab-type">adj</span></span><span class="vocab-phonetic">/ˈdeɪtə ˈdrɪvən/</span><span class="vocab-meaning">dựa trên dữ liệu</span></div>
+    <div class="vocab-row"><span class="vocab-num">10</span><span><span class="vocab-word">indicator</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈɪndɪkeɪtər/</span><span class="vocab-meaning">chỉ báo</span></div>
+    <div class="vocab-row"><span class="vocab-num">11</span><span><span class="vocab-word">baseline</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈbeɪslaɪn/</span><span class="vocab-meaning">đường cơ sở (đo lường)</span></div>
+    <div class="vocab-row"><span class="vocab-num">12</span><span><span class="vocab-word">target</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈtɑːrɡɪt/</span><span class="vocab-meaning">mục tiêu / chỉ tiêu</span></div>
+    <div class="vocab-row"><span class="vocab-num">13</span><span><span class="vocab-word">root cause</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ruːt kɔːz/</span><span class="vocab-meaning">nguyên nhân gốc rễ</span></div>
+    <div class="vocab-row"><span class="vocab-num">14</span><span><span class="vocab-word">insight</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈɪnsaɪt/</span><span class="vocab-meaning">nhận định sâu / insight</span></div>
+    <div class="vocab-row"><span class="vocab-num">15</span><span><span class="vocab-word">benchmarking</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈbentʃmɑːrkɪŋ/</span><span class="vocab-meaning">so sánh chuẩn</span></div>
+  </div>
+</section>
+
+<!-- LESSON 15 -->
+<section class="lesson-section" id="lesson-15">
+  <div class="lesson-intro">
+    <h2>Bài 15 — Công nghệ & Hạ tầng</h2>
+    <p>Từ vựng về cloud, DevOps, database, networking và công nghệ hiện đại.</p>
+  </div>
+  <div class="vocab-table">
+    <div class="vocab-header"><span>#</span><span>Từ vựng</span><span>Phiên âm</span><span>Nghĩa tiếng Việt</span></div>
+    <div class="vocab-row"><span class="vocab-num">1</span><span><span class="vocab-word">cloud computing</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/klaʊd kəmˈpjuːtɪŋ/</span><span class="vocab-meaning">điện toán đám mây</span></div>
+    <div class="vocab-row"><span class="vocab-num">2</span><span><span class="vocab-word">virtualization</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˌvɜːrtʃuəlaɪˈzeɪʃən/</span><span class="vocab-meaning">ảo hóa</span></div>
+    <div class="vocab-row"><span class="vocab-num">3</span><span><span class="vocab-word">container</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/kənˈteɪnər/</span><span class="vocab-meaning">container (Docker)</span></div>
+    <div class="vocab-row"><span class="vocab-num">4</span><span><span class="vocab-word">microservice</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈmaɪkroʊˌsɜːrvɪs/</span><span class="vocab-meaning">kiến trúc vi dịch vụ</span></div>
+    <div class="vocab-row"><span class="vocab-num">5</span><span><span class="vocab-word">API</span><br><span class="vocab-type">abbr</span></span><span class="vocab-phonetic">/eɪ piː aɪ/</span><span class="vocab-meaning">giao diện lập trình ứng dụng</span></div>
+    <div class="vocab-row"><span class="vocab-num">6</span><span><span class="vocab-word">database</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈdeɪtəbeɪs/</span><span class="vocab-meaning">cơ sở dữ liệu</span></div>
+    <div class="vocab-row"><span class="vocab-num">7</span><span><span class="vocab-word">server</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈsɜːrvər/</span><span class="vocab-meaning">máy chủ</span></div>
+    <div class="vocab-row"><span class="vocab-num">8</span><span><span class="vocab-word">bandwidth</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈbændwɪdθ/</span><span class="vocab-meaning">băng thông</span></div>
+    <div class="vocab-row"><span class="vocab-num">9</span><span><span class="vocab-word">latency</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈleɪtənsi/</span><span class="vocab-meaning">độ trễ</span></div>
+    <div class="vocab-row"><span class="vocab-num">10</span><span><span class="vocab-word">redundancy</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/rɪˈdʌndənsi/</span><span class="vocab-meaning">dự phòng (hệ thống)</span></div>
+    <div class="vocab-row"><span class="vocab-num">11</span><span><span class="vocab-word">load balancing</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/loʊd ˈbælənsɪŋ/</span><span class="vocab-meaning">cân bằng tải</span></div>
+    <div class="vocab-row"><span class="vocab-num">12</span><span><span class="vocab-word">CDN</span><br><span class="vocab-type">abbr</span></span><span class="vocab-phonetic">/siː diː en/</span><span class="vocab-meaning">mạng phân phối nội dung</span></div>
+    <div class="vocab-row"><span class="vocab-num">13</span><span><span class="vocab-word">on-premise</span><br><span class="vocab-type">adj</span></span><span class="vocab-phonetic">/ɒn ˈpremɪs/</span><span class="vocab-meaning">tại chỗ (không cloud)</span></div>
+    <div class="vocab-row"><span class="vocab-num">14</span><span><span class="vocab-word">hybrid</span><br><span class="vocab-type">adj</span></span><span class="vocab-phonetic">/ˈhaɪbrɪd/</span><span class="vocab-meaning">lai (hybrid cloud)</span></div>
+    <div class="vocab-row"><span class="vocab-num">15</span><span><span class="vocab-word">disaster recovery site</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/dɪˈzɑːstər rɪˈkʌvəri saɪt/</span><span class="vocab-meaning">trang web phục hồi DR</span></div>
+  </div>
+</section>
+
+<!-- LESSON 16 -->
+<section class="lesson-section" id="lesson-16">
+  <div class="lesson-intro">
+    <h2>Bài 16 — Đàm phán & Giải quyết Xung đột</h2>
+    <p>Từ vựng về kỹ năng mềm, đàm phán, quản lý xung đột và thuyết phục.</p>
+  </div>
+  <div class="vocab-table">
+    <div class="vocab-header"><span>#</span><span>Từ vựng</span><span>Phiên âm</span><span>Nghĩa tiếng Việt</span></div>
+    <div class="vocab-row"><span class="vocab-num">1</span><span><span class="vocab-word">negotiate</span><br><span class="vocab-type">v</span></span><span class="vocab-phonetic">/nɪˈɡoʊʃieɪt/</span><span class="vocab-meaning">đàm phán</span></div>
+    <div class="vocab-row"><span class="vocab-num">2</span><span><span class="vocab-word">compromise</span><br><span class="vocab-type">n / v</span></span><span class="vocab-phonetic">/ˈkɒmprəmaɪz/</span><span class="vocab-meaning">thỏa hiệp</span></div>
+    <div class="vocab-row"><span class="vocab-num">3</span><span><span class="vocab-word">consensus</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/kənˈsensəs/</span><span class="vocab-meaning">đồng thuận chung</span></div>
+    <div class="vocab-row"><span class="vocab-num">4</span><span><span class="vocab-word">conflict</span><br><span class="vocab-type">n</span></span><span class="vocab-phonant ic">/ˈkɒnflɪkt/</span><span class="vocab-meaning">xung đột</span></div>
+    <div class="vocab-row"><span class="vocab-num">5</span><span><span class="vocab-word">mediate</span><br><span class="vocab-type">v</span></span><span class="vocab-phonetic">/ˈmiːdieɪt/</span><span class="vocab-meaning">hòa giải</span></div>
+    <div class="vocab-row"><span class="vocab-num">6</span><span><span class="vocab-word">assertive</span><br><span class="vocab-type">adj</span></span><span class="vocab-phonetic">/əˈsɜːrtɪv/</span><span class="vocab-meaning">quả quyết / kiên định</span></div>
+    <div class="vocab-row"><span class="vocab-num">7</span><span><span class="vocab-word">persuade</span><br><span class="vocab-type">v</span></span><span class="vocab-phonetic">/pərˈsweɪd/</span><span class="vocab-meaning">thuyết phục</span></div>
+    <div class="vocab-row"><span class="vocab-num">8</span><span><span class="vocab-word">influence</span><br><span class="vocab-type">n / v</span></span><span class="vocab-phonetic">/ˈɪnfluəns/</span><span class="vocab-meaning">ảnh hưởng</span></div>
+    <div class="vocab-row"><span class="vocab-num">9</span><span><span class="vocab-word">diplomacy</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/dɪˈploʊməsi/</span><span class="vocab-meaning">ngoại giao / khéo léo</span></div>
+    <div class="vocab-row"><span class="vocab-num">10</span><span><span class="vocab-word">stakeholder mapping</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈsteɪkˌhoʊldər ˈmæpɪŋ/</span><span class="vocab-meaning">lập bản đồ bên liên quan</span></div>
+    <div class="vocab-row"><span class="vocab-num">11</span><span><span class="vocab-word">win-win</span><br><span class="vocab-type">adj</span></span><span class="vocab-phonetic">/wɪn wɪn/</span><span class="vocab-meaning">cùng có lợi</span></div>
+    <div class="vocab-row"><span class="vocab-num">12</span><span><span class="vocab-word">leverage</span><br><span class="vocab-type">v</span></span><span class="vocab-phonetic">/ˈlevərɪdʒ/</span><span class="vocab-meaning">tận dụng / dựa vào</span></div>
+    <div class="vocab-row"><span class="vocab-num">13</span><span><span class="vocab-word">proposal</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/prəˈpoʊzəl/</span><span class="vocab-meaning">đề xuất</span></div>
+    <div class="vocab-row"><span class="vocab-num">14</span><span><span class="vocab-word">objection</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/əbˈdʒekʃən/</span><span class="vocab-meaning">phản đối / ý kiến phản bác</span></div>
+    <div class="vocab-row"><span class="vocab-num">15</span><span><span class="vocab-word">facilitate</span><br><span class="vocab-type">v</span></span><span class="vocab-phonetic">/fəˈsɪlɪteɪt/</span><span class="vocab-meaning">tạo điều kiện / dẫn dắt</span></div>
+  </div>
+</section>
+
+<!-- LESSON 17 -->
+<section class="lesson-section" id="lesson-17">
+  <div class="lesson-intro">
+    <h2>Bài 17 — Giao tiếp Quốc tế & Văn hóa</h2>
+    <p>Từ vựng về làm việc với đội đa quốc gia, giao tiếp xuyên văn hóa.</p>
+  </div>
+  <div class="vocab-table">
+    <div class="vocab-header"><span>#</span><span>Từ vựng</span><span>Phiên âm</span><span>Nghĩa tiếng Việt</span></div>
+    <div class="vocab-row"><span class="vocab-num">1</span><span><span class="vocab-word">cross-cultural</span><br><span class="vocab-type">adj</span></span><span class="vocab-phonetic">/krɒs ˈkʌltʃərəl/</span><span class="vocab-meaning">xuyên văn hóa</span></div>
+    <div class="vocab-row"><span class="vocab-num">2</span><span><span class="vocab-word">localization</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˌloʊkəlaɪˈzeɪʃən/</span><span class="vocab-meaning">bản địa hóa</span></div>
+    <div class="vocab-row"><span class="vocab-num">3</span><span><span class="vocab-word">timezone</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈtaɪmzoʊn/</span><span class="vocab-meaning">múi giờ</span></div>
+    <div class="vocab-row"><span class="vocab-num">4</span><span><span class="vocab-word">offshore</span><br><span class="vocab-type">adj</span></span><span class="vocab-phonetic">/ˌɒfˈʃɔːr/</span><span class="vocab-meaning">ngoài khơi / thuê ngoài</span></div>
+    <div class="vocab-row"><span class="vocab-num">5</span><span><span class="vocab-word">nearshore</span><br><span class="vocab-type">adj</span></span><span class="vocab-phonetic">/ˈnɪərʃɔːr/</span><span class="vocab-meaning">thuê gần (đơn vị gần)</span></div>
+    <div class="vocab-row"><span class="vocab-num">6</span><span><span class="vocab-word">distributed team</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/dɪˈstrɪbjuːtɪd tiːm/</span><span class="vocab-meaning">đội phân tán</span></div>
+    <div class="vocab-row"><span class="vocab-num">7</span><span><span class="vocab-word">remote work</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/rɪˈmoʊt wɜːrk/</span><span class="vocab-meaning">làm việc từ xa</span></div>
+    <div class="vocab-row"><span class="vocab-num">8</span><span><span class="vocab-word">virtual meeting</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈvɜːrtʃuəl ˈmiːtɪŋ/</span><span class="vocab-meaning">cuộc họp trực tuyến</span></div>
+    <div class="vocab-row"><span class="vocab-num">9</span><span><span class="vocab-word">asynchronous</span><br><span class="vocab-type">adj</span></span><span class="vocab-phonetic">/eɪˈsɪŋkrənəs/</span><span class="vocab-meaning">không đồng bộ</span></div>
+    <div class="vocab-row"><span class="vocab-num">10</span><span><span class="vocab-word">synchronous</span><br><span class="vocab-type">adj</span></span><span class="vocab-phonetic">/ˈsɪŋkrənəs/</span><span class="vocab-meaning">đồng bộ</span></div>
+    <div class="vocab-row"><span class="vocab-num">11</span><span><span class="vocab-word">cultural awareness</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈkʌltʃərəl əˈweərnəs/</span><span class="vocab-meaning">nhận thức văn hóa</span></div>
+    <div class="vocab-row"><span class="vocab-num">12</span><span><span class="vocab-word">native speaker</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈneɪtɪv ˈspiːkər/</span><span class="vocab-meaning">người bản ngữ</span></div>
+    <div class="vocab-row"><span class="vocab-num">13</span><span><span class="vocab-word">lingua franca</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈlɪŋɡwə ˈfræŋkə/</span><span class="vocab-meaning">ngôn ngữ chung (thường là Anh)</span></div>
+    <div class="vocab-row"><span class="vocab-num">14</span><span><span class="vocab-word">diversity</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/daɪˈvɜːrsəti/</span><span class="vocab-meaning">sự đa dạng</span></div>
+    <div class="vocab-row"><span class="vocab-num">15</span><span><span class="vocab-word">inclusion</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ɪnˈkluːʒən/</span><span class="vocab-meaning">sự bao trùm / hòa nhập</span></div>
+  </div>
+</section>
+
+<!-- LESSON 18 -->
+<section class="lesson-section" id="lesson-18">
+  <div class="lesson-intro">
+    <h2>Bài 18 — Tư duy & Kỹ năng PM</h2>
+    <p>Từ vựng về phong cách lãnh đạo, tư duy chiến lược và kỹ năng quản lý.</p>
+  </div>
+  <div class="vocab-table">
+    <div class="vocab-header"><span>#</span><span>Từ vựng</span><span>Phiên âm</span><span>Nghĩa tiếng Việt</span></div>
+    <div class="vocab-row"><span class="vocab-num">1</span><span><span class="vocab-word">leadership</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈliːdərʃɪp/</span><span class="vocab-meaning">lãnh đạo</span></div>
+    <div class="vocab-row"><span class="vocab-num">2</span><span><span class="vocab-word">strategy</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈstrætədʒi/</span><span class="vocab-meaning">chiến lược</span></div>
+    <div class="vocab-row"><span class="vocab-num">3</span><span><span class="vocab-word">strategic</span><br><span class="vocab-type">adj</span></span><span class="vocab-phonetic">/strəˈtiːdʒɪk/</span><span class="vocab-meaning">chiến lược (adj)</span></div>
+    <div class="vocab-row"><span class="vocab-num">4</span><span><span class="vocab-word">tactical</span><br><span class="vocab-type">adj</span></span><span class="vocab-phonetic">/ˈtæktɪkəl/</span><span class="vocab-meaning">chiến thuật</span></div>
+    <div class="vocab-row"><span class="vocab-num">5</span><span><span class="vocab-word">vision</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈvɪʒən/</span><span class="vocab-meaning">tầm nhìn</span></div>
+    <div class="vocab-row"><span class="vocab-num">6</span><span><span class="vocab-word">mission</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈmɪʃən/</span><span class="vocab-meaning">sứ mệnh</span></div>
+    <div class="vocab-row"><span class="vocab-num">7</span><span><span class="vocab-word">decision-making</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/dɪˈsɪʒən ˈmeɪkɪŋ/</span><span class="vocab-meaning">ra quyết định</span></div>
+    <div class="vocab-row"><span class="vocab-num">8</span><span><span class="vocab-word">delegation</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˌdelɪˈɡeɪʃən/</span><span class="vocab-meaning">ủy quyền</span></div>
+    <div class="vocab-row"><span class="vocab-num">9</span><span><span class="vocab-word">accountability</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/əˌkaʊntəˈbɪləti/</span><span class="vocab-meaning">trách nhiệm giải trình</span></div>
+    <div class="vocab-row"><span class="vocab-num">10</span><span><span class="vocab-word">mentality</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/menˈtæləti/</span><span class="vocab-meaning">tư duy</span></div>
+    <div class="vocab-row"><span class="vocab-num">11</span><span><span class="vocab-word">proactive</span><br><span class="vocab-type">adj</span></span><span class="vocab-phonetic">/proʊˈæktɪv/</span><span class="vocab-meaning">chủ động</span></div>
+    <div class="vocab-row"><span class="vocab-num">12</span><span><span class="vocab-word">adaptable</span><br><span class="vocab-type">adj</span></span><span class="vocab-phonetic">/əˈdæptəbəl/</span><span class="vocab-meaning">có khả năng thích nghi</span></div>
+    <div class="vocab-row"><span class="vocab-num">13</span><span><span class="vocab-word">resilient</span><br><span class="vocab-type">adj</span></span><span class="vocab-phonetic">/rɪˈzɪliənt/</span><span class="vocab-meaning">kiên cường / có khả năng phục hồi</span></div>
+    <div class="vocab-row"><span class="vocab-num">14</span><span><span class="vocab-word">synergy</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈsɪnərdʒi/</span><span class="vocab-meaning">hiệp lực</span></div>
+    <div class="vocab-row"><span class="vocab-num">15</span><span><span class="vocab-word">stakeholder buy-in</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈsteɪkˌhoʊldər ˈbaɪ ɪn/</span><span class="vocab-meaning">sự ủng hộ của bên liên quan</span></div>
+  </div>
+</section>
+
+<!-- LESSON 19 -->
+<section class="lesson-section" id="lesson-19">
+  <div class="lesson-intro">
+    <h2>Bài 19 — Tài liệu & Chứng chỉ</h2>
+    <p>Từ vựng về các loại tài liệu dự án, chứng chỉ và tiêu chuẩn ngành.</p>
+  </div>
+  <div class="vocab-table">
+    <div class="vocab-header"><span>#</span><span>Từ vựng</span><span>Phiên âm</span><span>Nghĩa tiếng Việt</span></div>
+    <div class="vocab-row"><span class="vocab-num">1</span><span><span class="vocab-word">charter</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈtʃɑːrtər/</span><span class="vocab-meaning">điều lệ dự án</span></div>
+    <div class="vocab-row"><span class="vocab-num">2</span><span><span class="vocab-word">feasibility study</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˌfiːzəˈbɪləti ˈstʌdi/</span><span class="vocab-meaning">nghiên cứu tính khả thi</span></div>
+    <div class="vocab-row"><span class="vocab-num">3</span><span><span class="vocab-word">business case</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈbɪznəs keɪs/</span><span class="vocab-meaning">phân tích lợi ích-kinh phí</span></div>
+    <div class="vocab-row"><span class="vocab-num">4</span><span><span class="vocab-word">project plan</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈprɒdʒekt plæn/</span><span class="vocab-meaning">kế hoạch dự án</span></div>
+    <div class="vocab-row"><span class="vocab-num">5</span><span><span class="vocab-word">WBS</span><br><span class="vocab-type">abbr</span></span><span class="vocab-phonetic">/dʌbəljuː biː es/</span><span class="vocab-meaning">cấu trúc phân rã công việc</span></div>
+    <div class="vocab-row"><span class="vocab-num">6</span><span><span class="vocab-word">RACI matrix</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈræsi ˈmeɪtrɪks/</span><span class="vocab-meaning">ma trận phân công trách nhiệm</span></div>
+    <div class="vocab-row"><span class="vocab-num">7</span><span><span class="vocab-word">lessons learned</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈlesənz ˈlɜːrnd/</span><span class="vocab-meaning">bài học kinh nghiệm</span></div>
+    <div class="vocab-row"><span class="vocab-num">8</span><span><span class="vocab-word">PMP</span><br><span class="vocab-type">abbr</span></span><span class="vocab-phonetic">/piː em piː/</span><span class="vocab-meaning">chứng chỉ quản lý dự án</span></div>
+    <div class="vocab-row"><span class="vocab-num">9</span><span><span class="vocab-word">PMI</span><br><span class="vocab-type">abbr</span></span><span class="vocab-phonetic">/piː em aɪ/</span><span class="vocab-meaning">viện quản lý dự án</span></div>
+    <div class="vocab-row"><span class="vocab-num">10</span><span><span class="vocab-word">PRINCE2</span><br><span class="vocab-type">abbr</span></span><span class="vocab-phonetic">/prɪns tuː/</span><span class="vocab-meaning">phương pháp quản lý dự án PRINCE2</span></div>
+    <div class="vocab-row"><span class="vocab-num">11</span><span><span class="vocab-word">ISO 9001</span><br><span class="vocab-type">abbr</span></span><span class="vocab-phonetic">/aɪ es oʊ naɪn wʌn wʌn/</span><span class="vocab-meaning">tiêu chuẩn quản lý chất lượng</span></div>
+    <div class="vocab-row"><span class="vocab-num">12</span><span><span class="vocab-word">CMMI</span><br><span class="vocab-type">abbr</span></span><span class="vocab-phonetic">/siː em em aɪ/</span><span class="vocab-meaning">mô hình năng lực trưởng thành</span></div>
+    <div class="vocab-row"><span class="vocab-num">13</span><span><span class="vocab-word">best practice</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/best ˈpræktɪs/</span><span class="vocab-meaning">thực hành tốt nhất</span></div>
+    <div class="vocab-row"><span class="vocab-num">14</span><span><span class="vocab-word">templates</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈtempləts/</span><span class="vocab-meaning">mẫu tài liệu</span></div>
+    <div class="vocab-row"><span class="vocab-num">15</span><span><span class="vocab-word">sign-off</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈsaɪn ɒf/</span><span class="vocab-meaning">xác nhận phê duyệt cuối cùng</span></div>
+  </div>
+</section>
+
+<!-- LESSON 20 -->
+<section class="lesson-section" id="lesson-20">
+  <div class="lesson-intro">
+    <h2>Bài 20 — Đánh giá & Đóng Dự án</h2>
+    <p>Từ vựng về đánh giá cuối dự án, bàn giao, hậu triển khai và thu hồi kinh nghiệm.</p>
+  </div>
+  <div class="vocab-table">
+    <div class="vocab-header"><span>#</span><span>Từ vựng</span><span>Phiên âm</span><span>Nghĩa tiếng Việt</span></div>
+    <div class="vocab-row"><span class="vocab-num">1</span><span><span class="vocab-word">close out</span><br><span class="vocab-type">v</span></span><span class="vocab-phonetic">/kloʊz aʊt/</span><span class="vocab-meaning">đóng dự án</span></div>
+    <div class="vocab-row"><span class="vocab-num">2</span><span><span class="vocab-word">closure</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈkloʊʒər/</span><span class="vocab-meaning">sự kết thúc</span></div>
+    <div class="vocab-row"><span class="vocab-num">3</span><span><span class="vocab-word">handover</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈhændoʊvər/</span><span class="vocab-meaning">bàn giao</span></div>
+    <div class="vocab-row"><span class="vocab-num">4</span><span><span class="vocab-word">post-implementation</span><br><span class="vocab-type">adj</span></span><span class="vocab-phonetic">/poʊst ˌɪmplɪmenˈteɪʃən/</span><span class="vocab-meaning">hậu triển khai</span></div>
+    <div class="vocab-row"><span class="vocab-num">5</span><span><span class="vocab-word">benefit realization</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈbenɪfɪt ˌriːəlaɪˈzeɪʃən/</span><span class="vocab-meaning">hiện thực hóa lợi ích</span></div>
+    <div class="vocab-row"><span class="vocab-num">6</span><span><span class="vocab-word">success criteria</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/səkˈses kraɪˈtɪəriə/</span><span class="vocab-meaning">tiêu chí thành công</span></div>
+    <div class="vocab-row"><span class="vocab-num">7</span><span><span class="vocab-word">performance review</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/pərˈfɔːrməns rɪˈvjuː/</span><span class="vocab-meaning">đánh giá hiệu suất</span></div>
+    <div class="vocab-row"><span class="vocab-num">8</span><span><span class="vocab-word">project retrospective</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈprɒdʒekt ˌretrəˈspektɪv/</span><span class="vocab-meaning">nhìn lại toàn dự án</span></div>
+    <div class="vocab-row"><span class="vocab-num">9</span><span><span class="vocab-word">archive</span><br><span class="vocab-type">v</span></span><span class="vocab-phonetic">/ˈɑːrkaɪv/</span><span class="vocab-meaning">lưu trữ</span></div>
+    <div class="vocab-row"><span class="vocab-num">10</span><span><span class="vocab-word">decommission</span><br><span class="vocab-type">v</span></span><span class="vocab-phonetic">/ˌdiːkəˈmɪʃən/</span><span class="vocab-meaning">ngừng sử dụng hệ thống cũ</span></div>
+    <div class="vocab-row"><span class="vocab-num">11</span><span><span class="vocab-word">sunset</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈsʌnset/</span><span class="vocab-meaning">ngừng hỗ trợ sản phẩm</span></div>
+    <div class="vocab-row"><span class="vocab-num">12</span><span><span class="vocab-word">reference</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈrefrəns/</span><span class="vocab-meaning">tài liệu tham chiếu</span></div>
+    <div class="vocab-row"><span class="vocab-num">13</span><span><span class="vocab-word">recognition</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˌrekəɡˈnɪʃən/</span><span class="vocab-meaning">công nhận / ghi nhận</span></div>
+    <div class="vocab-row"><span class="vocab-num">14</span><span><span class="vocab-word">warranty</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈwɒrənti/</span><span class="vocab-meaning">bảo hành</span></div>
+    <div class="vocab-row"><span class="vocab-num">15</span><span><span class="vocab-word">sustainability</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/səˌsteɪnəˈbɪləti/</span><span class="vocab-meaning">tính bền vững</span></div>
+  </div>
+</section>
+
+<!-- ══ CONVERSATIONS ══ -->
+<section class="cover-section" id="conversations-panel">
+  <div class="lesson-intro" style="margin-bottom: 24px;">
+    <h2>Hội thoại ôn luyện</h2>
+    <p>Mỗi đoạn hội thoại sử dụng từ vựng của bài tương ứng và các bài trước đó. Di chuột qua dòng hội thoại để xem bản dịch tiếng Việt.</p>
+    <p style="margin-top: 6px;"><strong>Chọn bài:</strong></p>
+  </div>
+
+  <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px;">
+    <button class="nav-btn" style="font-size:.85rem;" onclick="showConv(1)">Hội thoại Bài 1</button>
+    <button class="nav-btn" style="font-size:.85rem;" onclick="showConv(2)">Hội thoại Bài 2</button>
+    <button class="nav-btn" style="font-size:.85rem;" onclick="showConv(3)">Hội thoại Bài 3</button>
+    <button class="nav-btn" style="font-size:.85rem;" onclick="showConv(4)">Hội thoại Bài 4</button>
+    <button class="nav-btn" style="font-size:.85rem;" onclick="showConv(5)">Hội thoại Bài 5</button>
+    <button class="nav-btn" style="font-size:.85rem;" onclick="showConv(6)">Hội thoại Bài 6</button>
+    <button class="nav-btn" style="font-size:.85rem;" onclick="showConv(7)">Hội thoại Bài 7</button>
+    <button class="nav-btn" style="font-size:.85rem;" onclick="showConv(8)">Hội thoại Bài 8</button>
+    <button class="nav-btn" style="font-size:.85rem;" onclick="showConv(9)">Hội thoại Bài 9</button>
+    <button class="nav-btn" style="font-size:.85rem;" onclick="showConv(9)">Hội thoại Bài 9</button>
+    <button class="nav-btn" style="font-size:.85rem;" onclick="showConv(10)">Hội thoại Bài 10</button>
+    <button class="nav-btn" style="font-size:.85rem;" onclick="showConv(11)">Hội thoại Bài 11</button>
+    <button class="nav-btn" style="font-size:.85rem;" onclick="showConv(12)">Hội thoại Bài 12</button>
+    <button class="nav-btn" style="font-size:.85rem;" onclick="showConv(13)">Hội thoại Bài 13</button>
+    <button class="nav-btn" style="font-size:.85rem;" onclick="showConv(14)">Hội thoại Bài 14</button>
+    <button class="nav-btn" style="font-size:.85rem;" onclick="showConv(15)">Hội thoại Bài 15</button>
+    <button class="nav-btn" style="font-size:.85rem;" onclick="showConv(16)">Hội thoại Bài 16</button>
+    <button class="nav-btn" style="font-size:.85rem;" onclick="showConv(17)">Hội thoại Bài 17</button>
+    <button class="nav-btn" style="font-size:.85rem;" onclick="showConv(18)">Hội thoại Bài 18</button>
+    <button class="nav-btn" style="font-size:.85rem;" onclick="showConv(19)">Hội thoại Bài 19</button>
+    <button class="nav-btn" style="font-size:.85rem;" onclick="showConv(20)">Hội thoại Bài 20</button>
+  </div>
+
+  <!-- Conv 1 -->
+  <div class="conv-section" id="conv-1">
+    <div class="conv-card">
+      <h3>Conversation 1 — Project Kick-off</h3>
+      <p class="conv-subtitle">Chủ đề: Bài 1 — Từ vựng về khởi tạo & lập kế hoạch dự án</p>
+      <div class="conv-line conv-speaker">
+        <span class="conv-label">Project Manager</span>
+        Good morning, everyone. Let's kick off this project. Our main objective is to deliver a new ERP system within six months.
+        <div class="conv-translation">Chào buổi sáng tất cả mọi người. Hãy khởi động dự án này. Mục tiêu chính của chúng ta là bàn giao hệ thống ERP mới trong vòng sáu tháng.</div>
+      </div>
+      <div class="conv-line conv-response">
+        <span class="conv-label">Team Lead</span>
+        Understood. Before we allocate any resources, should we first check the feasibility of the timeline?
+        <div class="conv-translation">Được rồi. Trước khi phân bổ bất kỳ nguồn lực nào, chúng ta có nên kiểm tra tính khả thi của lịch trình trước không?</div>
+      </div>
+      <div class="conv-line conv-speaker">
+        <span class="conv-label">Project Manager</span>
+        Yes, exactly. I've prepared the project charter with the scope, budget, and key milestones. Please review it by Friday.
+        <div class="conv-translation">Đúng vậy. Tôi đã chuẩn bị bản điều lệ dự án với phạm vi, ngân sách và các cột mốc quan trọng. Vui lòng xem lại trước thứ Sáu.</div>
+      </div>
+      <div class="conv-line conv-response">
+        <span class="conv-label">Team Lead</span>
+        Sure. And I've scheduled a meeting to allocate the team members to each deliverable next Tuesday.
+        <div class="conv-translation">Chắc chắn rồi. Và tôi đã lên lịch họp để phân bổ các thành viên trong nhóm cho từng sản phẩm bàn giao vào thứ Ba tới.</div>
+      </div>
+      <div class="conv-line conv-speaker">
+        <span class="conv-label">Project Manager</span>
+        Perfect. We'll use this timeline to track our progress every week. Any questions so far?
+        <div class="conv-translation">Hoàn hảo. Chúng ta sẽ sử dụng kế hoạch thời gian này để theo dõi tiến độ mỗi tuần. Có câu hỏi nào chưa?</div>
+      </div>
+      <div class="conv-line conv-response">
+        <span class="conv-label">Team Lead</span>
+        No questions. Let's get started!
+        <div class="conv-translation">Không có câu hỏi nào. Hãy bắt đầu thôi!</div>
+      </div>
+      <div class="review-note">
+        <strong>Từ vựng đã ôn:</strong> project, objective, deliverable, milestone, scope, schedule, timeline, feasibility, budget, resource, allocate, kick-off
+      </div>
+    </div>
+  </div>
+
+  <!-- Conv 2 -->
+  <div class="conv-section" id="conv-2">
+    <div class="conv-card">
+      <h3>Conversation 2 — Team Onboarding</h3>
+      <p class="conv-subtitle">Chủ đề: Bài 2 + ôn lại Bài 1</p>
+      <div class="conv-line conv-speaker">
+        <span class="conv-label">Project Manager</span>
+        We're expanding the team. Our vendor has recommended three new members. Let's onboard them next week.
+        <div class="conv-translation">Chúng ta đang mở rộng nhóm. Nhà cung cấp đã giới thiệu ba thành viên mới. Hãy đưa họ vào dự án vào tuần sau.</div>
+      </div>
+      <div class="conv-line conv-response">
+        <span class="conv-label">HR Lead</span>
+        Should we assign each member a mentor during the onboarding process? That helps them collaborate faster.
+        <div class="conv-translation">Chúng ta có nên chỉ định một người cố vấn cho mỗi thành viên trong quá trình đưa vào dự án không? Điều đó giúp họ cộng tác nhanh hơn.</div>
+      </div>
+      <div class="conv-line conv-speaker">
+        <span class="conv-label">Project Manager</span>
+        Great idea. I want to empower every team member by clarifying their roles and responsibilities clearly.
+        <div class="conv-translation">Ý hay đấy. Tôi muốn trao quyền cho mỗi thành viên bằng cách làm rõ vai trò và trách nhiệm của họ.</div>
+      </div>
+      <div class="conv-line conv-response">
+        <span class="conv-label">HR Lead</span>
+        Who will be the primary client contact? We need to keep the stakeholder informed of the schedule changes.
+        <div class="conv-translation">Ai sẽ là người liên hệ chính với khách hàng? Chúng ta cần giữ cho bên liên quan được thông báo về các thay đổi lịch trình.</div>
+      </div>
+      <div class="conv-line conv-speaker">
+        <span class="conv-label">Project Manager</span>
+        I'll take that role. The sponsor also wants weekly reports. Can you prepare the team member list for me?
+        <div class="conv-translation">Tôi sẽ đảm nhận vai trò đó. Nhà tài trợ cũng muốn báo cáo hàng tuần. Bạn có thể chuẩn bị danh sách thành viên cho tôi không?</div>
+      </div>
+      <div class="review-note">
+        <strong>Từ vựng đã ôn:</strong> team, member, role, responsibility, stakeholder, sponsor, client, vendor, onboard, mentor, collaborate, empower, resource, schedule
+      </div>
+    </div>
+  </div>
+
+  <!-- Conv 3 -->
+  <div class="conv-section" id="conv-3">
+    <div class="conv-card">
+      <h3>Conversation 3 — Requirements Workshop</h3>
+      <p class="conv-subtitle">Chủ đề: Bài 3 + ôn lại Bài 1-2</p>
+      <div class="conv-line conv-speaker">
+        <span class="conv-label">Business Analyst</span>
+        We've gathered requirements from twelve stakeholders. Now we need to analyze and prioritize them.
+        <div class="conv-translation">Chúng tôi đã thu thập yêu cầu từ mười hai bên liên quan. Bây giờ chúng ta cần phân tích và ưu tiên hóa chúng.</div>
+      </div>
+      <div class="conv-line conv-response">
+        <span class="conv-label">Project Manager</span>
+        Good. Let's start with the functional requirements. Non-functional ones like performance will come later.
+        <div class="conv-translation">Tốt. Hãy bắt đầu với các yêu cầu chức năng. Các yêu cầu phi chức năng như hiệu năng sẽ đến sau.</div>
+      </div>
+      <div class="conv-line conv-speaker">
+        <span class="conv-label">Business Analyst</span>
+        Right. I've written use cases and acceptance criteria for each feature. Here's the specification document.
+        <div class="conv-translation">Đúng rồi. Tôi đã viết các trường hợp sử dụng và tiêu chí nghiệm thu cho mỗi tính năng. Đây là tài liệu đặc tả.</div>
+      </div>
+      <div class="conv-line conv-response">
+        <span class="conv-label">Project Manager</span>
+        This looks comprehensive. However, I'm worried about scope creep. Can we add traceability to control it?
+        <div class="conv-translation">Nhìn có vẻ toàn diện. Tuy nhiên, tôi lo về phạm vi bò. Chúng ta có thể thêm khả năng truy vết để kiểm soát không?</div>
+      </div>
+      <div class="conv-line conv-speaker">
+        <span class="conv-label">Business Analyst</span>
+        Absolutely. We'll use a traceability matrix. Also, we're planning a workshop next week to finalize alignment with all stakeholders.
+        <div class="conv-translation">Hoàn toàn có thể. Chúng tôi sẽ sử dụng ma trận truy vết. Ngoài ra, chúng tôi đang lên kế hoạch một buổi hội thảo vào tuần sau để hoàn tất đồng thuận với tất cả bên liên quan.</div>
+      </div>
+      <div class="review-note">
+        <strong>Từ vựng đã ôn:</strong> requirement, specification, gather, analyze, prioritize, scope creep, feature, functional, non-functional, use case, acceptance criteria, workshop, stakeholder alignment, traceability, milestone, allocate
+      </div>
+    </div>
+  </div>
+
+  <!-- Conv 4 -->
+  <div class="conv-section" id="conv-4">
+    <div class="conv-card">
+      <h3>Conversation 4 — Architecture Design Review</h3>
+      <p class="conv-subtitle">Chủ đề: Bài 4 + ôn lại Bài 1-3</p>
+      <div class="conv-line conv-speaker">
+        <span class="conv-label">Technical Architect</span>
+        I've designed the system architecture. It's modular and scalable, so we can easily add new components later.
+        <div class="conv-translation">Tôi đã thiết kế kiến trúc hệ thống. Nó theo module và có thể mở rộng, vì vậy chúng ta có thể dễ dàng thêm các thành phần mới sau.</div>
+      </div>
+      <div class="conv-line conv-response">
+        <span class="conv-label">Project Manager</span>
+        Does this design integrate with our existing infrastructure? We can't afford a major redesign later.
+        <div class="conv-translation">Thiết kế này có tích hợp với hạ tầng hiện có của chúng ta không? Chúng ta không thể chi trả cho việc thiết kế lại lớn sau này.</div>
+      </div>
+      <div class="conv-line conv-speaker">
+        <span class="conv-label">Technical Architect</span>
+        Yes, the interfaces are standardized. But I'm concerned about technical debt. We should plan for some refactoring.
+        <div class="conv-translation">Có, các giao diện được tiêu chuẩn hóa. Nhưng tôi lo về nợ kỹ thuật. Chúng ta nên lên kế hoạch tái cấu trúc một phần.</div>
+      </div>
+      <div class="conv-line conv-response">
+        <span class="conv-label">Project Manager</span>
+        I agree. Let's review the prototype with the client before we finalize the workflow diagram.
+        <div class="conv-translation">Tôi đồng ý. Hãy xem lại bản mẫu với khách hàng trước khi chúng ta hoàn thiện sơ đồ quy trình.</div>
+      </div>
+      <div class="conv-line conv-speaker">
+        <span class="conv-label">Technical Architect</span>
+        Good point. I'll prepare the wireframe and demo it next Thursday.
+        <div class="conv-translation">Điểm hay. Tôi sẽ chuẩn bị khung dây và trình diễn vào thứ Năm tới.</div>
+      </div>
+      <div class="review-note">
+        <strong>Từ vựng đã ôn:</strong> architecture, design, prototype, wireframe, component, interface, integrate, scalable, scalability, modular, diagram, workflow, redesign, technical debt, refactor, stakeholder, requirement
+      </div>
+    </div>
+  </div>
+
+  <!-- Conv 5 -->
+  <div class="conv-section" id="conv-5">
+    <div class="conv-card">
+      <h3>Conversation 5 — Development Pipeline</h3>
+      <p class="conv-subtitle">Chủ đề: Bài 5 + ôn lại Bài 1-4</p>
+      <div class="conv-line conv-speaker">
+        <span class="conv-label">Tech Lead</span>
+        We start the new sprint tomorrow. I've added all the features to the backlog and assigned story points to each one.
+        <div class="conv-translation">Chúng ta bắt đầu sprint mới vào ngày mai. Tôi đã thêm tất cả các tính năng vào backlog và gán điểm câu chuyện cho mỗi tính năng.</div>
+      </div>
+      <div class="conv-line conv-response">
+        <span class="conv-label">Developer</span>
+        I've created a new branch for the authentication feature. I'll commit the code after the code review.
+        <div class="conv-translation">Tôi đã tạo một nhánh mới cho tính năng xác thực. Tôi sẽ commit mã sau khi kiểm tra mã nguồn.</div>
+      </div>
+      <div class="conv-line conv-speaker">
+        <span class="conv-label">Tech Lead</span>
+        Perfect. Remember, we need to debug any issues before the build goes into the pipeline.
+        <div class="conv-translation">Hoàn hảo. Nhớ rằng, chúng ta cần gỡ lỗi bất kỳ vấn đề nào trước khi bản build đi vào pipeline.</div>
+      </div>
+      <div class="conv-line conv-response">
+        <span class="conv-label">Developer</span>
+        Understood. Also, we found a critical bug in production. Should we deploy a hotfix immediately?
+        <div class="conv-translation">Được rồi. Ngoài ra, chúng tôi phát hiện một lỗi nghiêm trọng trong môi trường sản xuất. Chúng ta có nên triển khai sửa lỗi khẩn cấp ngay không?</div>
+      </div>
+      <div class="conv-line conv-speaker">
+        <span class="conv-label">Tech Lead</span>
+        Yes, escalate this to the project manager. We can't wait until the next iteration.
+        <div class="conv-translation">Có, báo cáo vấn đề này lên cấp cao hơn cho quản lý dự án. Chúng ta không thể đợi đến vòng lặp tiếp theo.</div>
+      </div>
+      <div class="review-note">
+        <strong>Từ vựng đã ôn:</strong> sprint, backlog, branch, commit, merge, build, pipeline, code review, debug, hotfix, deploy, feature, iterate, monitor, escalate, stakeholder, milestone, timeline, prototype
+      </div>
+    </div>
+  </div>
+
+  <!-- Conv 6 -->
+  <div class="conv-section" id="conv-6">
+    <div class="conv-card">
+      <h3>Conversation 6 — QA and Bug Triage</h3>
+      <p class="conv-subtitle">Chủ đề: Bài 6 + ôn lại Bài 1-5</p>
+      <div class="conv-line conv-speaker">
+        <span class="conv-label">QA Lead</span>
+        We've completed the test plan and written test cases for all features. Let's start testing in the staging environment.
+        <div class="conv-translation">Chúng tôi đã hoàn thành kế hoạch kiểm thử và viết các trường hợp kiểm thử cho tất cả tính năng. Hãy bắt đầu kiểm thử trong môi trường staging.</div>
+      </div>
+      <div class="conv-line conv-response">
+        <span class="conv-label">Developer</span>
+        How many bugs did you find? Any with high severity?
+        <div class="conv-translation">Bạn tìm thấy bao nhiêu lỗi? Có lỗi nào có mức độ nghiêm trọng cao không?</div>
+      </div>
+      <div class="conv-line conv-speaker">
+        <span class="conv-label">QA Lead</span>
+        We found twelve defects. Three are critical. We need to automate some regression tests to improve coverage.
+        <div class="conv-translation">Chúng tôi tìm thấy mười hai khuyết tật. Ba cái nghiêm trọng. Chúng ta cần tự động hóa một số kiểm thử hồi quy để cải thiện độ phủ.</div>
+      </div>
+      <div class="conv-line conv-response">
+        <span class="conv-label">Developer</span>
+        The build passed all test cases in CI. Now we're doing a sanity check before UAT.
+        <div class="conv-translation">Bản build đã đạt tất cả các trường hợp kiểm thử trong CI. Bây giờ chúng tôi đang kiểm tra sơ bộ trước khi UAT.</div>
+      </div>
+      <div class="conv-line conv-speaker">
+        <span class="conv-label">QA Lead</span>
+        The client will run UAT next week. We need to ensure quality assurance standards are met before the release.
+        <div class="conv-translation">Khách hàng sẽ chạy UAT vào tuần tới. Chúng ta cần đảm bảo các tiêu chuẩn đảm bảo chất lượng được đáp ứng trước khi phát hành.</div>
+      </div>
+      <div class="review-note">
+        <strong>Từ vựng đã ôn:</strong> testing, quality assurance, test case, test plan, bug, defect, regression, UAT, staging, production, pass, fail, coverage, automate, sanity check, severity, release, deploy, backlog
+      </div>
+    </div>
+  </div>
+
+  <!-- Conv 7 -->
+  <div class="conv-section" id="conv-7">
+    <div class="conv-card">
+      <h3>Conversation 7 — Go-Live Preparation</h3>
+      <p class="conv-subtitle">Chủ đề: Bài 7 + ôn lại Bài 1-6</p>
+      <div class="conv-line conv-speaker">
+        <span class="conv-label">DevOps Engineer</span>
+        The release is scheduled for Friday night. We've finished the configuration and infrastructure checks.
+        <div class="conv-translation">Phát hành được lên kịch hoạch vào tối thứ Sáu. Chúng tôi đã hoàn thành kiểm tra cấu hình và hạ tầng.</div>
+      </div>
+      <div class="conv-line conv-response">
+        <span class="conv-label">Project Manager</span>
+        What's our rollback plan if something goes wrong during the cutover?
+        <div class="conv-translation">Kế hoạch quay lui của chúng ta là gì nếu có sự cố xảy ra trong quá trình chuyển đổi?</div>
+      </div>
+      <div class="conv-line conv-speaker">
+        <span class="conv-label">DevOps Engineer</span>
+        We'll use the previous version. I've also prepared the data migration scripts and tested them in staging.
+        <div class="conv-translation">Chúng tôi sẽ sử dụng phiên bản trước. Tôi cũng đã chuẩn bị các script di chuyển dữ liệu và kiểm tra chúng trong staging.</div>
+      </div>
+      <div class="conv-line conv-response">
+        <span class="conv-label">Project Manager</span>
+        Good. How is the post-launch support being arranged?
+        <div class="conv-translation">Tốt. Việc sắp xếp hỗ trợ sau khi ra mắt như thế nào rồi?</div>
+      </div>
+      <div class="conv-line conv-speaker">
+        <span class="conv-label">DevOps Engineer</span>
+        The hosting provider is ready. We've scheduled maintenance windows for the first month after go-live.
+        <div class="conv-translation">Nhà cung cấp lưu trữ đã sẵn sàng. Chúng tôi đã lên lịch các đợt bảo trì trong tháng đầu tiên sau khi vận hành chính thức.</div>
+      </div>
+      <div class="review-note">
+        <strong>Từ vựng đã ôn:</strong> release, launch, rollout, rollback, migration, cutover, configuration, infrastructure, data center, hosting, go-live, post-launch, support, maintenance, version, staging, production, deploy, defect, regression
+      </div>
+    </div>
+  </div>
+
+  <!-- Conv 8 -->
+  <div class="conv-section" id="conv-8">
+    <div class="conv-card">
+      <h3>Conversation 8 — Risk and Issue Management</h3>
+      <p class="conv-subtitle">Chủ đề: Bài 8 + ôn lại Bài 1-7</p>
+      <div class="conv-line conv-speaker">
+        <span class="conv-label">Project Manager</span>
+        Our velocity dropped this sprint. Let's review the burndown chart and identify what's causing the variance.
+        <div class="conv-translation">Tốc độ hoàn thành của chúng ta giảm trong sprint này. Hãy xem lại biểu đồ đốt cháy công việc và xác định điều gì đang gây ra chênh lệch.</div>
+      </div>
+      <div class="conv-line conv-response">
+        <span class="conv-label">Scrum Master</span>
+        We have two blockers. The API integration is overdue, and we need to escalate this risk to the sponsor.
+        <div class="conv-translation">Chúng ta có hai vấn đề chặn tiến độ. Việc tích hợp API đã quá hạn, và chúng ta cần báo cáo rủi ro này lên nhà tài trợ.</div>
+      </div>
+      <div class="conv-line conv-speaker">
+        <span class="conv-label">Project Manager</span>
+        Agreed. What are our key metrics for this project? We need to track KPIs closely this month.
+        <div class="conv-translation">Đồng ý. Các chỉ số hiệu quả chính của dự án này là gì? Chúng ta cần theo dõi sát các chỉ số này trong tháng này.</div>
+      </div>
+      <div class="conv-line conv-response">
+        <span class="conv-label">Scrum Master</span>
+        The main metric is the burndown rate. We should also benchmark against the original schedule.
+        <div class="conv-translation">Chỉ số chính là tốc độ đốt cháy công việc. Chúng ta cũng nên so sánh với lịch trình ban đầu.</div>
+      </div>
+      <div class="conv-line conv-speaker">
+        <span class="conv-label">Project Manager</span>
+        Let's prepare a contingency plan for the API issue and mitigate the risk by adding an extra developer.
+        <div class="conv-translation">Hãy chuẩn bị phương án dự phòng cho vấn đề API và giảm thiểu rủi ro bằng cách thêm một lập trình viên.</div>
+      </div>
+      <div class="review-note">
+        <strong>Từ vựng đã ôn:</strong> monitor, track, KPI, metric, benchmark, risk, mitigate, contingency, issue, blocker, velocity, burndown chart, variance, overdue, escalate, sprint, stakeholder, scope, timeline
+      </div>
+    </div>
+  </div>
+
+  <!-- Conv 9 -->
+  <div class="conv-section" id="conv-9">
+    <div class="conv-card">
+      <h3>Conversation 9 — Weekly Status Meeting</h3>
+      <p class="conv-subtitle">Chủ đề: Bài 9 + ôn lại Bài 1-8</p>
+      <div class="conv-line conv-speaker">
+        <span class="conv-label">Project Manager</span>
+        Let's review the status update. I need to clarify the agenda before we start the briefing.
+        <div class="conv-translation">Hãy xem lại báo cáo cập nhật. Tôi cần làm rõ chương trình nghị sự trước khi chúng ta bắt đầu buổi giao ban.</div>
+      </div>
+      <div class="conv-line conv-response">
+        <span class="conv-label">Team Lead</span>
+        The documentation for the API is ready. But we need more feedback from the client before we finalize it.
+        <div class="conv-translation">Tài liệu cho API đã sẵn sàng. Nhưng chúng ta cần thêm phản hồi từ khách hàng trước khi hoàn thiện.</div>
+      </div>
+      <div class="conv-line conv-speaker">
+        <span class="conv-label">Project Manager</span>
+        I'll notify the stakeholder about this. We should follow up with them today to get transparent communication.
+        <div class="conv-translation">Tôi sẽ thông báo cho bên liên quan về việc này. Chúng ta nên theo dõi với họ hôm nay để có giao tiếp minh bạch.</div>
+      </div>
+      <div class="conv-line conv-response">
+        <span class="conv-label">Team Lead</span>
+        Should we prepare a presentation for the sponsor? They asked for a full report next week.
+        <div class="conv-translation">Chúng ta có nên chuẩn bị một bài thuyết trình cho nhà tài trợ không? Họ yêu cầu một báo cáo đầy đủ vào tuần tới.</div>
+      </div>
+      <div class="conv-line conv-speaker">
+        <span class="conv-label">Project Manager</span>
+        Yes, please include the minutes from this meeting in the escalation report. We need to keep everything transparent.
+        <div class="conv-translation">Có, vui lòng đưa biên bản cuộc họp này vào báo cáo leo thang. Chúng ta cần giữ mọi thứ minh bạch.</div>
+      </div>
+      <div class="review-note">
+        <strong>Từ vựng đã ôn:</strong> status, update, report, agenda, briefing, minutes, presentation, stakeholder management, escalation, transparent, clarify, follow up, documentation, notify, feedback, milestone, risk, issue, timeline
+      </div>
+    </div>
+  </div>
+
+  <!-- Conv 10 -->
+  <div class="conv-section" id="conv-10">
+    <div class="conv-card">
+      <h3>Conversation 10 — Sprint Retrospective</h3>
+      <p class="conv-subtitle">Chủ đề: Bài 10 + ôn lại TẤT CẢ các bài 1-9</p>
+      <div class="conv-line conv-speaker">
+        <span class="conv-label">Scrum Master</span>
+        Welcome to the retrospective. First, let's review the sprint. Did we meet the definition of done for all increments?
+        <div class="conv-translation">Chào mừng đến với buổi nhìn lại. Đầu tiên, hãy xem lại sprint. Chúng ta có đáp ứng định nghĩa hoàn thành cho tất cả phần tăng trưởng không?</div>
+      </div>
+      <div class="conv-line conv-response">
+        <span class="conv-label">Product Owner</span>
+        Two user stories didn't pass UAT. The backlog grooming session next week should help prioritize them better.
+        <div class="conv-translation">Hai câu chuyện người dùng không đạt UAT. Buổi tinh chỉnh backlog tuần tới sẽ giúp ưu tiên tốt hơn.</div>
+      </div>
+      <div class="conv-line conv-speaker">
+        <span class="conv-label">Scrum Master</span>
+        Our velocity improved. But we hit the WIP limit on the Kanban board twice. Let's address this for continuous improvement.
+        <div class="conv-translation">Tốc độ của chúng ta đã cải thiện. Nhưng chúng ta đã chạm giới hạn công việc đang làm trên bảng Kanban hai lần. Hãy giải quyết điều này để cải tiến liên tục.</div>
+      </div>
+      <div class="conv-line conv-response">
+        <span class="conv-label">Developer</span>
+        During the daily stand-up, we spent too much time on blockers. Can we escalate them faster?
+        <div class="conv-translation">Trong buổi họp đứng hàng ngày, chúng tôi đã dành quá nhiều thời gian cho các vấn đề chặn tiến độ. Chúng ta có thể báo lên nhanh hơn không?</div>
+      </div>
+      <div class="conv-line conv-speaker">
+        <span class="conv-label">Scrum Master</span>
+        Agreed. From now on, if something blocks us for more than one day, we escalate immediately. Let's update the backlog and plan the next sprint.
+        <div class="conv-translation">Đồng ý. Từ bây giờ, nếu có điều gì chặn chúng ta hơn một ngày, chúng ta báo lên ngay. Hãy cập nhật backlog và lên kế hoạch sprint tiếp theo.</div>
+      </div>
+      <div class="review-note">
+        <strong>Từ vựng đã ôn (TOÀN BỘ BÀI 1-10):</strong> agile, scrum, product owner, scrum master, backlog grooming, planning poker, story point, daily stand-up, retrospective, sprint review, increment, definition of done, kanban, WIP limit, continuous improvement, velocity, UAT, deliverable, milestone, resource, stakeholder, requirement, defect, release, deploy, go-live, KPI, metric, risk, mitigate, transparent, feedback, documentation, escalate, monitor
+      </div>
+    </div>
+  </div>
+
+  <!-- Conv 11 -->
+  <div class="conv-section" id="conv-11">
+    <div class="conv-card">
+      <h3>Conversation 11 — Security Review Meeting</h3>
+      <p class="conv-subtitle">Chủ đề: Bài 11 + ôn lại Bài 1-10</p>
+      <div class="conv-line conv-speaker">
+        <span class="conv-label">Security Officer</span>
+        We've identified a critical vulnerability in the authentication module. We need to schedule a penetration test immediately.
+        <div class="conv-translation">Chúng tôi đã phát hiện một lỗ hổng nghiêm trọng trong module xác thực. Chúng ta cần lên lịch kiểm thử xâm nhập ngay.</div>
+      </div>
+      <div class="conv-line conv-response">
+        <span class="conv-label">Project Manager</span>
+        Does this affect our compliance timeline? We have an audit scheduled next month.
+        <div class="conv-translation">Điều này có ảnh hưởng đến lịch tuân thủ của chúng ta không? Chúng tôi có lịch kiểm toán vào tháng tới.</div>
+      </div>
+      <div class="conv-line conv-speaker">
+        <span class="conv-label">Security Officer</span>
+        Yes, it could. We need encryption for all data in transit. The backup system also needs to be reviewed.
+        <div class="conv-translation">Có, nó có thể. Chúng ta cần mã hóa cho tất cả dữ liệu đang truyền. Hệ thống sao lưu cũng cần được xem xét.</div>
+      </div>
+      <div class="conv-line conv-response">
+        <span class="conv-label">Project Manager</span>
+        I'll escalate this to the sponsor. We can't afford a data breach. Who controls access to the production environment?
+        <div class="conv-translation">Tôi sẽ báo cáo lên nhà tài trợ. Chúng ta không thể chịu rò rỉ dữ liệu. Ai kiểm soát truy cập vào môi trường sản xuất?</div>
+      </div>
+      <div class="conv-line conv-speaker">
+        <span class="conv-label">Security Officer</span>
+        Authorization is managed by the IT team. But we need stronger authentication, like two-factor. We should also update our disaster recovery plan.
+        <div class="conv-translation">Việc phân quyền do đội IT quản lý. Nhưng chúng ta cần xác thực mạnh hơn, như hai yếu tố. Chúng ta cũng nên cập nhật kế hoạch phục hồi sau thảm họa.</div>
+      </div>
+      <div class="review-note">
+        <strong>Từ vựng đã ôn:</strong> security, authentication, authorization, encryption, compliance, vulnerability, threat, data breach, privacy, access control, audit, penetration testing, incident, disaster recovery, backup, stakeholder, risk, mitigate, escalat
+      </div>
+    </div>
+  </div>
+
+  <!-- Conv 12 -->
+  <div class="conv-section" id="conv-12">
+    <div class="conv-card">
+      <h3>Conversation 12 — Change Control Board</h3>
+      <p class="conv-subtitle">Chủ đề: Bài 12 + ôn lại Bài 1-11</p>
+      <div class="conv-line conv-speaker">
+        <span class="conv-label">Change Manager</span>
+        We have three change requests waiting for approval. The change board will meet this afternoon to review them.
+        <div class="conv-translation">Chúng tôi có ba yêu cầu thay đổi đang chờ phê duyệt. Hội đồng thay đổi sẽ họp chiều nay để xem xét.</div>
+      </div>
+      <div class="conv-line conv-response">
+        <span class="conv-label">Project Manager</span>
+        CR-042 is urgent. The client wants to add a new feature to the scope. What's the impact analysis result?
+        <div class="conv-translation">CR-042 khẩn cấp. Khách hàng muốn thêm tính năng mới vào phạm vi. Kết quả phân tích tác động là gì?</div>
+      </div>
+      <div class="conv-line conv-speaker">
+        <span class="conv-label">Change Manager</span>
+        The impact analysis shows it will delay the release by two weeks and increase the budget. We need to revert the baseline if we approve it.
+        <div class="conv-translation">Phân tích tác động cho thấy nó sẽ làm trì hoãn phát hành hai tuần và tăng ngân sách. Chúng ta cần hoàn nguyên đường cơ sở nếu phê duyệt.</div>
+      </div>
+      <div class="conv-line conv-response">
+        <span class="conv-label">Project Manager</span>
+        Can we reject it for now and prioritize it in the next release? We need to update the change log either way.
+        <div class="conv-translation">Chúng ta có thể từ chối nó bây giờ và ưu tiên trong phát hành tiếp theo không? Chúng ta cần cập nhật nhật ký thay đổi dù theo hướng nào.</div>
+      </div>
+      <div class="conv-line conv-speaker">
+        <span class="conv-label">Change Manager</span>
+        Agreed. Let's get the change control board's approval and then run regression tests on the approved changes.
+        <div class="conv-translation">Đồng ý. Hãy lấy phê duyệt của hội đồng kiểm soát thay đổi và sau đó chạy kiểm thử hồi quy trên các thay đổi được phê duyệt.</div>
+      </div>
+      <div class="review-note">
+        <strong>Từ vựng đã ôn:</strong> change request, change control, change board, impact analysis, baseline, configuration item, release management, approval, reject, implement, revert, version control, change log, regression test, scope, budget, timeline
+      </div>
+    </div>
+  </div>
+
+  <!-- Conv 13 -->
+  <div class="conv-section" id="conv-13">
+    <div class="conv-card">
+      <h3>Conversation 13 — Contract Negotiation</h3>
+      <p class="conv-subtitle">Chủ đề: Bài 13 + ôn lại Bài 1-12</p>
+      <div class="conv-line conv-speaker">
+        <span class="conv-label">Procurement Lead</span>
+        The vendor sent their final quote. The invoice is higher than the estimate we agreed on. Should we negotiate?
+        <div class="conv-translation">Nhà cung cấp gửi báo giá cuối cùng. Hóa đơn cao hơn ước lượng chúng ta đã thống nhất. Chúng ta nên đàm phán không?</div>
+      </div>
+      <div class="conv-line conv-response">
+        <span class="conv-label">Project Manager</span>
+        Absolutely. Let's review the terms and conditions and check the cash flow before we sign the contract.
+        <div class="conv-translation">Hoàn toàn nên. Hãy xem lại các điều khoản và điều kiện và kiểm tra dòng tiền trước khi ký hợp đồng.</div>
+      </div>
+      <div class="conv-line conv-speaker">
+        <span class="conv-label">Procurement Lead</span>
+        There's a penalty clause for late delivery. The vendor is concerned about our payment schedule.
+        <div class="conv-translation">Có điều khoản phạt giao hàng trễ. Nhà cung cấp lo ngại về lịch thanh toán của chúng ta.</div>
+      </div>
+      <div class="conv-line conv-response">
+        <span class="conv-label">Project Manager</span>
+        The ROI for this project is strong. Let's negotiate better payment terms and request an NDA before sharing our SOW details.
+        <div class="conv-translation">Lợi tức đầu tư cho dự án này rất mạnh. Hãy đàm phán điều khoản thanh toán tốt hơn và yêu cầu thỏa thuận bảo mật trước khi chia sẻ chi tiết phạm vi công việc.</div>
+      </div>
+      <div class="conv-line conv-speaker">
+        <span class="conv-label">Procurement Lead</span>
+        Good idea. Should we also discuss the contract renewal terms now, or wait until the first phase is complete?
+        <div class="conv-translation">Ý hay. Chúng ta có nên thảo luận về điều khoản gia hạn hợp đồng bây giờ, hay đợi đến khi giai đoạn đầu hoàn thành?</div>
+      </div>
+      <div class="review-note">
+        <strong>Từ vựng đã ôn:</strong> cost, estimate, quote, invoice, payment, procurement, contract, SOW, NDA, penalty, ROI, cash flow, tender, terms and conditions, renewal, vendor, stakeholder, scope, budget
+      </div>
+    </div>
+  </div>
+
+  <!-- Conv 14 -->
+  <div class="conv-section" id="conv-14">
+    <div class="conv-card">
+      <h3>Conversation 14 — Project Dashboard Review</h3>
+      <p class="conv-subtitle">Chủ đề: Bài 14 + ôn lại Bài 1-13</p>
+      <div class="conv-line conv-speaker">
+        <span class="conv-label">PMO Director</span>
+        Let's look at the project dashboard. Our CPI is 0.85 and our SPI is 0.92. What does this tell us?
+        <div class="conv-translation">Hãy xem bảng điều khiển dự án. Chỉ số tiết kiệm chi phí của chúng ta là 0.85 và chỉ số tiến độ là 0.92. Điều này cho chúng ta biết gì?</div>
+      </div>
+      <div class="conv-line conv-response">
+        <span class="conv-label">Project Manager</span>
+        We're over budget and behind schedule. I need to forecast the final cost using earned value analysis.
+        <div class="conv-translation">Chúng ta đang vượt ngân sách và chậm tiến độ. Tôi cần dự báo chi phí cuối cùng bằng phân tích giá trị đã đạt.</div>
+      </div>
+      <div class="conv-line conv-speaker">
+        <span class="conv-label">PMO Director</span>
+        Are there any trends? Let's identify the root cause of the variance before we present this to the sponsor.
+        <div class="conv-translation">Có xu hướng gì không? Hãy xác định nguyên nhân gốc rễ của chênh lệch trước khi chúng ta trình bày điều này với nhà tài trợ.</div>
+      </div>
+      <div class="conv-line conv-response">
+        <span class="conv-label">Project Manager</span>
+        The main indicator is that we underestimated the planned value for the first phase. The actual cost exceeded the budget.
+        <div class="conv-translation">Chỉ báo chính là chúng ta đã ước lượng thấp giá trị kế hoạch cho giai đoạn đầu. Chi phí thực tế vượt ngân sách.</div>
+      </div>
+      <div class="conv-line conv-speaker">
+        <span class="conv-label">PMO Director</span>
+        Use data-driven insights to benchmark against similar past projects. We need solid indicators for the next status update.
+        <div class="conv-translation">Sử dụng nhận định sâu dựa trên dữ liệu để so sánh với các dự án tương tự trong quá khứ. Chúng ta cần các chỉ báo vững chắc cho báo cáo cập nhật tiếp theo.</div>
+      </div>
+      <div class="review-note">
+        <strong>Từ vựng đã ôn:</strong> earned value, planned value, actual cost, CPI, SPI, forecast, trend, dashboard, data-driven, indicator, baseline, target, root cause, insight, benchmarking, KPI, variance, milestone, budget, schedule
+      </div>
+    </div>
+  </div>
+
+  <!-- Conv 15 -->
+  <div class="conv-section" id="conv-15">
+    <div class="conv-card">
+      <h3>Conversation 15 — Cloud Migration Discussion</h3>
+      <p class="conv-subtitle">Chủ đề: Bài 15 + ôn lại Bài 1-14</p>
+      <div class="conv-line conv-speaker">
+        <span class="conv-label">DevOps Lead</span>
+        We're planning to migrate to a hybrid cloud. The latency from the database server is too high, and bandwidth is a bottleneck.
+        <div class="conv-translation">Chúng ta đang lên kế hoạch chuyển sang đám mây lai. Độ trễ từ máy chủ cơ sở dữ liệu quá cao và băng thông là điểm nghẽn.</div>
+      </div>
+      <div class="conv-line conv-response">
+        <span class="conv-label">Project Manager</span>
+        Can we use load balancing and CDN to improve performance? What about the on-premise infrastructure?
+        <div class="conv-translation">Chúng ta có thể dùng cân bằng tải và CDN để cải thiện hiệu năng không? Còn hạ tầng tại chỗ thì sao?</div>
+      </div>
+      <div class="conv-line conv-speaker">
+        <span class="conv-label">DevOps Lead</span>
+        We'll keep some on-premise for compliance reasons. Each microservice will run in its own container. We'll set up a disaster recovery site as well.
+        <div class="conv-translation">Chúng tôi sẽ giữ một phần tại chỗ vì lý do tuân thủ. Mỗi vi dịch vụ sẽ chạy trong container riêng. Chúng tôi cũng sẽ thiết lập một trang phục hồi DR.</div>
+      </div>
+      <div class="conv-line conv-response">
+        <span class="conv-label">Project Manager</span>
+        Good. The API endpoints need redundancy. Let's review the cloud computing costs and compare them with our current server expenses.
+        <div class="conv-translation">Tốt. Các endpoint API cần dự phòng. Hãy xem lại chi phí điện toán đám mây và so sánh với chi phí máy chủ hiện tại.</div>
+      </div>
+      <div class="conv-line conv-speaker">
+        <span class="conv-label">DevOps Lead</span>
+        The virtualized environment will reduce costs. We'll use containers and microservices for better scalability and easier deployment.
+        <div class="conv-translation">Môi trường ảo hóa sẽ giảm chi phí. Chúng tôi sẽ dùng container và vi dịch vụ để mở rộng tốt hơn và triển khai dễ hơn.</div>
+      </div>
+      <div class="review-note">
+        <strong>Từ vựng đã ôn:</strong> cloud computing, virtualization, container, microservice, API, database, server, bandwidth, latency, redundancy, load balancing, CDN, on-premise, hybrid, disaster recovery site, infrastructure, deploy, scalability, configuration, compliance, cost
+      </div>
+    </div>
+  </div>
+
+  <!-- Conv 16 -->
+  <div class="conv-section" id="conv-16">
+    <div class="conv-card">
+      <h3>Conversation 16 — Stakeholder Conflict Resolution</h3>
+      <p class="conv-subtitle">Chủ đề: Bài 16 + ôn lại Bài 1-15</p>
+      <div class="conv-line conv-speaker">
+        <span class="conv-label">Project Manager</span>
+        We have a conflict between the client and the development team on priorities. Let me facilitate a mediation session.
+        <div class="conv-translation">Chúng ta có xung đột giữa khách hàng và đội phát triển về mức ưu tiên. Để tôi tạo điều kiện một buổi hòa giải.</div>
+      </div>
+      <div class="conv-line conv-response">
+        <span class="conv-label">Scrum Master</span>
+        The client raised an objection to the sprint backlog. They want high-priority features moved forward.
+        <div class="conv-translation">Khách hàng đưa ra phản đối về backlog sprint. Họ muốn các tính năng ưu tiên cao được đưa lên trước.</div>
+      </div>
+      <div class="conv-line conv-speaker">
+        <span class="conv-label">Project Manager</span>
+        I need to negotiate a compromise. Let's do stakeholder mapping first to understand everyone's influence level.
+        <div class="conv-translation">Tôi cần đàm phán một thỏa hiệp. Hãy lập bản đồ bên liên quan trước để hiểu mức ảnh hưởng của mọi người.</div>
+      </div>
+      <div class="conv-line conv-response">
+        <span class="conv-label">Scrum Master</span>
+        Can we propose a win-win solution? The team could deliver two high-priority features in exchange for more resources.
+        <div class="conv-translation">Chúng ta có thể đề xuất giải pháp cùng có lợi không? Đội có thể bàn giao hai tính năng ưu tiên cao để đổi lấy nhiều nguồn lực hơn.</div>
+      </div>
+      <div class="conv-line conv-speaker">
+        <span class="conv-label">Project Manager</span>
+        I'll leverage our strong relationship with the client to reach consensus. We need to be diplomatic but assertive in this negotiation.
+        <div class="conv-translation">Tôi sẽ tận dụng mối quan hệ tốt với khách hàng để đạt đồng thuận. Chúng ta cần khéo léo nhưng quả quyết trong cuộc đàm phán này.</div>
+      </div>
+      <div class="review-note">
+        <strong>Từ vựng đã ôn:</strong> negotiate, compromise, consensus, conflict, mediate, assertive, persuade, influence, diplomacy, stakeholder mapping, win-win, leverage, proposal, objection, facilitate, backlog, sprint, stakeholder, resource, priority
+      </div>
+    </div>
+  </div>
+
+  <!-- Conv 17 -->
+  <div class="conv-section" id="conv-17">
+    <div class="conv-card">
+      <h3>Conversation 17 — Managing a Distributed Team</h3>
+      <p class="conv-subtitle">Chủ đề: Bài 17 + ôn lại Bài 1-16</p>
+      <div class="conv-line conv-speaker">
+        <span class="conv-label">Project Manager</span>
+        Our team is distributed across four timezones. I need to schedule asynchronous updates to avoid conflicts.
+        <div class="conv-translation">Đội của chúng ta phân tán qua bốn múi giờ. Tôi cần lên lịch cập nhật không đồng bộ để tránh xung đột.</div>
+      </div>
+      <div class="conv-line conv-response">
+        <span class="conv-label">Team Lead (Vietnam)</span>
+        The Vietnam team works with native speakers from the UK office. Cultural awareness training would help bridge the communication gap.
+        <div class="conv-translation">Đội Việt Nam làm việc với người bản ngữ từ văn phòng Anh. Đào tạo nhận thức văn hóa sẽ giúp thu hẹp khoảng cách giao tiếp.</div>
+      </div>
+      <div class="conv-line conv-speaker">
+        <span class="conv-label">Project Manager</span>
+        Agreed. English is our lingua franca, but we need localization for the Vietnamese documentation. Diversity drives better outcomes.
+        <div class="conv-translation">Đồng ý. Tiếng Anh là ngôn ngữ chung của chúng ta, nhưng chúng ta cần bản địa hóa cho tài liệu tiếng Việt. Sự đa dạng thúc đẩy kết quả tốt hơn.</div>
+      </div>
+      <div class="conv-line conv-response">
+        <span class="conv-label">Team Lead (Vietnam)</span>
+        Should we hold the daily stand-up during the overlap window, or keep it fully virtual and asynchronous?
+        <div class="conv-translation">Chúng ta nên tổ chức buổi họp đứng hàng ngày trong khung giờ chồng lấn, hay giữ nó hoàn toàn trực tuyến và không đồng bộ?</div>
+      </div>
+      <div class="conv-line conv-speaker">
+        <span class="conv-label">Project Manager</span>
+        Let's use synchronous for critical updates and asynchronous for routine reports. This promotes inclusion for everyone on the distributed team.
+        <div class="conv-translation">Hãy dùng đồng bộ cho các cập nhật quan trọng và không đồng bộ cho báo cáo thường nhật. Điều này thúc đẩy sự hòa nhập cho mọi người trong đội phân tán.</div>
+      </div>
+      <div class="review-note">
+        <strong>Từ vựng đã ôn:</strong> cross-cultural, localization, timezone, offshore, nearshore, distributed team, remote work, virtual meeting, asynchronous, synchronous, cultural awareness, native speaker, lingua franca, diversity, inclusion, collaboration, stakeholder, communication, documentation
+      </div>
+    </div>
+  </div>
+
+  <!-- Conv 18 -->
+  <div class="conv-section" id="conv-18">
+    <div class="conv-card">
+      <h3>Conversation 18 — Leadership and Strategy Alignment</h3>
+      <p class="conv-subtitle">Chủ đề: Bài 18 + ôn lại Bài 1-17</p>
+      <div class="conv-line conv-speaker">
+        <span class="conv-label">Senior Manager</span>
+        Our strategy for the next quarter is clear: increase market share by 20 percent. How does this align with our project portfolio?
+        <div class="conv-translation">Chiến lược của chúng ta cho quý tới rõ ràng: tăng thị phần 20 phần trăm. Điều này liên kết như thế nào với danh mục dự án của chúng ta?</div>
+      </div>
+      <div class="conv-line conv-response">
+        <span class="conv-label">Project Manager</span>
+        The mission of our division is to deliver customer value. Our current projects directly support this vision and strategy.
+        <div class="conv-translation">Sứ mệnh của bộ phận chúng ta là mang lại giá trị cho khách hàng. Các dự án hiện tại trực tiếp hỗ trợ tầm nhìn và chiến lược này.</div>
+      </div>
+      <div class="conv-line conv-speaker">
+        <span class="conv-label">Senior Manager</span>
+        Good. Delegation is key — you need to trust your team. Proactive decision-making and accountability will drive success.
+        <div class="conv-translation">Tốt. Ủy quyền là then chốt — bạn cần tin tưởng đội của mình. Ra quyết động chủ động và trách nhiệm giải trình sẽ thúc đẩy thành công.</div>
+      </div>
+      <div class="conv-line conv-response">
+        <span class="conv-label">Project Manager</span>
+        Absolutely. We need resilient and adaptable leadership to handle tactical challenges. Synergy across teams is our biggest asset.
+        <div class="conv-translation">Hoàn toàn. Chúng ta cần lãnh đạo kiên cường và có khả năng thích nghi để đối phó với thách thức chiến thuật. Hiệp lực giữa các đội là tài sản lớn nhất của chúng ta.</div>
+      </div>
+      <div class="conv-line conv-speaker">
+        <span class="conv-label">Senior Manager</span>
+        How is your stakeholder buy-in for the new initiative? We need everyone's mentality aligned with the organizational vision.
+        <div class="conv-translation">Sự ủng hộ của bên liên quan cho sáng kiến mới như thế nào? Chúng ta cần tư duy của mọi người liên kết với tầm nhìn tổ chức.</div>
+      </div>
+      <div class="review-note">
+        <strong>Từ vựng đã ôn:</strong> leadership, strategy, strategic, tactical, vision, mission, decision-making, delegation, accountability, mentality, proactive, adaptable, resilient, synergy, stakeholder buy-in, deliverable, milestone, resource, objective, roadmap
+      </div>
+    </div>
+  </div>
+
+  <!-- Conv 19 -->
+  <div class="conv-section" id="conv-19">
+    <div class="conv-card">
+      <h3>Conversation 19 — Project Documentation and PMP Preparation</h3>
+      <p class="conv-subtitle">Chủ đề: Bài 19 + ôn lại Bài 1-18</p>
+      <div class="conv-line conv-speaker">
+        <span class="conv-label">Team Member</span>
+        I'm preparing for the PMP exam. Can you explain the difference between the WBS and the RACI matrix?
+        <div class="conv-translation">Tôi đang chuẩn bị cho kỳ thi PMP. Bạn có thể giải thích sự khác biệt giữa cấu trúc phân rã công việc và ma trận phân công trách nhiệm không?</div>
+      </div>
+      <div class="conv-line conv-response">
+        <span class="conv-label">Project Manager</span>
+        The WBS breaks down deliverables into manageable work packages. The RACI matrix clarifies who is Responsible, Accountable, Consulted, and Informed for each task.
+        <div class="conv-translation">Cấu trúc phân rã công việc chia nhỏ sản phẩm bàn giao thành các gói công việc có thể quản lý. Ma trận RACI làm rõ ai là người chịu trách nhiệm, chịu trách nhiệm cuối cùng, được tư vấn và được thông báo cho mỗi nhiệm vụ.</div>
+      </div>
+      <div class="conv-line conv-speaker">
+        <span class="conv-label">Team Member</span>
+        What documents do we need before we do the project sign-off? I'm also curious about best practices from lessons learned.
+        <div class="conv-translation">Chúng ta cần những tài liệu gì trước khi xác nhận phê duyệt cuối cùng? Tôi cũng tò mò về các thực hành tốt nhất từ bài học kinh nghiệm.</div>
+      </div>
+      <div class="conv-line conv-response">
+        <span class="conv-label">Project Manager</span>
+        We need the project charter, business case, feasibility study, and project plan. Templates are available in our ISO 9001 documentation system.
+        <div class="conv-translation">Chúng ta cần điều lệ dự án, phân tích lợi ích-kinh phí, nghiên cứu tính khả thi và kế hoạch dự án. Các mẫu có sẵn trong hệ thống tài liệu ISO 9001 của chúng ta.</div>
+      </div>
+      <div class="conv-line conv-speaker">
+        <span class="conv-label">Team Member</span>
+        Does CMMI apply to our software development process as well?
+        <div class="conv-translation">Mô hình năng lực trưởng thành có áp dụng cho quy trình phát triển phần mềm của chúng ta không?</div>
+      </div>
+      <div class="review-note">
+        <strong>Từ vựng đã ôn:</strong> charter, feasibility study, business case, project plan, WBS, RACI matrix, lessons learned, PMP, PMI, PRINCE2, ISO 9001, CMMI, best practice, templates, sign-off, deliverable, requirement, stakeholder, scope, documentation
+      </div>
+    </div>
+  </div>
+
+  <!-- Conv 20 -->
+  <div class="conv-section" id="conv-20">
+    <div class="conv-card">
+      <h3>Conversation 20 — Project Close-Out and Benefit Realization</h3>
+      <p class="conv-subtitle">Chủ đề: Bài 20 + ôn lại TẤT CẢ các bài 1-19</p>
+      <div class="conv-line conv-speaker">
+        <span class="conv-label">Project Manager</span>
+        It's time to close out the project. We need to do a project retrospective and document lessons learned for future teams.
+        <div class="conv-translation">Đã đến lúc đóng dự án. Chúng ta cần nhìn lại toàn dự án và ghi lại bài học kinh nghiệm cho các đội tương lai.</div>
+      </div>
+      <div class="conv-line conv-response">
+        <span class="conv-label">Team Lead</span>
+        Did we meet the success criteria? The client will run a performance review before the final handover.
+        <div class="conv-translation">Chúng ta có đáp ứng tiêu chí thành công không? Khách hàng sẽ chạy đánh giá hiệu suất trước khi bàn giao cuối cùng.</div>
+      </div>
+      <div class="conv-line conv-speaker">
+        <span class="conv-label">Project Manager</span>
+        Yes, the warranty period is active. Now we need to archive all documentation and decommission the old system. The sunset plan is in place.
+        <div class="conv-translation">Có, thời gian bảo hành đang có hiệu lực. Bây giờ chúng ta cần lưu trữ tất cả tài liệu và ngừng sử dụng hệ thống cũ. Kế hoạch ngừng hỗ trợ đã sẵn sàng.</div>
+      </div>
+      <div class="conv-line conv-response">
+        <span class="conv-label">Team Lead</span>
+        What about benefit realization? The sponsor wants to see the ROI report before we issue the final sign-off.
+        <div class="conv-translation">Còn hiện thực hóa lợi ích thì sao? Nhà tài trợ muốn xem báo cáo lợi tức đầu tư trước khi chúng ta phát hành xác nhận phê duyệt cuối cùng.</div>
+      </div>
+      <div class="conv-line conv-speaker">
+        <span class="conv-label">Project Manager</span>
+        The sustainability of this solution is strong. Let's schedule a recognition ceremony and ensure post-implementation support is ready.
+        <div class="conv-translation">Tính bền vững của giải pháp này rất mạnh. Hãy lên lịch buổi ghi nhận công trạng và đảm bảo hỗ trợ hậu triển khai đã sẵn sàng.</div>
+      </div>
+      <div class="review-note">
+        <strong>Từ vựng đã ôn (TẤT CẢ 20 BÀI — 300 TỪ):</strong> close out, closure, handover, post-implementation, benefit realization, success criteria, performance review, project retrospective, archive, decommission, sunset, reference, recognition, warranty, sustainability, sign-off, lessons learned, ROI, deliverable, stakeholder, milestone, risk, KPI, metric, compliance, security, change control, contract, agile, scrum, sprint, backlog, cloud, API, negotiate, leadership, strategy, WBS, RACI, PMP, ISO 9001, CMMI, distributed team, contingency, mitigation, UAT, go-live, rollback, deployment, documentation, stakeholder buy-in
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer class="footer">
+  <p>Tài liệu học tiếng Anh chuyên ngành Quản trị Dự án CNTT — 20 bài học &bull; 300 từ vựng &bull; 20 hội thoại</p>
+  <p style="margin-top: 6px;">Học mỗi ngày 1 bài &bull; Ôn lại hội thoại cuối mỗi bài &bull; Di chuột qua hội thoại để xem dịch tiếng Việt</p>
+</footer>
+
+</div><!-- /container -->
+
+<!-- ══ PROGRESS ══ -->
+<div class="progress-wrap">
+  <div class="progress-label" id="progress-label">Bài 1 / 10</div>
+  <div class="progress-bar-outer">
+    <div class="progress-bar-inner" id="progress-bar"></div>
+  </div>
+</div>
+
+<!-- ══ JAVASCRIPT ══ -->
+<script>
+  const navBtns = document.querySelectorAll('.lesson-nav .nav-btn');
+  const lessonSections = document.querySelectorAll('.lesson-section');
+  const convSections = document.querySelectorAll('.conv-section');
+  let currentLesson = 0;
+
+  function clearActive() {
+    navBtns.forEach(b => b.classList.remove('active'));
+    lessonSections.forEach(s => s.classList.remove('active'));
+    convSections.forEach(c => c.classList.remove('active'));
+  }
+
+  function showCover() {
+    clearActive();
+    document.querySelector('.lesson-nav .nav-btn').classList.add('active');
+    document.getElementById('cover').classList.add('active');
+    updateProgress(0);
+  }
+
+  function showLesson(n) {
+    clearActive();
+    const btns = document.querySelectorAll('.lesson-nav .nav-btn');
+    btns[n].classList.add('active');
+    document.getElementById('lesson-' + n).classList.add('active');
+    updateProgress(n);
+  }
+
+  function showConversations() {
+    clearActive();
+    document.querySelectorAll('.lesson-nav .nav-btn').forEach(b => {
+      if (b.textContent.includes('Hội thoại')) b.classList.add('active');
+    });
+    document.getElementById('conversations-panel').classList.add('active');
+    document.getElementById('conv-1').classList.add('active');
+    updateProgress(0);
+  }
+
+  function showConv(n) {
+    clearActive();
+    document.querySelectorAll('.lesson-nav .nav-btn').forEach(b => {
+      if (b.textContent.includes('Hội thoại')) b.classList.add('active');
+    });
+    convSections.forEach(c => c.classList.remove('active'));
+    document.getElementById('conv-' + n).classList.add('active');
+  }
+
+  function updateProgress(n) {
+    currentLesson = n;
+    const pct = n === 0 ? 0 : Math.round((n / 20) * 100);
+    document.getElementById('progress-bar').style.width = pct + '%';
+    const label = n === 0 ? 'Giới thiệu' : 'Bài ' + n + ' / 20';
+    document.getElementById('progress-label').textContent = label;
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowRight') {
+      const next = Math.min(currentLesson + 1, 20);
+      if (next === 0) showCover(); else showLesson(next);
+    }
+    if (e.key === 'ArrowLeft') {
+      const prev = Math.max(currentLesson - 1, 0);
+      if (prev === 0) showCover(); else showLesson(prev);
+    }
+  });
+</script>
+</body>
+</html>
