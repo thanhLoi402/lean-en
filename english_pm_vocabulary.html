@@ -413,7 +413,7 @@
 </header>
 
 <!-- ══ NAV TABS ══ -->
-<nav class="lesson-nav">
+<!-- <nav class="lesson-nav">
   <div class="lesson-nav-inner">
     <div class="nav-row">
       <span class="nav-label">Bài học</span>
@@ -430,7 +430,7 @@
       <button class="nav-btn" onclick="showLesson(10)">Bài 10</button>
     </div>
     <div class="nav-row">
-      <!-- <span class="nav-label">Bài 11-20</span> -->
+      <span class="nav-label">Bài 11-20</span>
       <button class="nav-btn" onclick="showLesson(11)">Bài 11</button>
       <button class="nav-btn" onclick="showLesson(12)">Bài 12</button>
       <button class="nav-btn" onclick="showLesson(13)">Bài 13</button>
@@ -444,7 +444,7 @@
       <button class="nav-btn conversation-btn" onclick="showConversations()">Hội thoại</button>
     </div>
   </div>
-</nav>
+</nav> -->
 
 <!-- ══ COVER / INTRO ══ -->
 <section class="cover-section active" id="cover">
@@ -452,7 +452,7 @@
     <!-- <div class="lesson-intro" style="margin-bottom: 0;">
       <h2>Chào mừng bạn!</h2>
       <p>Tài liệu gồm <strong>20 bài học</strong>, mỗi bài 15 từ vựng phổ biến trong quản trị dự án CNTT. Cuối mỗi bài có một <strong>đoạn hội thoại</strong> ôn luyện từ vựng của bài đó và các bài trước.</p>
-      <p style="margin-top: 8px;">Cách sử dụng: Nhấn <strong>tab Bài 1 → Bài 10</strong> để học từ mới. Nhấn tab <strong>Hội thoại</strong> để mở danh sách 10 đoạn hội thoại ôn luyện. Di chuột qua dòng hội thoại để xem bản dịch tiếng Việt.</p>
+      <p style="margin-top: 8px;">Nhấn vào <strong>danh sách bài học bên dưới</strong> hoặc <strong>tab Bài 1 → Bài 20</strong> để học từ mới. Nhấn tab <strong>Hội thoại</strong> để mở 20 đoạn hội thoại. Di chuột qua dòng hội thoại để xem bản dịch tiếng Việt.</p>
     </div> -->
     <!-- <div style="margin-top: 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px;">
       <div style="background: var(--card); border-radius: var(--radius); padding: 16px 20px; box-shadow: var(--shadow);">
@@ -472,28 +472,28 @@
       </div>
     </div> -->
     <div style="margin-top: 28px; background: var(--card); border-radius: var(--radius); padding: 20px 24px; box-shadow: var(--shadow);">
-      <h3 style="color: var(--primary-dark); margin-bottom: 12px;">Các chủ đề trong 10 bài học</h3>
+      <h3 style="color: var(--primary-dark); margin-bottom: 12px;">Các chủ đề trong 20 bài học</h3>
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 8px; font-size: .88rem;">
-        <div>📁 Bài 1 — Khởi tạo & Lập kế hoạch dự án</div>
-        <div>👥 Bài 2 — Nhóm & Bên liên quan</div>
-        <div>📋 Bài 3 — Yêu cầu & Phạm vi dự án</div>
-        <div>🏗️ Bài 4 — Thiết kế & Kiến trúc</div>
-        <div>💻 Bài 5 — Phát triển & Mã nguồn</div>
-        <div>🧪 Bài 6 — Kiểm thử & Chất lượng</div>
-        <div>🚀 Bài 7 — Triển khai & Ra mắt</div>
-        <div>📊 Bài 8 — Giám sát & Quản lý rủi ro</div>
-        <div>📧 Bài 9 — Giao tiếp & Báo cáo</div>
-        <div>🔄 Bài 10 — Agile & Scrum</div>
-        <div>🔒 Bài 11 — Bảo mật & Tuân thủ</div>
-        <div>📐 Bài 12 — Quản lý thay đổi & Cấu hình</div>
-        <div>💰 Bài 13 — Tài chính & Hợp đồng</div>
-        <div>📈 Bài 14 — Đo lường & Báo cáo nâng cao</div>
-        <div>🛠️ Bài 15 — Công nghệ & Hạ tầng</div>
-        <div>🤝 Bài 16 — Đàm phán & Giải quyết xung đột</div>
-        <div>🌐 Bài 17 — Giao tiếp quốc tế & Văn hóa</div>
-        <div>🧠 Bài 18 — Tư duy & Kỹ năng PM</div>
-        <div>📚 Bài 19 — Tài liệu & Chứng chỉ</div>
-        <div>🎯 Bài 20 — Đánh giá & Đóng dự án</div>
+        <a href="javascript:void(0)" onclick="showLesson(1)" style="color:var(--text);text-decoration:none;padding:4px 8px;border-radius:6px;transition:background .15s;" onmouseover="this.style.background='var(--secondary)'" onmouseout="this.style.background='transparent'">📁 Bài 1 — Khởi tạo & Lập kế hoạch dự án</a>
+        <a href="javascript:void(0)" onclick="showLesson(2)" style="color:var(--text);text-decoration:none;padding:4px 8px;border-radius:6px;transition:background .15s;" onmouseover="this.style.background='var(--secondary)'" onmouseout="this.style.background='transparent'">👥 Bài 2 — Nhóm & Bên liên quan</a>
+        <a href="javascript:void(0)" onclick="showLesson(3)" style="color:var(--text);text-decoration:none;padding:4px 8px;border-radius:6px;transition:background .15s;" onmouseover="this.style.background='var(--secondary)'" onmouseout="this.style.background='transparent'">📋 Bài 3 — Yêu cầu & Phạm vi dự án</a>
+        <a href="javascript:void(0)" onclick="showLesson(4)" style="color:var(--text);text-decoration:none;padding:4px 8px;border-radius:6px;transition:background .15s;" onmouseover="this.style.background='var(--secondary)'" onmouseout="this.style.background='transparent'">🏗️ Bài 4 — Thiết kế & Kiến trúc</a>
+        <a href="javascript:void(0)" onclick="showLesson(5)" style="color:var(--text);text-decoration:none;padding:4px 8px;border-radius:6px;transition:background .15s;" onmouseover="this.style.background='var(--secondary)'" onmouseout="this.style.background='transparent'">💻 Bài 5 — Phát triển & Mã nguồn</a>
+        <a href="javascript:void(0)" onclick="showLesson(6)" style="color:var(--text);text-decoration:none;padding:4px 8px;border-radius:6px;transition:background .15s;" onmouseover="this.style.background='var(--secondary)'" onmouseout="this.style.background='transparent'">🧪 Bài 6 — Kiểm thử & Chất lượng</a>
+        <a href="javascript:void(0)" onclick="showLesson(7)" style="color:var(--text);text-decoration:none;padding:4px 8px;border-radius:6px;transition:background .15s;" onmouseover="this.style.background='var(--secondary)'" onmouseout="this.style.background='transparent'">🚀 Bài 7 — Triển khai & Ra mắt</a>
+        <a href="javascript:void(0)" onclick="showLesson(8)" style="color:var(--text);text-decoration:none;padding:4px 8px;border-radius:6px;transition:background .15s;" onmouseover="this.style.background='var(--secondary)'" onmouseout="this.style.background='transparent'">📊 Bài 8 — Giám sát & Quản lý rủi ro</a>
+        <a href="javascript:void(0)" onclick="showLesson(9)" style="color:var(--text);text-decoration:none;padding:4px 8px;border-radius:6px;transition:background .15s;" onmouseover="this.style.background='var(--secondary)'" onmouseout="this.style.background='transparent'">📧 Bài 9 — Giao tiếp & Báo cáo</a>
+        <a href="javascript:void(0)" onclick="showLesson(10)" style="color:var(--text);text-decoration:none;padding:4px 8px;border-radius:6px;transition:background .15s;" onmouseover="this.style.background='var(--secondary)'" onmouseout="this.style.background='transparent'">🔄 Bài 10 — Agile & Scrum</a>
+        <a href="javascript:void(0)" onclick="showLesson(11)" style="color:var(--text);text-decoration:none;padding:4px 8px;border-radius:6px;transition:background .15s;" onmouseover="this.style.background='var(--secondary)'" onmouseout="this.style.background='transparent'">🔒 Bài 11 — Bảo mật & Tuân thủ</a>
+        <a href="javascript:void(0)" onclick="showLesson(12)" style="color:var(--text);text-decoration:none;padding:4px 8px;border-radius:6px;transition:background .15s;" onmouseover="this.style.background='var(--secondary)'" onmouseout="this.style.background='transparent'">📐 Bài 12 — Quản lý thay đổi & Cấu hình</a>
+        <a href="javascript:void(0)" onclick="showLesson(13)" style="color:var(--text);text-decoration:none;padding:4px 8px;border-radius:6px;transition:background .15s;" onmouseover="this.style.background='var(--secondary)'" onmouseout="this.style.background='transparent'">💰 Bài 13 — Tài chính & Hợp đồng</a>
+        <a href="javascript:void(0)" onclick="showLesson(14)" style="color:var(--text);text-decoration:none;padding:4px 8px;border-radius:6px;transition:background .15s;" onmouseover="this.style.background='var(--secondary)'" onmouseout="this.style.background='transparent'">📈 Bài 14 — Đo lường & Báo cáo nâng cao</a>
+        <a href="javascript:void(0)" onclick="showLesson(15)" style="color:var(--text);text-decoration:none;padding:4px 8px;border-radius:6px;transition:background .15s;" onmouseover="this.style.background='var(--secondary)'" onmouseout="this.style.background='transparent'">🛠️ Bài 15 — Công nghệ & Hạ tầng</a>
+        <a href="javascript:void(0)" onclick="showLesson(16)" style="color:var(--text);text-decoration:none;padding:4px 8px;border-radius:6px;transition:background .15s;" onmouseover="this.style.background='var(--secondary)'" onmouseout="this.style.background='transparent'">🤝 Bài 16 — Đàm phán & Giải quyết xung đột</a>
+        <a href="javascript:void(0)" onclick="showLesson(17)" style="color:var(--text);text-decoration:none;padding:4px 8px;border-radius:6px;transition:background .15s;" onmouseover="this.style.background='var(--secondary)'" onmouseout="this.style.background='transparent'">🌐 Bài 17 — Giao tiếp quốc tế & Văn hóa</a>
+        <a href="javascript:void(0)" onclick="showLesson(18)" style="color:var(--text);text-decoration:none;padding:4px 8px;border-radius:6px;transition:background .15s;" onmouseover="this.style.background='var(--secondary)'" onmouseout="this.style.background='transparent'">🧠 Bài 18 — Tư duy & Kỹ năng PM</a>
+        <a href="javascript:void(0)" onclick="showLesson(19)" style="color:var(--text);text-decoration:none;padding:4px 8px;border-radius:6px;transition:background .15s;" onmouseover="this.style.background='var(--secondary)'" onmouseout="this.style.background='transparent'">📚 Bài 19 — Tài liệu & Chứng chỉ</a>
+        <a href="javascript:void(0)" onclick="showLesson(20)" style="color:var(--text);text-decoration:none;padding:4px 8px;border-radius:6px;transition:background .15s;" onmouseover="this.style.background='var(--secondary)'" onmouseout="this.style.background='transparent'">🎯 Bài 20 — Đánh giá & Đóng dự án</a>
       </div>
     </div>
   </div>
@@ -526,6 +526,9 @@
     <div class="vocab-row"><span class="vocab-num">14</span><span><span class="vocab-word">allocate</span><br><span class="vocab-type">v</span></span><span class="vocab-phonetic">/ˈæləkeɪt/</span><span class="vocab-meaning">phân bổ (nguồn lực)</span></div>
     <div class="vocab-row"><span class="vocab-num">15</span><span><span class="vocab-word">kick-off</span><br><span class="vocab-type">n / v</span></span><span class="vocab-phonetic">/ˈkɪk ɒf/</span><span class="vocab-meaning">khởi động dự án</span></div>
   </div>
+  <div style="text-align:center; margin-top:24px;">
+    <button class="nav-btn conversation-btn" onclick="showConversations();showConv(1)">&#128264; Hội thoại Bài 1</button>
+  </div>
 </section>
 
 <!-- LESSON 2 -->
@@ -551,6 +554,9 @@
     <div class="vocab-row"><span class="vocab-num">13</span><span><span class="vocab-word">onboard</span><br><span class="vocab-type">v</span></span><span class="vocab-phonetic">/ˈɒnbɔːrd/</span><span class="vocab-meaning">đưa thành viên vào dự án</span></div>
     <div class="vocab-row"><span class="vocab-num">14</span><span><span class="vocab-word">offboard</span><br><span class="vocab-type">v</span></span><span class="vocab-phonetic">/ˈɒfbɔːrd/</span><span class="vocab-meaning">kết thúc tham gia dự án</span></div>
     <div class="vocab-row"><span class="vocab-num">15</span><span><span class="vocab-word">collaborate</span><br><span class="vocab-type">v</span></span><span class="vocab-phonetic">/kəˈlæbəreɪt/</span><span class="vocab-meaning">cộng tác, hợp tác</span></div>
+  </div>
+  <div style="text-align:center; margin-top:24px;">
+    <button class="nav-btn conversation-btn" onclick="showConversations();showConv(2)">&#128264; Hội thoại Bài 2</button>
   </div>
 </section>
 
@@ -578,6 +584,9 @@
     <div class="vocab-row"><span class="vocab-num">14</span><span><span class="vocab-word">stakeholder alignment</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈsteɪkˌhoʊldər əˈlaɪnmənt/</span><span class="vocab-meaning">đồng thuận bên liên quan</span></div>
     <div class="vocab-row"><span class="vocab-num">15</span><span><span class="vocab-word">traceability</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˌteɪsəˈbɪləti/</span><span class="vocab-meaning">khả năng truy vết</span></div>
   </div>
+  <div style="text-align:center; margin-top:24px;">
+    <button class="nav-btn conversation-btn" onclick="showConversations();showConv(3)">&#128264; Hội thoại Bài 3</button>
+  </div>
 </section>
 
 <!-- LESSON 4 -->
@@ -603,6 +612,9 @@
     <div class="vocab-row"><span class="vocab-num">13</span><span><span class="vocab-word">redesign</span><br><span class="vocab-type">v</span></span><span class="vocab-phonetic">/ˌriːdɪˈzaɪn/</span><span class="vocab-meaning">thiết kế lại</span></div>
     <div class="vocab-row"><span class="vocab-num">14</span><span><span class="vocab-word">technical debt</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈteknɪkəl det/</span><span class="vocab-meaning">nợ kỹ thuật</span></div>
     <div class="vocab-row"><span class="vocab-num">15</span><span><span class="vocab-word">refactor</span><br><span class="vocab-type">v</span></span><span class="vocab-phonetic">/riːˈfæktər/</span><span class="vocab-meaning">tái cấu trúc mã nguồn</span></div>
+  </div>
+  <div style="text-align:center; margin-top:24px;">
+    <button class="nav-btn conversation-btn" onclick="showConversations();showConv(4)">&#128264; Hội thoại Bài 4</button>
   </div>
 </section>
 
@@ -630,6 +642,9 @@
     <div class="vocab-row"><span class="vocab-num">14</span><span><span class="vocab-word">debug</span><br><span class="vocab-type">v</span></span><span class="vocab-phonetic">/diːˈbʌɡ/</span><span class="vocab-meaning">gỡ lỗi</span></div>
     <div class="vocab-row"><span class="vocab-num">15</span><span><span class="vocab-word">hotfix</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈhɒtfɪks/</span><span class="vocab-meaning">sửa lỗi khẩn cấp</span></div>
   </div>
+  <div style="text-align:center; margin-top:24px;">
+    <button class="nav-btn conversation-btn" onclick="showConversations();showConv(5)">&#128264; Hội thoại Bài 5</button>
+  </div>
 </section>
 
 <!-- LESSON 6 -->
@@ -655,6 +670,9 @@
     <div class="vocab-row"><span class="vocab-num">13</span><span><span class="vocab-word">automate</span><br><span class="vocab-type">v</span></span><span class="vocab-phonetic">/ˈɔːtəmeɪt/</span><span class="vocab-meaning">tự động hóa</span></div>
     <div class="vocab-row"><span class="vocab-num">14</span><span><span class="vocab-word">sanity check</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈsænəti tʃek/</span><span class="vocab-meaning">kiểm tra sơ bộ</span></div>
     <div class="vocab-row"><span class="vocab-num">15</span><span><span class="vocab-word">severity</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/sɪˈverəti/</span><span class="vocab-meaning">mức độ nghiêm trọng (của lỗi)</span></div>
+  </div>
+  <div style="text-align:center; margin-top:24px;">
+    <button class="nav-btn conversation-btn" onclick="showConversations();showConv(6)">&#128264; Hội thoại Bài 6</button>
   </div>
 </section>
 
@@ -682,6 +700,9 @@
     <div class="vocab-row"><span class="vocab-num">14</span><span><span class="vocab-word">maintenance</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈmeɪntənəns/</span><span class="vocab-meaning">bảo trì</span></div>
     <div class="vocab-row"><span class="vocab-num">15</span><span><span class="vocab-word">version</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈvɜːrʒən/</span><span class="vocab-meaning">phiên bản</span></div>
   </div>
+  <div style="text-align:center; margin-top:24px;">
+    <button class="nav-btn conversation-btn" onclick="showConversations();showConv(7)">&#128264; Hội thoại Bài 7</button>
+  </div>
 </section>
 
 <!-- LESSON 8 -->
@@ -707,6 +728,9 @@
     <div class="vocab-row"><span class="vocab-num">13</span><span><span class="vocab-word">variance</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈveəriəns/</span><span class="vocab-meaning">chênh lệch (so với kế hoạch)</span></div>
     <div class="vocab-row"><span class="vocab-num">14</span><span><span class="vocab-word">overdue</span><br><span class="vocab-type">adj</span></span><span class="vocab-phonetic">/ˌoʊvərˈdjuː/</span><span class="vocab-meaning">quá hạn</span></div>
     <div class="vocab-row"><span class="vocab-num">15</span><span><span class="vocab-word">escalate</span><br><span class="vocab-type">v</span></span><span class="vocab-phonetic">/ˈeskəleɪt/</span><span class="vocab-meaning">báo lên cấp cao hơn</span></div>
+  </div>
+  <div style="text-align:center; margin-top:24px;">
+    <button class="nav-btn conversation-btn" onclick="showConversations();showConv(8)">&#128264; Hội thoại Bài 8</button>
   </div>
 </section>
 
@@ -734,6 +758,9 @@
     <div class="vocab-row"><span class="vocab-num">14</span><span><span class="vocab-word">notify</span><br><span class="vocab-type">v</span></span><span class="vocab-phonetic">/ˈnoʊtɪfaɪ/</span><span class="vocab-meaning">thông báo</span></div>
     <div class="vocab-row"><span class="vocab-num">15</span><span><span class="vocab-word">feedback</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈfiːdbæk/</span><span class="vocab-meaning">phản hồi</span></div>
   </div>
+  <div style="text-align:center; margin-top:24px;">
+    <button class="nav-btn conversation-btn" onclick="showConversations();showConv(9)">&#128264; Hội thoại Bài 9</button>
+  </div>
 </section>
 
 <!-- LESSON 10 -->
@@ -759,6 +786,9 @@
     <div class="vocab-row"><span class="vocab-num">13</span><span><span class="vocab-word">kanban</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/kɑːnˈbɑːn/</span><span class="vocab-meaning">Kanban (bảng thẻ công việc)</span></div>
     <div class="vocab-row"><span class="vocab-num">14</span><span><span class="vocab-word">WIP limit</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/wɪp ˈlɪmɪt/</span><span class="vocab-meaning">giới hạn công việc đang làm</span></div>
     <div class="vocab-row"><span class="vocab-num">15</span><span><span class="vocab-word">continuous improvement</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/kənˈtɪnjuəs ɪmˈpruːvmənt/</span><span class="vocab-meaning">cải tiến liên tục</span></div>
+  </div>
+  <div style="text-align:center; margin-top:24px;">
+    <button class="nav-btn conversation-btn" onclick="showConversations();showConv(10)">&#128264; Hội thoại Bài 10</button>
   </div>
 </section>
 
@@ -786,6 +816,9 @@
     <div class="vocab-row"><span class="vocab-num">14</span><span><span class="vocab-word">disaster recovery</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/dɪˈzɑːstər rɪˈkʌvəri/</span><span class="vocab-meaning">phục hồi sau thảm họa</span></div>
     <div class="vocab-row"><span class="vocab-num">15</span><span><span class="vocab-word">backup</span><br><span class="vocab-type">n / v</span></span><span class="vocab-phonetic">/ˈbækʌp/</span><span class="vocab-meaning">sao lưu</span></div>
   </div>
+  <div style="text-align:center; margin-top:24px;">
+    <button class="nav-btn conversation-btn" onclick="showConversations();showConv(11)">&#128264; Hội thoại Bài 11</button>
+  </div>
 </section>
 
 <!-- LESSON 12 -->
@@ -811,6 +844,9 @@
     <div class="vocab-row"><span class="vocab-num">13</span><span><span class="vocab-word">version control</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈvɜːrʒən kənˈtroʊl/</span><span class="vocab-meaning">kiểm soát phiên bản</span></div>
     <div class="vocab-row"><span class="vocab-num">14</span><span><span class="vocab-word">change log</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/tʃeɪndʒ lɒɡ/</span><span class="vocab-meaning">nhật ký thay đổi</span></div>
     <div class="vocab-row"><span class="vocab-num">15</span><span><span class="vocab-word">regression test</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/rɪˈɡreʃən test/</span><span class="vocab-meaning">kiểm thử hồi quy</span></div>
+  </div>
+  <div style="text-align:center; margin-top:24px;">
+    <button class="nav-btn conversation-btn" onclick="showConversations();showConv(12)">&#128264; Hội thoại Bài 12</button>
   </div>
 </section>
 
@@ -838,6 +874,9 @@
     <div class="vocab-row"><span class="vocab-num">14</span><span><span class="vocab-word">terms and conditions</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/tɜːrmz ənd kənˈdɪʃənz/</span><span class="vocab-meaning">điều khoản và điều kiện</span></div>
     <div class="vocab-row"><span class="vocab-num">15</span><span><span class="vocab-word">renewal</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/rɪˈnjuːəl/</span><span class="vocab-meaning">gia hạn hợp đồng</span></div>
   </div>
+  <div style="text-align:center; margin-top:24px;">
+    <button class="nav-btn conversation-btn" onclick="showConversations();showConv(13)">&#128264; Hội thoại Bài 13</button>
+  </div>
 </section>
 
 <!-- LESSON 14 -->
@@ -863,6 +902,9 @@
     <div class="vocab-row"><span class="vocab-num">13</span><span><span class="vocab-word">root cause</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ruːt kɔːz/</span><span class="vocab-meaning">nguyên nhân gốc rễ</span></div>
     <div class="vocab-row"><span class="vocab-num">14</span><span><span class="vocab-word">insight</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈɪnsaɪt/</span><span class="vocab-meaning">nhận định sâu / insight</span></div>
     <div class="vocab-row"><span class="vocab-num">15</span><span><span class="vocab-word">benchmarking</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈbentʃmɑːrkɪŋ/</span><span class="vocab-meaning">so sánh chuẩn</span></div>
+  </div>
+  <div style="text-align:center; margin-top:24px;">
+    <button class="nav-btn conversation-btn" onclick="showConversations();showConv(14)">&#128264; Hội thoại Bài 14</button>
   </div>
 </section>
 
@@ -890,6 +932,9 @@
     <div class="vocab-row"><span class="vocab-num">14</span><span><span class="vocab-word">hybrid</span><br><span class="vocab-type">adj</span></span><span class="vocab-phonetic">/ˈhaɪbrɪd/</span><span class="vocab-meaning">lai (hybrid cloud)</span></div>
     <div class="vocab-row"><span class="vocab-num">15</span><span><span class="vocab-word">disaster recovery site</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/dɪˈzɑːstər rɪˈkʌvəri saɪt/</span><span class="vocab-meaning">trang web phục hồi DR</span></div>
   </div>
+  <div style="text-align:center; margin-top:24px;">
+    <button class="nav-btn conversation-btn" onclick="showConversations();showConv(15)">&#128264; Hội thoại Bài 15</button>
+  </div>
 </section>
 
 <!-- LESSON 16 -->
@@ -915,6 +960,9 @@
     <div class="vocab-row"><span class="vocab-num">13</span><span><span class="vocab-word">proposal</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/prəˈpoʊzəl/</span><span class="vocab-meaning">đề xuất</span></div>
     <div class="vocab-row"><span class="vocab-num">14</span><span><span class="vocab-word">objection</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/əbˈdʒekʃən/</span><span class="vocab-meaning">phản đối / ý kiến phản bác</span></div>
     <div class="vocab-row"><span class="vocab-num">15</span><span><span class="vocab-word">facilitate</span><br><span class="vocab-type">v</span></span><span class="vocab-phonetic">/fəˈsɪlɪteɪt/</span><span class="vocab-meaning">tạo điều kiện / dẫn dắt</span></div>
+  </div>
+  <div style="text-align:center; margin-top:24px;">
+    <button class="nav-btn conversation-btn" onclick="showConversations();showConv(16)">&#128264; Hội thoại Bài 16</button>
   </div>
 </section>
 
@@ -942,6 +990,9 @@
     <div class="vocab-row"><span class="vocab-num">14</span><span><span class="vocab-word">diversity</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/daɪˈvɜːrsəti/</span><span class="vocab-meaning">sự đa dạng</span></div>
     <div class="vocab-row"><span class="vocab-num">15</span><span><span class="vocab-word">inclusion</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ɪnˈkluːʒən/</span><span class="vocab-meaning">sự bao trùm / hòa nhập</span></div>
   </div>
+  <div style="text-align:center; margin-top:24px;">
+    <button class="nav-btn conversation-btn" onclick="showConversations();showConv(17)">&#128264; Hội thoại Bài 17</button>
+  </div>
 </section>
 
 <!-- LESSON 18 -->
@@ -967,6 +1018,9 @@
     <div class="vocab-row"><span class="vocab-num">13</span><span><span class="vocab-word">resilient</span><br><span class="vocab-type">adj</span></span><span class="vocab-phonetic">/rɪˈzɪliənt/</span><span class="vocab-meaning">kiên cường / có khả năng phục hồi</span></div>
     <div class="vocab-row"><span class="vocab-num">14</span><span><span class="vocab-word">synergy</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈsɪnərdʒi/</span><span class="vocab-meaning">hiệp lực</span></div>
     <div class="vocab-row"><span class="vocab-num">15</span><span><span class="vocab-word">stakeholder buy-in</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈsteɪkˌhoʊldər ˈbaɪ ɪn/</span><span class="vocab-meaning">sự ủng hộ của bên liên quan</span></div>
+  </div>
+  <div style="text-align:center; margin-top:24px;">
+    <button class="nav-btn conversation-btn" onclick="showConversations();showConv(18)">&#128264; Hội thoại Bài 18</button>
   </div>
 </section>
 
@@ -994,6 +1048,9 @@
     <div class="vocab-row"><span class="vocab-num">14</span><span><span class="vocab-word">templates</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈtempləts/</span><span class="vocab-meaning">mẫu tài liệu</span></div>
     <div class="vocab-row"><span class="vocab-num">15</span><span><span class="vocab-word">sign-off</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈsaɪn ɒf/</span><span class="vocab-meaning">xác nhận phê duyệt cuối cùng</span></div>
   </div>
+  <div style="text-align:center; margin-top:24px;">
+    <button class="nav-btn conversation-btn" onclick="showConversations();showConv(19)">&#128264; Hội thoại Bài 19</button>
+  </div>
 </section>
 
 <!-- LESSON 20 -->
@@ -1019,6 +1076,9 @@
     <div class="vocab-row"><span class="vocab-num">13</span><span><span class="vocab-word">recognition</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˌrekəɡˈnɪʃən/</span><span class="vocab-meaning">công nhận / ghi nhận</span></div>
     <div class="vocab-row"><span class="vocab-num">14</span><span><span class="vocab-word">warranty</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/ˈwɒrənti/</span><span class="vocab-meaning">bảo hành</span></div>
     <div class="vocab-row"><span class="vocab-num">15</span><span><span class="vocab-word">sustainability</span><br><span class="vocab-type">n</span></span><span class="vocab-phonetic">/səˌsteɪnəˈbɪləti/</span><span class="vocab-meaning">tính bền vững</span></div>
+  </div>
+  <div style="text-align:center; margin-top:24px;">
+    <button class="nav-btn conversation-btn" onclick="showConversations();showConv(20)">&#128264; Hội thoại Bài 20</button>
   </div>
 </section>
 
@@ -1799,37 +1859,37 @@
 
 <!-- ══ JAVASCRIPT ══ -->
 <script>
-  const navBtns = document.querySelectorAll('.lesson-nav .nav-btn');
+  // const navBtns = document.querySelectorAll('.lesson-nav .nav-btn');
   const lessonSections = document.querySelectorAll('.lesson-section');
   const convSections = document.querySelectorAll('.conv-section');
   let currentLesson = 0;
 
   function clearActive() {
-    navBtns.forEach(b => b.classList.remove('active'));
+    // navBtns.forEach(b => b.classList.remove('active'));
     lessonSections.forEach(s => s.classList.remove('active'));
     convSections.forEach(c => c.classList.remove('active'));
   }
 
   function showCover() {
     clearActive();
-    document.querySelector('.lesson-nav .nav-btn').classList.add('active');
+    //nt.querySelector('.lesson-nav .nav-btn').classList.add('active');
     document.getElementById('cover').classList.add('active');
     updateProgress(0);
   }
 
   function showLesson(n) {
     clearActive();
-    const btns = document.querySelectorAll('.lesson-nav .nav-btn');
-    btns[n].classList.add('active');
+    //const btns = document.querySelectorAll('.lesson-nav .nav-btn');
+    //btns[n].classList.add('active');
     document.getElementById('lesson-' + n).classList.add('active');
     updateProgress(n);
   }
 
   function showConversations() {
     clearActive();
-    document.querySelectorAll('.lesson-nav .nav-btn').forEach(b => {
-      if (b.textContent.includes('Hội thoại')) b.classList.add('active');
-    });
+    // document.querySelectorAll('.lesson-nav .nav-btn').forEach(b => {
+    //   if (b.textContent.includes('Hội thoại')) b.classList.add('active');
+    // });
     document.getElementById('conversations-panel').classList.add('active');
     document.getElementById('conv-1').classList.add('active');
     updateProgress(0);
@@ -1837,9 +1897,9 @@
 
   function showConv(n) {
     clearActive();
-    document.querySelectorAll('.lesson-nav .nav-btn').forEach(b => {
-      if (b.textContent.includes('Hội thoại')) b.classList.add('active');
-    });
+    // document.querySelectorAll('.lesson-nav .nav-btn').forEach(b => {
+    //   if (b.textContent.includes('Hội thoại')) b.classList.add('active');
+    // });
     convSections.forEach(c => c.classList.remove('active'));
     document.getElementById('conv-' + n).classList.add('active');
   }
